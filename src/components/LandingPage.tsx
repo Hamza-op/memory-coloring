@@ -57,14 +57,14 @@ const Hero = () => {
              <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
                 <motion.div whileHover={{ y: -5, rotate: -2 }} className="soft-card p-4 -rotate-3 transition-all duration-500 w-full max-w-[260px] bg-[var(--surface)]">
                   <div className="aspect-[3/4] overflow-hidden rounded-xl mb-3">
-                    <img src={`${base}demo/mom_kid_before.png`} alt="Original Photo" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+                    <img src={`${base}demo/mom_kid_before.png?v=2`} alt="Original Photo" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
                   </div>
                   <div className="text-center"><span className="section-label">Your Photo</span></div>
                 </motion.div>
                 
                 <motion.div whileHover={{ y: -5, rotate: 2 }} className="soft-card p-4 rotate-3 transition-all duration-500 w-full max-w-[260px] bg-[var(--surface)] sm:-ml-8 sm:mt-12 z-10">
                   <div className="aspect-[3/4] overflow-hidden rounded-xl mb-3 border border-[var(--border)]">
-                    <img src={`${base}demo/mom_kid_after.png`} alt="Coloring Page" className="w-full h-full object-cover scale-110" loading="lazy" />
+                    <img src={`${base}demo/mom_kid_after.png?v=2`} alt="Coloring Page" className="w-full h-full object-cover scale-110" loading="lazy" />
                   </div>
                   <div className="text-center"><span className="section-label text-honey">Our Magic</span></div>
                 </motion.div>
@@ -115,9 +115,9 @@ const WhyUs = () => {
 const Comparison = () => {
   const base = import.meta.env.BASE_URL;
   const items = [
-    { label: "Moms & Kids", photo: `${base}demo/mom_kid_before.png`, art: `${base}demo/mom_kid_after.png` },
-    { label: "Adventures", photo: `${base}demo/adventure_before.png`, art: `${base}demo/adventure_after.png` },
-    { label: "Pet Memories", photo: `${base}demo/pet_before.png`, art: `${base}demo/pet_after.png` }
+    { label: "Moms & Kids", photo: `${base}demo/mom_kid_before.png?v=2`, art: `${base}demo/mom_kid_after.png?v=2` },
+    { label: "Adventures", photo: `${base}demo/adventure_before.png?v=2`, art: `${base}demo/adventure_after.png?v=2` },
+    { label: "Pet Memories", photo: `${base}demo/pet_before.png?v=2`, art: `${base}demo/pet_after.png?v=2` }
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
