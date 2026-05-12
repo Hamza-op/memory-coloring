@@ -160,6 +160,7 @@ const Comparison = () => {
 };
 
 const Packages = () => {
+  const navigate = useNavigate();
   const packs = [
     { name: "Digital Starter", pages: "8 Pages PDF", price: "799", tag: "PDF Only", items: ["8 Coloring Pages", "HQ Digital PDF", "Private Photos Only", "WhatsApp Support"], color: "bg-sky text-white" },
     { name: "Mini Memory", pages: "12 Pages", price: "1,999", tag: "Printed + PDF", items: ["Personalized Cover", "Preview Before Final", "12-15 Photos Best", "Nationwide Delivery"], color: "bg-violet text-white" },
@@ -198,7 +199,7 @@ const Packages = () => {
                 ))}
               </div>
               <div className="flex flex-col gap-3 mt-auto">
-                <button onClick={() => { window.location.href = '/checkout'; }} className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-white hover:bg-coral/90 shadow-md" : "bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] hover:bg-[var(--surface-hover)]")}>
+                <button onClick={() => navigate('/checkout')} className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-white hover:bg-coral/90 shadow-md" : "bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] hover:bg-[var(--surface-hover)]")}>
                   <ShoppingBag size={16} /> Order Online
                 </button>
               </div>
