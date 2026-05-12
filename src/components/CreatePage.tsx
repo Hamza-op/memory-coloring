@@ -27,14 +27,97 @@ const CreatePage = () => {
     if (!file) return;
     setIsProcessing(true); setError(null); setMsgIdx(0);
     const interval = setInterval(() => setMsgIdx(p => (p + 1) % MAGIC_MSGS.length), 2200);
-    const formData = new FormData();
-    formData.append('image', file);
+
     try {
-      const res = await fetch('/api/process-coloring', { method: 'POST', body: formData });
-      if (!res.ok) throw new Error('Something went wrong. Please try again.');
-      const data = await res.json();
-      setResultImage(data.imageUrl);
-    } catch (err: any) { setError(err.message); } finally { clearInterval(interval); setIsProcessing(false); }
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.src = url;
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error('Failed to load image'));
+      });
+
+      const canvas = document.createElement('canvas');
+      // Scale down slightly if huge to prevent browser lag, max 1200px
+      const maxSize = 1200;
+      let w = img.width;
+      let h = img.height;
+      if (w > maxSize || h > maxSize) {
+        const ratio = Math.min(maxSize / w, maxSize / h);
+        w = Math.floor(w * ratio);
+        h = Math.floor(h * ratio);
+      }
+      canvas.width = w;
+      canvas.height = h;
+      
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      if (!ctx) throw new Error('Canvas not supported');
+      
+      ctx.drawImage(img, 0, 0, w, h);
+      const srcData = ctx.getImageData(0, 0, w, h);
+      const data = srcData.data;
+      
+      // Step 1: Grayscale and Linear Contrast (1.5, -0.2)
+      for (let i = 0; i < data.length; i += 4) {
+        const avg = (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
+        let val = avg * 1.5 - (0.2 * 255);
+        if (val < 0) val = 0;
+        if (val > 255) val = 255;
+        data[i] = val;
+        data[i + 1] = val;
+        data[i + 2] = val;
+      }
+      
+      // Step 2: Convolve (Edge Detection) and Negate and Threshold
+      const kernel = [-1, -1, -1, -1, 8, -1, -1, -1, -1];
+      const side = 3;
+      const halfSide = 1;
+      
+      const outputData = ctx.createImageData(w, h);
+      const dst = outputData.data;
+      
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const dstOff = (y * w + x) * 4;
+          let r = 0;
+          
+          for (let cy = 0; cy < side; cy++) {
+            for (let cx = 0; cx < side; cx++) {
+              const scy = y + cy - halfSide;
+              const scx = x + cx - halfSide;
+              if (scy >= 0 && scy < h && scx >= 0 && scx < w) {
+                const srcOff = (scy * w + scx) * 4;
+                const wt = kernel[cy * side + cx];
+                r += data[srcOff] * wt;
+              }
+            }
+          }
+          
+          // Negate (invert so edges are black)
+          let finalVal = 255 - r;
+          
+          // Threshold (240)
+          finalVal = finalVal > 240 ? 255 : 0;
+          
+          dst[dstOff] = finalVal;
+          dst[dstOff + 1] = finalVal;
+          dst[dstOff + 2] = finalVal;
+          dst[dstOff + 3] = 255;
+        }
+      }
+      
+      ctx.putImageData(outputData, 0, 0);
+      
+      // Artificial delay to show magic messages
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      
+      setResultImage(canvas.toDataURL('image/png'));
+    } catch (err: any) { 
+      setError(err.message || 'Something went wrong. Please try again.'); 
+    } finally { 
+      clearInterval(interval); 
+      setIsProcessing(false); 
+    }
   };
 
   const reset = () => { setFile(null); setPreview(null); setResultImage(null); setError(null); };
