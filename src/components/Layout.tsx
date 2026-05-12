@@ -53,13 +53,13 @@ const Navbar = () => {
       <nav className="bg-[var(--bg)]/80 backdrop-blur-xl border-b border-[var(--border)] sticky top-0 z-50 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-[72px]">
-            <Link to="/"><Logo /></Link>
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Logo /></Link>
             <div className="hidden lg:flex items-center gap-6">
               {links.map(link => (
                 link.href.startsWith('#') ? (
                   <button key={link.name} onClick={() => document.getElementById(link.href.substring(1))?.scrollIntoView({ behavior: 'smooth' })} className="font-body font-semibold text-[var(--text-muted)] hover:text-coral transition-colors text-sm">{link.name}</button>
                 ) : (
-                  <Link key={link.name} to={link.href} className="font-body font-semibold text-[var(--text-muted)] hover:text-coral transition-colors text-sm">{link.name}</Link>
+                  <Link key={link.name} to={link.href} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="font-body font-semibold text-[var(--text-muted)] hover:text-coral transition-colors text-sm">{link.name}</Link>
                 )
               ))}
               <ThemeToggle />
@@ -78,7 +78,7 @@ const Navbar = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-[var(--surface)] border-t border-[var(--border)] pt-16 pb-8 transition-colors">
+  <footer id="about" className="bg-[var(--surface)] border-t border-[var(--border)] pt-16 pb-8 transition-colors">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         <div className="md:col-span-1">
@@ -94,7 +94,7 @@ const Footer = () => (
         <div>
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Quick Links</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
-            <li><Link to="/" className="hover:text-coral transition-colors">Home</Link></li>
+            <li><Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-coral transition-colors">Home</Link></li>
             <li><button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">How It Works</button></li>
             <li><button onClick={() => document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Packages</button></li>
             <li><button onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Gallery</button></li>
