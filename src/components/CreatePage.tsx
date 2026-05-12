@@ -27,48 +27,14 @@ const CreatePage = () => {
     if (!file) return;
     setIsProcessing(true); setError(null); setMsgIdx(0);
     const interval = setInterval(() => setMsgIdx(p => (p + 1) % MAGIC_MSGS.length), 2200);
-
+    const formData = new FormData();
+    formData.append('image', file);
     try {
-      const url = URL.createObjectURL(file);
-      const img = new Image();
-      img.src = url;
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = () => reject(new Error('Failed to load image'));
-      });
-
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) throw new Error('Canvas not supported');
-      
-      ctx.drawImage(img, 0, 0);
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
-      
-      // Simple sketch effect (grayscale + threshold)
-      for (let i = 0; i < data.length; i += 4) {
-        const avg = (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
-        const threshold = 128;
-        const val = avg > threshold ? 255 : 0;
-        data[i] = val;
-        data[i + 1] = val;
-        data[i + 2] = val;
-      }
-      
-      ctx.putImageData(imageData, 0, 0);
-      
-      // Artificial delay to show magic messages
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      setResultImage(canvas.toDataURL('image/png'));
-    } catch (err: any) { 
-      setError(err.message || 'Something went wrong. Please try again.'); 
-    } finally { 
-      clearInterval(interval); 
-      setIsProcessing(false); 
-    }
+      const res = await fetch('/api/process-coloring', { method: 'POST', body: formData });
+      if (!res.ok) throw new Error('Something went wrong. Please try again.');
+      const data = await res.json();
+      setResultImage(data.imageUrl);
+    } catch (err: any) { setError(err.message); } finally { clearInterval(interval); setIsProcessing(false); }
   };
 
   const reset = () => { setFile(null); setPreview(null); setResultImage(null); setError(null); };
