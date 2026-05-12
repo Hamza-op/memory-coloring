@@ -31,7 +31,22 @@ const OrderPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    const selectedPkg = packages.find(p => p.id === formData.packageId);
+    
+    const message = `*New Order - Memory Coloring* 🎨\n\n` +
+      `*Package:* ${selectedPkg?.name} (Rs. ${selectedPkg?.price})\n` +
+      `*Name:* ${formData.fullName}\n` +
+      `*Phone:* ${formData.phone}\n` +
+      `*Email:* ${formData.email || 'Not provided'}\n` +
+      `*Address:* ${formData.address}\n\n` +
+      `_Please let me know how to send my photos!_`;
+      
+    const whatsappUrl = `https://wa.me/923000000000?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+    
     setIsSubmitting(false);
     setIsSuccess(true);
   };
@@ -45,7 +60,7 @@ const OrderPage = () => {
           </div>
           <h2 className="text-3xl text-[var(--text)] font-display font-bold mb-3">Order Received!</h2>
           <p className="text-[var(--text-muted)] font-body mb-8">
-            Thank you! Our artists will begin working on your magical memory right away. We'll contact you on WhatsApp shortly.
+            Thank you! We have opened WhatsApp with your order details. Please hit <b>"Send"</b> in WhatsApp to confirm your order and share your photos with us!
           </p>
           <button onClick={() => navigate('/')} className="btn-primary w-full">Return to Home</button>
         </motion.div>
