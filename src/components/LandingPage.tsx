@@ -48,11 +48,7 @@ const Hero = () => {
                 <MessageCircle size={20} fill="currentColor" /> WhatsApp
               </a>
             </div>
-            <button onClick={() => navigate('/create')} className="group flex flex-col items-center sm:items-start mt-2">
-              <span className="font-body font-bold text-sm text-[var(--text-muted)] hover:text-coral transition-colors flex items-center gap-1">
-                Try Free Art Preview <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </span>
-            </button>
+
           </div>
         </motion.div>
 

@@ -129,7 +129,6 @@ const MobileBottomNav = () => {
   const location = useLocation();
   const items = [
     { to: '/', icon: Home, label: 'Home' },
-    { to: '/create', icon: Wand2, label: 'Preview' },
     { to: '/checkout', icon: ShoppingBag, label: 'Order' },
   ];
   return (
