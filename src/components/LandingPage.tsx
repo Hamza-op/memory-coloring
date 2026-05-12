@@ -90,7 +90,7 @@ const WhyUs = () => {
   ];
 
   return (
-    <section className="py-24 px-4 overflow-hidden relative">
+    <section id="how-it-works" className="py-24 px-4 overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-16 px-4">
           <div className="badge bg-violet/10 text-violet mb-4"><Smile size={14} /> The Magic Formula</div>
