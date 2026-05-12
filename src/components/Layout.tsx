@@ -43,13 +43,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-charcoal text-warm-white text-center py-2 text-xs font-body font-semibold px-4 border-b border-white/5">
-        <div className="flex items-center justify-center gap-6 max-w-7xl mx-auto">
-          <span className="flex items-center gap-1.5">⭐ Screen-free activity</span>
-          <span className="hidden sm:flex items-center gap-1.5">🔒 Private photos</span>
-          <span className="hidden sm:flex items-center gap-1.5">👁️ Preview before final</span>
-        </div>
-      </div>
+
       <nav className="bg-[var(--bg)]/80 backdrop-blur-xl border-b border-[var(--border)] sticky top-0 z-50 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-[72px]">
