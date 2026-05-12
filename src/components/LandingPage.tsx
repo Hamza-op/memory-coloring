@@ -8,6 +8,7 @@ import ActivityToast from './ActivityToast';
 import FloatingDoodles from './FloatingDoodles';
 
 const Hero = () => {
+  const base = import.meta.env.BASE_URL;
   const navigate = useNavigate();
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 100]);
@@ -60,14 +61,14 @@ const Hero = () => {
              <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
                 <motion.div whileHover={{ y: -5, rotate: -2 }} className="soft-card p-4 -rotate-3 transition-all duration-500 w-full max-w-[260px] bg-[var(--surface)]">
                   <div className="aspect-[3/4] overflow-hidden rounded-xl mb-3">
-                    <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=400&auto=format" alt="Original Photo" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+                    <img src={`${base}demo/mom_kid_before.png`} alt="Original Photo" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
                   </div>
                   <div className="text-center"><span className="section-label">Your Photo</span></div>
                 </motion.div>
                 
                 <motion.div whileHover={{ y: -5, rotate: 2 }} className="soft-card p-4 rotate-3 transition-all duration-500 w-full max-w-[260px] bg-[var(--surface)] sm:-ml-8 sm:mt-12 z-10">
                   <div className="aspect-[3/4] overflow-hidden rounded-xl mb-3 border border-[var(--border)]">
-                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1SqEr1WJ7JNVNg4erQGxG_iQ1CIu39djZh5svcxg85y18sXac145c21rq96TGu8Vxjcglk5uri6uDCZa_WFuYt6sjz4-9N9wTGBYiE-xTaspJ-YGKLf3XXrbyrllAA2HFGuyBubf6A_fE-tGdcdl566nXeHLNBcK0sDBK9P_ZG0klxdgGEzMocZE-85Q9jUnrzHYV-AbGVmYH-vTTQEIdYlUpxmssRWAQWF_uo6E2RG3t5sH2jKg_CvO0ZP48je0gR3IUsDdlHt65" alt="Coloring Page" className="w-full h-full object-cover scale-110" loading="lazy" />
+                    <img src={`${base}demo/mom_kid_after.png`} alt="Coloring Page" className="w-full h-full object-cover scale-110" loading="lazy" />
                   </div>
                   <div className="text-center"><span className="section-label text-honey">Our Magic</span></div>
                 </motion.div>
@@ -116,10 +117,11 @@ const WhyUs = () => {
 };
 
 const Comparison = () => {
+  const base = import.meta.env.BASE_URL;
   const items = [
-    { label: "Moms & Kids", photo: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=800&auto=format", art: "https://lh3.googleusercontent.com/aida-public/AB6AXuAtxf8tYJfwDzTX94xkOXTtYmj6RtV-jOMldGV6LwlddcSVY4IsdMOfKn4kjaZgfGnD9nuYnH9dwXGyDafYxtA-MkJIx6QSiznfTw6l3Qat6aFsDIRj0yNnADkpo4xVxODAOo5BlcL7GhVu5Ei29SWMiiER-QOAawSg8NFZEEDEPIhFamYEvuFB5AjoCqFmmaXiACAJ8qpqkaTbYtwNuUdG5jwaAM6SRonJnUWXZ1D9gHKuRsIRFjjdGQeQmPAHJwsjENaNpBweDz6T" },
-    { label: "Adventures", photo: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&auto=format", art: "https://lh3.googleusercontent.com/aida-public/AB6AXuD3LUAPvlvBCLTHIlEnIckpxFRvVkthtTbERDqjNc3GHGHy26YtO5KmFX_Avf5aWDPREJhE0pFxp-E88tZqcf2q0CMzbT6B9YCTB9Udw5570yXydGMNPS7B8AMBjyoKB8T7gOqxtWQ2ElXZsLAqixe4lH7KC4uj0cFtNzu6ajoxEoUfMvlyYL420g7-Rdu_wePPwS54ViIowELq8PmkPlID_0f1Ti_CGUUoxyPbA-lt0OwSWmp9WR46FruSPiIr5eWS6vvj3tGT1_Jn" },
-    { label: "Pet Memories", photo: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=800&auto=format", art: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxsYWWSa9_YwUNr8jWW9HRfKNgldMOjIcfNyr9yJyNBwtjxkjCe32HGo2NLTa0tsmeiL2S-kt5VBM-J7OPSLvfcE59L2MOeh_ft-JIhLimgHNDhWwlgXJYTBGwK6CAIOX-6mELQ0Zo5YNdoe8hHJazLqmTJer2wfElc_ZHlW2Q8A19ClUV2a49sNeSNepDehAMGCmHypnaYZrjgJJfmFyzmveUKavnVk_lm4hlbFAJ_6ZK6bDr93Gzh5AnueO_K3gykY4CdK60YIcB" }
+    { label: "Moms & Kids", photo: `${base}demo/mom_kid_before.png`, art: `${base}demo/mom_kid_after.png` },
+    { label: "Adventures", photo: `${base}demo/adventure_before.png`, art: `${base}demo/adventure_after.png` },
+    { label: "Pet Memories", photo: `${base}demo/pet_before.png`, art: `${base}demo/pet_after.png` }
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
