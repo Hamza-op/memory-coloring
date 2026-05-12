@@ -40,7 +40,7 @@ const ActivityToast = () => {
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
-          className="fixed bottom-24 lg:bottom-6 left-4 lg:left-6 z-50 pointer-events-none"
+          className="fixed top-20 lg:top-24 right-4 lg:right-6 z-50 pointer-events-none"
         >
           <div className="glass-card flex items-center gap-3 p-3 pr-5 shadow-lg max-w-sm border border-[var(--border)]">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${notification.color}`}>

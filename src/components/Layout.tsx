@@ -35,10 +35,10 @@ const ThemeToggle = () => {
 const Navbar = () => {
   const links = [
     { name: 'Home', href: '/' },
-    { name: 'How It Works', href: '/#how-it-works' },
-    { name: 'Packages', href: '/#packages' },
-    { name: 'Gallery', href: '/#gallery' },
-    { name: 'About', href: '/#about' },
+    { name: 'How It Works', href: '#how-it-works' },
+    { name: 'Packages', href: '#packages' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'About', href: '#about' },
   ];
 
   return (
@@ -56,7 +56,11 @@ const Navbar = () => {
             <Link to="/"><Logo /></Link>
             <div className="hidden lg:flex items-center gap-6">
               {links.map(link => (
-                <a key={link.name} href={link.href} className="font-body font-semibold text-[var(--text-muted)] hover:text-coral transition-colors text-sm">{link.name}</a>
+                link.href.startsWith('#') ? (
+                  <button key={link.name} onClick={() => document.getElementById(link.href.substring(1))?.scrollIntoView({ behavior: 'smooth' })} className="font-body font-semibold text-[var(--text-muted)] hover:text-coral transition-colors text-sm">{link.name}</button>
+                ) : (
+                  <Link key={link.name} to={link.href} className="font-body font-semibold text-[var(--text-muted)] hover:text-coral transition-colors text-sm">{link.name}</Link>
+                )
               ))}
               <ThemeToggle />
               <a href="https://wa.me/923000000000" target="_blank" rel="noreferrer" className="btn-wa py-2.5 px-5 text-sm">
@@ -91,9 +95,9 @@ const Footer = () => (
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Quick Links</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
             <li><Link to="/" className="hover:text-coral transition-colors">Home</Link></li>
-            <li><a href="#how-it-works" className="hover:text-coral transition-colors">How It Works</a></li>
-            <li><a href="#packages" className="hover:text-coral transition-colors">Packages</a></li>
-            <li><a href="#gallery" className="hover:text-coral transition-colors">Gallery</a></li>
+            <li><button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">How It Works</button></li>
+            <li><button onClick={() => document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Packages</button></li>
+            <li><button onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Gallery</button></li>
           </ul>
         </div>
         <div>
