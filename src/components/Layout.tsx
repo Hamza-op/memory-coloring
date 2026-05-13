@@ -12,7 +12,7 @@ const Logo = () => (
       </motion.div>
     </div>
     <div className="flex flex-col">
-      <span className="font-display text-xl font-bold text-[var(--text)] tracking-tight leading-tight">Memory <span className="text-coral">Coloring</span></span>
+      <span className="font-display text-xl font-bold text-[var(--text)] tracking-tight leading-tight">Memory<span className="text-coral">Coloring</span></span>
       <span className="text-[10px] font-body font-semibold text-[var(--text-muted)] leading-none">Memories into magical art</span>
     </div>
   </div>
@@ -26,8 +26,42 @@ const ThemeToggle = () => {
     setIsDark(!isDark);
   };
   return (
-    <button onClick={toggle} className="w-10 h-10 rounded-full bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--text)] hover:bg-[var(--surface-hover)] transition-colors" aria-label="Toggle theme">
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
+    <button
+      onClick={toggle}
+      aria-label="Toggle theme"
+      className="relative w-16 h-8 rounded-full transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-violet/40 shrink-0"
+      style={{
+        background: isDark
+          ? 'linear-gradient(135deg, #1a1a3e 0%, #2d1b5e 100%)'
+          : 'linear-gradient(135deg, #8ED8F8 0%, #FFD95A 100%)',
+        boxShadow: isDark
+          ? '0 2px 12px rgba(205,180,255,0.3), inset 0 1px 0 rgba(255,255,255,0.05)'
+          : '0 2px 12px rgba(255,217,90,0.4), inset 0 1px 0 rgba(255,255,255,0.4)',
+      }}
+    >
+      {/* Stars (dark mode) */}
+      {isDark && (
+        <>
+          <span className="absolute top-1 left-1.5 text-[7px] text-violet opacity-80">✦</span>
+          <span className="absolute bottom-1 left-3 text-[5px] text-white opacity-60">✦</span>
+        </>
+      )}
+      {/* Sun rays (light mode) */}
+      {!isDark && (
+        <span className="absolute top-1 right-1.5 text-[7px] text-honey opacity-80">✦</span>
+      )}
+      {/* Sliding pill */}
+      <motion.div
+        layout
+        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+        className={`absolute top-1 w-6 h-6 rounded-full flex items-center justify-center shadow-md ${isDark ? 'right-1 bg-violet' : 'left-1 bg-white'
+          }`}
+      >
+        {isDark
+          ? <Moon size={13} className="text-charcoal" fill="currentColor" />
+          : <Sun size={13} className="text-honey-text" fill="currentColor" />
+        }
+      </motion.div>
     </button>
   );
 };
@@ -57,7 +91,7 @@ const Navbar = () => {
                 )
               ))}
               <ThemeToggle />
-              <a href="https://wa.me/923000000000" target="_blank" rel="noreferrer" className="btn-wa py-2.5 px-5 text-sm">
+              <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa py-2.5 px-5 text-sm">
                 <MessageCircle size={16} fill="currentColor" /> WhatsApp Us
               </a>
             </div>
@@ -72,7 +106,7 @@ const Navbar = () => {
 };
 
 const Footer = () => (
-  <footer id="about" className="bg-[var(--surface)] border-t border-[var(--border)] pt-16 pb-8 transition-colors">
+  <footer id="about" className="bg-[var(--surface)] border-t border-[var(--border)] pt-10 pb-6 transition-colors">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
         <div className="md:col-span-1">
@@ -97,22 +131,23 @@ const Footer = () => (
         <div>
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Policies</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
-            <li><a href="#" className="hover:text-coral transition-colors">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-coral transition-colors">Refund Policy</a></li>
-            <li><a href="#" className="hover:text-coral transition-colors">Terms of Service</a></li>
+            <li><Link to="/policies#privacy" className="hover:text-coral transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/policies#refund" className="hover:text-coral transition-colors">Refund Policy</Link></li>
+            <li><Link to="/policies#terms" className="hover:text-coral transition-colors">Terms of Service</Link></li>
+            <li><Link to="/policies#delivery" className="hover:text-coral transition-colors">Delivery Info</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Get in Touch</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
-            <li>Lahore, Pakistan</li>
+            <li>Multan, Pakistan</li>
             <li>hello@memorycoloring.com</li>
-            <li>WhatsApp: +92 3XX XXXXXXX</li>
+            <li>WhatsApp: +923462083310</li>
           </ul>
         </div>
       </div>
       <div className="border-t border-[var(--border)] pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-[var(--text-muted)] font-body">
-        <p>© {new Date().getFullYear()} Memory Coloring. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} MemoryColoring. All rights reserved.</p>
         <p className="flex items-center gap-1">Made with <Heart className="text-coral fill-coral" size={12} /> for beautiful memories</p>
       </div>
     </div>
@@ -133,7 +168,7 @@ const MobileBottomNav = () => {
           <span className="text-[10px] mt-1 font-body font-bold">{item.label}</span>
         </Link>
       ))}
-      <a href="https://wa.me/923000000000" target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] text-wa-green hover:text-sage transition-colors">
+      <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] text-wa-green hover:text-sage transition-colors">
         <MessageCircle size={22} />
         <span className="text-[10px] mt-1 font-body font-bold">Chat</span>
       </a>
@@ -141,8 +176,11 @@ const MobileBottomNav = () => {
   );
 };
 
+import FloatingDoodles from './FloatingDoodles';
+
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="min-h-screen flex flex-col pb-[68px] lg:pb-0 bg-[var(--bg)] transition-colors">
+  <div className="min-h-screen flex flex-col pb-[68px] lg:pb-0 bg-[var(--bg)] transition-colors relative z-0">
+    <FloatingDoodles />
     <header className="sticky top-0 z-50 flex flex-col"><Navbar /></header>
     <main className="flex-grow">{children}</main>
     <Footer />

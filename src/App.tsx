@@ -10,6 +10,7 @@ import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import CreatePage from './components/CreatePage';
 import OrderPage from './components/OrderPage';
+import PoliciesPage from './components/PoliciesPage';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -64,6 +65,19 @@ const AnimatedRoutes = () => {
               <OrderPage />
             </motion.div>
           } 
+        />
+        <Route
+          path="/policies"
+          element={
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <PoliciesPage />
+            </motion.div>
+          }
         />
       </Routes>
     </AnimatePresence>

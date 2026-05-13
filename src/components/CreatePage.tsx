@@ -49,14 +49,14 @@ const CreatePage = () => {
       }
       canvas.width = w;
       canvas.height = h;
-      
+
       const ctx = canvas.getContext('2d', { willReadFrequently: true });
       if (!ctx) throw new Error('Canvas not supported');
-      
+
       ctx.drawImage(img, 0, 0, w, h);
       const srcData = ctx.getImageData(0, 0, w, h);
       const data = srcData.data;
-      
+
       // Step 1: Grayscale and Linear Contrast (1.5, -0.2)
       for (let i = 0; i < data.length; i += 4) {
         const avg = (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
@@ -67,20 +67,20 @@ const CreatePage = () => {
         data[i + 1] = val;
         data[i + 2] = val;
       }
-      
+
       // Step 2: Convolve (Edge Detection) and Negate and Threshold
       const kernel = [-1, -1, -1, -1, 8, -1, -1, -1, -1];
       const side = 3;
       const halfSide = 1;
-      
+
       const outputData = ctx.createImageData(w, h);
       const dst = outputData.data;
-      
+
       for (let y = 0; y < h; y++) {
         for (let x = 0; x < w; x++) {
           const dstOff = (y * w + x) * 4;
           let r = 0;
-          
+
           for (let cy = 0; cy < side; cy++) {
             for (let cx = 0; cx < side; cx++) {
               const scy = y + cy - halfSide;
@@ -92,38 +92,38 @@ const CreatePage = () => {
               }
             }
           }
-          
+
           // Negate (invert so edges are black)
           let finalVal = 255 - r;
-          
+
           // Threshold (240)
           finalVal = finalVal > 240 ? 255 : 0;
-          
+
           dst[dstOff] = finalVal;
           dst[dstOff + 1] = finalVal;
           dst[dstOff + 2] = finalVal;
           dst[dstOff + 3] = 255;
         }
       }
-      
+
       ctx.putImageData(outputData, 0, 0);
-      
+
       // Artificial delay to show magic messages
       await new Promise(resolve => setTimeout(resolve, 3000));
-      
+
       setResultImage(canvas.toDataURL('image/png'));
-    } catch (err: any) { 
-      setError(err.message || 'Something went wrong. Please try again.'); 
-    } finally { 
-      clearInterval(interval); 
-      setIsProcessing(false); 
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      clearInterval(interval);
+      setIsProcessing(false);
     }
   };
 
   const reset = () => { setFile(null); setPreview(null); setResultImage(null); setError(null); };
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] pt-8 pb-24 px-4 relative overflow-hidden transition-colors">
+    <div className="min-h-screen bg-[var(--bg)] pt-8 pb-12 px-4 relative overflow-hidden transition-colors">
       {/* Decorative blobs */}
       <div className="absolute top-20 right-[10%] w-72 h-72 bg-coral/8 blob animate-float-slow pointer-events-none" />
       <div className="absolute bottom-40 left-[5%] w-56 h-56 bg-honey/10 blob-2 animate-float pointer-events-none" />
@@ -150,7 +150,7 @@ const CreatePage = () => {
               onClick={() => fileInputRef.current?.click()}>
               <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="w-20 h-20 bg-[var(--bg)] rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:shadow-lg transition-shadow border border-[var(--border)]">
-                <Upload className="text-coral" size={32} />
+                <Upload className="text-coral-text" size={32} />
               </motion.div>
               <h3 className="text-2xl text-[var(--text)] mb-2 font-display font-bold">Pick Your Favorite Memory</h3>
               <p className="text-[var(--text-muted)] mb-8 font-body text-sm">PNG or JPG up to 10MB</p>
@@ -162,7 +162,7 @@ const CreatePage = () => {
               <div className="grid md:grid-cols-2 gap-8 items-start">
                 {/* Source photo */}
                 <motion.div initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} className="space-y-3">
-                  <span className="badge bg-violet/15 text-violet">Your Photo</span>
+                  <span className="badge bg-violet/15 text-violet-text">Your Photo</span>
                   <div className="aspect-[3/4] overflow-hidden rounded-2xl shadow-lg">
                     <img src={preview} className="w-full h-full object-cover" alt="Your Photo" loading="lazy" />
                   </div>
@@ -170,26 +170,26 @@ const CreatePage = () => {
 
                 {/* Result */}
                 <motion.div initial={{ opacity: 0, x: 15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 }} className="space-y-3">
-                  <span className="badge bg-honey/15 text-honey">Magical Art</span>
+                  <span className="badge bg-honey/15 text-honey-text">Magical Art</span>
                   <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center shadow-lg">
                     <AnimatePresence mode="wait">
                       {isProcessing ? (
                         <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="text-center p-8 flex flex-col items-center">
                           <div className="relative w-24 h-24 mb-6">
                             <motion.div animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="absolute inset-0">
-                              <Sparkles className="absolute top-0 left-1/2 -translate-x-1/2 text-honey" size={18} />
-                              <Star className="absolute bottom-0 left-1/2 -translate-x-1/2 text-coral" size={14} fill="currentColor" />
-                              <Heart className="absolute top-1/2 left-0 -translate-y-1/2 text-violet" size={12} fill="currentColor" />
+                              <Sparkles className="absolute top-0 left-1/2 -translate-x-1/2 text-honey-text" size={18} />
+                              <Star className="absolute bottom-0 left-1/2 -translate-x-1/2 text-coral-text" size={14} fill="currentColor" />
+                              <Heart className="absolute top-1/2 left-0 -translate-y-1/2 text-violet-text" size={12} fill="currentColor" />
                             </motion.div>
                             <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-                              <Wand2 className="text-coral w-12 h-12 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                              <Wand2 className="text-coral-text w-12 h-12 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                             </motion.div>
                           </div>
                           <AnimatePresence mode="wait">
                             <motion.p key={msgIdx} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="font-display text-lg font-bold text-[var(--text)]">{MAGIC_MSGS[msgIdx]}</motion.p>
                           </AnimatePresence>
                           <div className="flex gap-1 mt-3">
-                            {[0,1,2].map(i => <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-coral" animate={{ scale: [1, 1.8, 1] }} transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.2 }} />)}
+                            {[0, 1, 2].map(i => <motion.div key={i} className="w-1.5 h-1.5 rounded-full bg-coral" animate={{ scale: [1, 1.8, 1] }} transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.2 }} />)}
                           </div>
                         </motion.div>
                       ) : resultImage ? (
@@ -220,7 +220,7 @@ const CreatePage = () => {
                       {isProcessing ? <RefreshCw className="animate-spin" size={20} /> : <Sparkles size={20} />}
                       <span>{isProcessing ? 'Creating Magic…' : 'See Sample Art'}</span>
                     </motion.button>
-                    {error && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-coral font-body font-semibold text-sm bg-coral/10 px-4 py-2 rounded-xl">{error}</motion.p>}
+                    {error && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-coral-text font-body font-semibold text-sm bg-coral/10 px-4 py-2 rounded-xl">{error}</motion.p>}
                   </div>
                 ) : (
                   <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="flex flex-col items-center gap-6 w-full max-w-md">
@@ -236,7 +236,7 @@ const CreatePage = () => {
                   <p className="font-display font-bold text-lg text-[var(--text)]">Want a full book like this?</p>
                   <div className="flex gap-3">
                     <button onClick={() => navigate('/checkout', { state: { image: resultImage } })} className="btn-primary text-sm py-2.5 px-5"><ShoppingBag size={16} /> Order</button>
-                    <a href="https://wa.me/923000000000" target="_blank" rel="noreferrer" className="btn-wa text-sm py-2.5 px-5"><MessageCircle size={16} fill="currentColor" /> Chat</a>
+                    <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa text-sm py-2.5 px-5"><MessageCircle size={16} fill="currentColor" /> Chat</a>
                   </div>
                 </div>
               </div>

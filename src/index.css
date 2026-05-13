@@ -1,49 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Nunito:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Baloo+2:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Fraunces", serif;
-  --font-body: "Nunito", sans-serif;
+  --font-display: "Baloo 2", cursive;   /* Rounded Playful Bold — brand guide headings */
+  --font-body: "Nunito", sans-serif;    /* Clean Friendly Sans — brand guide body */
 
-  --color-warm-white: #FFFAF3;
-  --color-charcoal: #1E1E2E;
-  --color-coral: #E64A4A; /* Darkened for white text contrast */
-  --color-honey: #D98C1C; /* Darkened for white text contrast */
-  --color-sky: #4A90E2; /* Darkened for white text contrast */
-  --color-sage: #5A9E5D; /* Darkened for white text contrast */
-  --color-violet: #8B5CF6; /* Darkened for white text contrast */
-  --color-blush: #FECDD3;
+  --color-warm-white: #FFF9EF; /* Soft Cream */
+  --color-charcoal: #25324A; /* Navy Ink */
+  --color-coral: #FFB38A; /* Peach */
+  --color-honey: #FFD95A; /* Sunshine Yellow */
+  --color-sky: #8ED8F8; /* Sky Blue */
+  --color-sage: #B7E4C7; /* Mint */
+  --color-violet: #CDB4FF; /* Lavender */
+  --color-blush: #FFE5D9;
   --color-wa-green: #25D366;
+
+  --color-coral-text: var(--theme-text-coral);
+  --color-honey-text: var(--theme-text-honey);
+  --color-sky-text: var(--theme-text-sky);
+  --color-sage-text: var(--theme-text-sage);
+  --color-violet-text: var(--theme-text-violet);
 }
 
 @layer base {
   :root {
-    --bg: #FFFAF3;
-    --text: #111118; /* Darker for higher contrast */
-    --text-muted: #4B5563; /* Darker gray for readability */
+    --bg: #FFF9EF; /* Soft Cream */
+    --text: #25324A; /* Navy Ink */
+    --text-muted: #5B6B8A; /* Muted Navy */
     --surface: #FFFFFF;
-    --surface-hover: #FFF5EB;
+    --surface-hover: #FFFDF8;
     --border: rgba(30, 30, 46, 0.08);
     --shadow-sm: 0 1px 3px rgba(30,30,46,0.06), 0 1px 2px rgba(30,30,46,0.04);
     --shadow-md: 0 4px 16px rgba(30,30,46,0.08), 0 2px 4px rgba(30,30,46,0.04);
     --shadow-lg: 0 12px 40px rgba(30,30,46,0.1), 0 4px 12px rgba(30,30,46,0.05);
     --shadow-xl: 0 20px 60px rgba(30,30,46,0.12), 0 8px 20px rgba(30,30,46,0.06);
-    --radius: 20px;
-    --radius-sm: 12px;
-    --radius-lg: 28px;
+    --radius: 32px;
+    --radius-sm: 20px;
+    --radius-lg: 48px;
+
+    --theme-text-coral: #D96B42;
+    --theme-text-honey: #B58200;
+    --theme-text-sky: #327AB8;
+    --theme-text-sage: #458F5A;
+    --theme-text-violet: #7852E2;
   }
 
   .dark {
-    --bg: #0F0F1A;
-    --text: #F8F9FA; /* Brighter white for high contrast */
-    --text-muted: #D1D5DB; /* Brighter gray for readability */
-    --surface: #1A1A2E;
-    --surface-hover: #242440;
+    --bg: #161A28; /* Dark navy */
+    --text: #FFF9EF; /* Soft Cream */
+    --text-muted: #B4BEDA; /* Muted light blue/gray */
+    --surface: #1F2437; /* Slightly lighter navy */
+    --surface-hover: #292E45;
     --border: rgba(241, 240, 238, 0.08);
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
     --shadow-md: 0 4px 16px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.15);
     --shadow-lg: 0 12px 40px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.15);
     --shadow-xl: 0 20px 60px rgba(0,0,0,0.35), 0 8px 20px rgba(0,0,0,0.2);
+
+    --theme-text-coral: var(--color-coral);
+    --theme-text-honey: var(--color-honey);
+    --theme-text-sky: var(--color-sky);
+    --theme-text-sage: var(--color-sage);
+    --theme-text-violet: var(--color-violet);
   }
 
   html {
