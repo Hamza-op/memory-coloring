@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Heart, MessageCircle, Facebook, Instagram, BookOpen, Pencil, Sparkles, Home, Wand2, ShoppingBag, Moon, Sun } from 'lucide-react';
+import { Heart, MessageCircle, Facebook, Instagram, Home, ShoppingBag, Moon, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
+import logo from '../../assets/logo-memory-coloring.webp';
 
 const Logo = () => (
-  <div className="flex items-center gap-2.5">
-    <div className="relative w-10 h-10 bg-gradient-to-br from-coral to-honey rounded-2xl flex items-center justify-center text-white shadow-sm">
-      <BookOpen size={20} />
-      <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute -top-1.5 -right-1.5 text-violet">
-        <Sparkles size={12} />
-      </motion.div>
-    </div>
-    <div className="flex flex-col">
-      <span className="font-display text-xl font-bold text-[var(--text)] tracking-tight leading-tight">Memory<span className="text-coral">Coloring</span></span>
-      <span className="text-[10px] font-body font-semibold text-[var(--text-muted)] leading-none">Memories into magical art</span>
-    </div>
+  <div className="flex items-center">
+    <motion.img
+      src={logo}
+      alt="Memory Coloring"
+      className="h-12 w-auto sm:h-14 object-contain"
+      animate={{ y: [0, -1, 0] }}
+      transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+    />
   </div>
 );
 
@@ -32,11 +30,11 @@ const ThemeToggle = () => {
       className="relative w-16 h-8 rounded-full transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-violet/40 shrink-0"
       style={{
         background: isDark
-          ? 'linear-gradient(135deg, #1a1a3e 0%, #2d1b5e 100%)'
-          : 'linear-gradient(135deg, #8ED8F8 0%, #FFD95A 100%)',
+          ? 'linear-gradient(135deg, #011F55 0%, #9672CC 100%)'
+          : 'linear-gradient(135deg, #55BCF1 0%, #FFC12F 100%)',
         boxShadow: isDark
-          ? '0 2px 12px rgba(205,180,255,0.3), inset 0 1px 0 rgba(255,255,255,0.05)'
-          : '0 2px 12px rgba(255,217,90,0.4), inset 0 1px 0 rgba(255,255,255,0.4)',
+          ? '0 2px 12px rgba(150,114,204,0.35), inset 0 1px 0 rgba(255,255,255,0.08)'
+          : '0 2px 12px rgba(255,193,47,0.4), inset 0 1px 0 rgba(255,255,255,0.4)',
       }}
     >
       {/* Stars (dark mode) */}
@@ -79,9 +77,9 @@ const Navbar = () => {
     <>
 
       <nav className="bg-[var(--bg)]/80 backdrop-blur-xl border-b border-[var(--border)] sticky top-0 z-50 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-[72px]">
-            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Logo /></Link>
+            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="min-w-0"><Logo /></Link>
             <div className="hidden lg:flex items-center gap-6">
               {links.map(link => (
                 link.href.startsWith('#') ? (
@@ -141,7 +139,7 @@ const Footer = () => (
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Get in Touch</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
             <li>Multan, Pakistan</li>
-            <li>hello@memorycoloring.com</li>
+            <li>Shopmemorycoloring@gmail.com</li>
             <li>WhatsApp: +923462083310</li>
           </ul>
         </div>
@@ -161,7 +159,7 @@ const MobileBottomNav = () => {
     { to: '/checkout', icon: ShoppingBag, label: 'Order' },
   ];
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[var(--surface)]/90 backdrop-blur-xl border-t border-[var(--border)] z-[100] flex justify-around items-center h-[68px] px-2 pb-safe">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[var(--surface)]/90 backdrop-blur-xl border-t border-[var(--border)] z-[100] flex justify-around items-center min-h-[68px] px-2 pb-safe">
       {items.map(item => (
         <Link key={item.to} to={item.to} className={`flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] transition-colors rounded-xl ${location.pathname === item.to ? 'text-coral' : 'text-[var(--text-muted)] hover:text-coral'}`}>
           <item.icon size={22} />

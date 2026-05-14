@@ -123,30 +123,30 @@ const CreatePage = () => {
   const reset = () => { setFile(null); setPreview(null); setResultImage(null); setError(null); };
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] pt-8 pb-12 px-4 relative overflow-hidden transition-colors">
+    <div className="min-h-screen bg-[var(--bg)] pt-6 sm:pt-8 pb-12 px-3 sm:px-4 relative overflow-hidden transition-colors">
       {/* Decorative blobs */}
       <div className="absolute top-20 right-[10%] w-72 h-72 bg-coral/8 blob animate-float-slow pointer-events-none" />
       <div className="absolute bottom-40 left-[5%] w-56 h-56 bg-honey/10 blob-2 animate-float pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8 sm:mb-12">
           <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200 }}
-            className="w-20 h-20 bg-gradient-to-br from-coral to-honey rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-coral/20">
-            <Paintbrush className="text-white w-10 h-10" />
+            className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-coral to-honey rounded-3xl flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-lg shadow-coral/20">
+            <Paintbrush className="text-charcoal w-8 h-8 sm:w-10 sm:h-10" />
           </motion.div>
-          <h1 className="text-4xl lg:text-5xl text-[var(--text)] mb-3 font-display font-bold">Try the Magic ✨</h1>
-          <p className="text-lg text-[var(--text-muted)] font-body max-w-lg mx-auto leading-relaxed">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl text-[var(--text)] mb-3 font-display font-bold">Try the Magic ✨</h1>
+          <p className="text-base sm:text-lg text-[var(--text-muted)] font-body max-w-lg mx-auto leading-relaxed">
             Upload a photo to preview how we transform your memories into hand-drawn coloring art.
           </p>
         </motion.div>
 
         {/* Main Card */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
-          className="soft-card p-6 sm:p-10">
+          className="soft-card p-4 sm:p-10">
           {!preview ? (
             <motion.div whileHover={{ scale: 1.005 }}
-              className="border-2 border-dashed border-[var(--border)] rounded-2xl p-10 sm:p-14 text-center cursor-pointer transition-all hover:border-coral/30 hover:bg-coral/3 group flex flex-col items-center"
+              className="border-2 border-dashed border-[var(--border)] rounded-2xl p-6 sm:p-14 text-center cursor-pointer transition-all hover:border-coral/30 hover:bg-coral/3 group flex flex-col items-center"
               onClick={() => fileInputRef.current?.click()}>
               <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="w-20 h-20 bg-[var(--bg)] rounded-2xl flex items-center justify-center mb-6 shadow-md group-hover:shadow-lg transition-shadow border border-[var(--border)]">
@@ -216,7 +216,7 @@ const CreatePage = () => {
               <div className="pt-8 border-t border-[var(--border)] flex flex-col items-center gap-8">
                 {!resultImage ? (
                   <div className="flex flex-col items-center gap-3">
-                    <motion.button onClick={processImage} disabled={isProcessing} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="btn-primary text-lg px-10 py-4">
+                    <motion.button onClick={processImage} disabled={isProcessing} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="btn-primary w-full sm:w-auto text-base sm:text-lg px-8 sm:px-10 py-4">
                       {isProcessing ? <RefreshCw className="animate-spin" size={20} /> : <Sparkles size={20} />}
                       <span>{isProcessing ? 'Creating Magic…' : 'See Sample Art'}</span>
                     </motion.button>
@@ -224,7 +224,7 @@ const CreatePage = () => {
                   </div>
                 ) : (
                   <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="flex flex-col items-center gap-6 w-full max-w-md">
-                    <div className="grid grid-cols-2 gap-4 w-full">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
                       <button onClick={() => window.print()} className="btn-outline"><Download size={18} /> Print</button>
                       <button onClick={reset} className="btn-outline"><RefreshCw size={18} /> Try Another</button>
                     </div>
@@ -234,9 +234,9 @@ const CreatePage = () => {
                 {/* Upsell */}
                 <div className="soft-card p-6 flex flex-col sm:flex-row items-center justify-between gap-5 w-full max-w-2xl bg-gradient-to-r from-coral/5 to-honey/5">
                   <p className="font-display font-bold text-lg text-[var(--text)]">Want a full book like this?</p>
-                  <div className="flex gap-3">
-                    <button onClick={() => navigate('/checkout', { state: { image: resultImage } })} className="btn-primary text-sm py-2.5 px-5"><ShoppingBag size={16} /> Order</button>
-                    <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa text-sm py-2.5 px-5"><MessageCircle size={16} fill="currentColor" /> Chat</a>
+                  <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                    <button onClick={() => navigate('/checkout', { state: { image: resultImage } })} className="btn-primary w-full sm:w-auto text-sm py-2.5 px-5"><ShoppingBag size={16} /> Order</button>
+                    <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa w-full sm:w-auto text-sm py-2.5 px-5"><MessageCircle size={16} fill="currentColor" /> Chat</a>
                   </div>
                 </div>
               </div>

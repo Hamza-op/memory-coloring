@@ -7,12 +7,12 @@ const NOTIFICATIONS = [
   { name: "Ali R.", location: "Karachi", item: "Premium Gift Box", icon: Star, color: "text-honey-text bg-honey/10" },
   { name: "Fatima K.", location: "Islamabad", item: "Mini Memory Pack", icon: Sparkles, color: "text-violet-text bg-violet/10" },
   { name: "Ayesha T.", location: "Multan", item: "Family Favorite Pack", icon: Gift, color: "text-sky-text bg-sky/10" },
-  { name: "Zainab M.", location: "Faisalabad", item: "Digital Starter", icon: Pencil, color: "text-sage-text bg-sage/10" },
+  { name: "Zainab M.", location: "Faisalabad", item: "Mini Memory Pack", icon: Pencil, color: "text-sage-text bg-sage/10" },
   { name: "Omar F.", location: "Rawalpindi", item: "Premium Gift Box", icon: Star, color: "text-honey-text bg-honey/10" },
   { name: "Bilal Q.", location: "Peshawar", item: "Mini Memory Pack", icon: Smile, color: "text-violet-text bg-violet/10" },
   { name: "Hassan A.", location: "Lahore", item: "Family Favorite Pack", icon: Heart, color: "text-coral-text bg-coral/10" },
   { name: "Sana R.", location: "Karachi", item: "Premium Gift Box", icon: Gift, color: "text-sky-text bg-sky/10" },
-  { name: "Khadija B.", location: "Islamabad", item: "Digital Starter", icon: Pencil, color: "text-sage-text bg-sage/10" },
+  { name: "Khadija B.", location: "Islamabad", item: "Family Favorite Pack", icon: Pencil, color: "text-sage-text bg-sage/10" },
 ];
 
 const ActivityToast = () => {

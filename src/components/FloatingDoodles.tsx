@@ -41,8 +41,8 @@ const CuteBook = ({ size = 24, className = "" }) => (
     <circle cx="35" cy="60" r="4" fill="currentColor" />
     <circle cx="65" cy="60" r="4" fill="currentColor" />
     <path d="M 45 70 Q 50 75 55 70" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-    <circle cx="25" cy="65" r="4" fill="#FFB38A" />
-    <circle cx="75" cy="65" r="4" fill="#FFB38A" />
+    <circle cx="25" cy="65" r="4" fill="var(--color-coral)" />
+    <circle cx="75" cy="65" r="4" fill="var(--color-coral)" />
   </svg>
 );
 

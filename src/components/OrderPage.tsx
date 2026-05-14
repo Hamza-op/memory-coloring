@@ -19,7 +19,6 @@ const OrderPage = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const packages = [
-    { id: 'starter', name: 'Digital Starter', priceNum: 799, price: '799', emoji: '✨', accent: 'border-sky/40 bg-sky/5', selected: 'border-sky bg-sky/10 shadow-md', badge: null },
     { id: 'mini', name: 'Mini Memory', priceNum: 1999, price: '1,999', emoji: '📖', accent: 'border-violet/40 bg-violet/5', selected: 'border-violet bg-violet/10 shadow-md', badge: null },
     { id: 'family', name: 'Family Favorite', priceNum: 3499, price: '3,499', emoji: '🎨', accent: 'border-coral/40 bg-coral/5', selected: 'border-coral bg-coral/10 shadow-md', badge: 'Most Popular' },
     { id: 'premium', name: 'Premium Gift', priceNum: 4999, price: '4,999', emoji: '🎁', accent: 'border-honey/40 bg-honey/5', selected: 'border-honey bg-honey/10 shadow-md', badge: null },
@@ -95,7 +94,7 @@ const OrderPage = () => {
   const labelClass = "block text-sm font-bold text-[var(--text-muted)] mb-2 font-body";
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] py-8 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg)] py-6 sm:py-8 px-3 sm:px-4 relative overflow-hidden">
       {/* Background blobs */}
       <div className="absolute top-20 right-[5%] w-72 h-72 bg-violet/8 blob animate-float-slow pointer-events-none -z-10" />
       <div className="absolute bottom-20 left-[5%] w-56 h-56 bg-coral/8 blob-2 pointer-events-none -z-10" />
@@ -126,7 +125,7 @@ const OrderPage = () => {
 
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="soft-card p-6 sm:p-8 space-y-6"
+          className="soft-card p-4 sm:p-8 space-y-6"
         >
           {/* Package Selection */}
           <div>
@@ -134,7 +133,7 @@ const OrderPage = () => {
               <Package size={18} className="text-violet-text" /> Select Package(s)
             </label>
             <p className="text-xs text-[var(--text-muted)] font-body mb-4">You can select multiple — tap to toggle.</p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {packages.map((pkg, i) => {
                 const isSelected = selectedIds.has(pkg.id);
                 return (
@@ -174,12 +173,12 @@ const OrderPage = () => {
 
           {/* Order Total */}
           {selectedIds.size > 0 && (
-            <div className="bg-[var(--bg)] border-2 border-[var(--border)] rounded-2xl p-4 flex items-center justify-between">
+            <div className="bg-[var(--bg)] border-2 border-[var(--border)] rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
                 <p className="text-xs text-[var(--text-muted)] font-body">{selectedIds.size} package{selectedIds.size > 1 ? 's' : ''} selected</p>
                 <p className="font-display font-bold text-[var(--text)] text-lg">Rs. {totalFormatted}</p>
               </div>
-              <div className="text-right">
+              <div className="sm:text-right">
                 <p className="text-xs text-[var(--text-muted)] font-body">Advance (50%)</p>
                 <p className="font-display font-bold text-coral-text text-lg">Rs. {advanceFormatted}</p>
               </div>

@@ -128,7 +128,7 @@ const sections = [
       },
       {
         heading: 'Digital PDF Delivery',
-        body: 'Digital Starter orders (PDF only) are delivered via WhatsApp or email within 24-48 hours of final approval. No shipping charges apply.',
+        body: 'Digital PDF files included with printed packages are delivered via WhatsApp or email after final approval. Printed books are shipped by courier.',
       },
     ],
   },
