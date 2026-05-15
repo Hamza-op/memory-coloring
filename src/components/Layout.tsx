@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Heart, MessageCircle, Facebook, Instagram, Home, ShoppingBag, Moon, Sun } from 'lucide-react';
+import { Heart, Facebook, Instagram, Home, ShoppingBag, Moon, Sun } from 'lucide-react';
 import { motion } from 'motion/react';
 import logo from '../../assets/logo-memory-coloring.webp';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const Logo = () => (
   <div className="flex items-center">
@@ -17,47 +18,63 @@ const Logo = () => (
 );
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false);
-  useEffect(() => { setIsDark(document.documentElement.classList.contains('dark')); }, []);
-  const toggle = () => {
-    document.documentElement.classList.toggle('dark');
-    setIsDark(!isDark);
+  const getPreferredTheme = () => {
+    const saved = window.localStorage.getItem('memory-coloring-theme');
+    if (saved === 'dark') return true;
+    if (saved === 'light') return false;
+    return document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
   };
+
+  const applyTheme = (nextIsDark: boolean) => {
+    document.documentElement.classList.toggle('dark', nextIsDark);
+    window.localStorage.setItem('memory-coloring-theme', nextIsDark ? 'dark' : 'light');
+    setIsDark(nextIsDark);
+  };
+
+  const [isDark, setIsDark] = useState(() => getPreferredTheme());
+
+  useEffect(() => {
+    applyTheme(getPreferredTheme());
+
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const toggle = () => {
+    applyTheme(!document.documentElement.classList.contains('dark'));
+  };
+
   return (
     <button
       onClick={toggle}
-      aria-label="Toggle theme"
-      className="relative w-16 h-8 rounded-full transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-violet/40 shrink-0"
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className="group relative h-8 w-14 shrink-0 overflow-hidden rounded-full border border-[var(--border)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-violet/35"
       style={{
         background: isDark
-          ? 'linear-gradient(135deg, #011F55 0%, #9672CC 100%)'
-          : 'linear-gradient(135deg, #55BCF1 0%, #FFC12F 100%)',
+          ? 'linear-gradient(135deg, #17171B 0%, #2B2C33 100%)'
+          : 'linear-gradient(135deg, #F7FBFF 0%, #B9E6FF 100%)',
         boxShadow: isDark
-          ? '0 2px 12px rgba(150,114,204,0.35), inset 0 1px 0 rgba(255,255,255,0.08)'
-          : '0 2px 12px rgba(255,193,47,0.4), inset 0 1px 0 rgba(255,255,255,0.4)',
+          ? '0 4px 12px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.08)'
+          : '0 4px 12px rgba(120,142,205,0.16), inset 0 1px 0 rgba(255,255,255,0.7)',
       }}
     >
-      {/* Stars (dark mode) */}
-      {isDark && (
-        <>
-          <span className="absolute top-1 left-1.5 text-[7px] text-violet opacity-80">✦</span>
-          <span className="absolute bottom-1 left-3 text-[5px] text-white opacity-60">✦</span>
-        </>
-      )}
-      {/* Sun rays (light mode) */}
-      {!isDark && (
-        <span className="absolute top-1 right-1.5 text-[7px] text-honey opacity-80">✦</span>
-      )}
-      {/* Sliding pill */}
+      <span className="absolute left-2 top-2.5 h-1 w-1 rounded-full bg-white/70 opacity-0 transition-opacity dark:opacity-100" />
+      <span className="absolute right-2.5 top-2 h-1.5 w-1.5 rounded-full bg-coral/70 opacity-100 transition-opacity dark:opacity-0" />
+      <span className="absolute bottom-2 right-4 h-1 w-1 rounded-full bg-white/60 opacity-0 transition-opacity dark:opacity-100" />
       <motion.div
         layout
-        transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-        className={`absolute top-1 w-6 h-6 rounded-full flex items-center justify-center shadow-md ${isDark ? 'right-1 bg-violet' : 'left-1 bg-white'
+        transition={{ type: 'spring', stiffness: 520, damping: 32 }}
+        className={`absolute top-0.5 flex h-7 w-7 items-center justify-center rounded-full shadow-md ring-1 ring-white/70 ${isDark ? 'right-0.5 bg-honey text-charcoal' : 'left-0.5 bg-white text-honey-text'
           }`}
       >
         {isDark
-          ? <Moon size={13} className="text-charcoal" fill="currentColor" />
-          : <Sun size={13} className="text-honey-text" fill="currentColor" />
+          ? <Moon size={14} fill="currentColor" />
+          : <Sun size={14} fill="currentColor" />
         }
       </motion.div>
     </button>
@@ -90,7 +107,7 @@ const Navbar = () => {
               ))}
               <ThemeToggle />
               <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa py-2.5 px-5 text-sm">
-                <MessageCircle size={16} fill="currentColor" /> WhatsApp Us
+                <WhatsAppIcon size={16} className="text-white" /> WhatsApp Us
               </a>
             </div>
             <div className="lg:hidden flex items-center gap-3">
@@ -167,7 +184,7 @@ const MobileBottomNav = () => {
         </Link>
       ))}
       <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] text-wa-green hover:text-sage transition-colors">
-        <MessageCircle size={22} />
+        <WhatsAppIcon size={22} />
         <span className="text-[10px] mt-1 font-body font-bold">Chat</span>
       </a>
     </div>

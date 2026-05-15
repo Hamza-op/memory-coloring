@@ -1,17 +1,16 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { MessageCircle, Check, Star, Sparkles, Heart, Pencil, Shield, Diamond, Smile, ShoppingBag, Palette, Wand2, Camera, Gift, Truck } from 'lucide-react';
+import { Check, Star, Sparkles, Heart, Pencil, Shield, Diamond, Smile, ShoppingBag, Palette, Wand2, Camera, Gift, Truck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ActivityToast from './ActivityToast';
+import WhatsAppIcon from './WhatsAppIcon';
 import familyPhoto from '../../assets/memory-coloring-20260513-223056.webp';
 import familySketch from '../../assets/memory-coloring-20260513-223135.webp';
 import grandparentsPhoto from '../../assets/memory-coloring-20260513-223140.webp';
 import grandparentsSketch from '../../assets/memory-coloring-20260513-223143.webp';
 import petPhoto from '../../assets/memory-coloring-20260513-223145.webp';
 import petSketch from '../../assets/memory-coloring-20260513-223148.webp';
-import selfiePhoto from '../../assets/memory-coloring-20260513-223151.webp';
-import selfieSketch from '../../assets/memory-coloring-20260513-223155.webp';
 import processPromo from '../../assets/memory-coloring-20260513-223545.webp';
 import birthdayPoster from '../../assets/memory-coloring-20260513-224058.webp';
 import adventurePoster from '../../assets/memory-coloring-20260513-224258.webp';
@@ -37,8 +36,8 @@ const Hero = () => {
   return (
     <section className="relative pt-5 pb-8 sm:pb-12 lg:pt-6 lg:pb-16 px-4 overflow-hidden hero-stage">
       <div className="absolute inset-0 -z-10 opacity-70">
-        <div className="absolute left-[-120px] top-10 h-72 w-72 rounded-full bg-coral/25 blur-3xl" />
-        <div className="absolute right-[-120px] top-24 h-80 w-80 rounded-full bg-honey/35 blur-3xl" />
+        <div className="absolute left-[-120px] top-10 h-72 w-72 rounded-full bg-coral/35 blur-3xl" />
+        <div className="absolute right-[-120px] top-24 h-80 w-80 rounded-full bg-violet/25 blur-3xl" />
         <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-sage/25 blur-3xl" />
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
@@ -61,7 +60,7 @@ const Hero = () => {
                   <ShoppingBag size={20} /> Order Online
                 </button>
                 <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa w-full sm:w-auto justify-center">
-                  <MessageCircle size={20} fill="currentColor" /> WhatsApp
+                  <WhatsAppIcon size={20} className="text-white" /> WhatsApp
                 </a>
               </div>
               <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-3 max-w-lg mx-auto lg:mx-0">
@@ -71,10 +70,10 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.35 + i * 0.08, duration: 0.45 }}
-                    className={cn("rounded-2xl border-2 bg-[var(--surface)] px-3 py-3 text-center shadow-sm backdrop-blur", item.accent)}
+                    className={cn("rounded-2xl border-2 bg-[var(--surface)] px-1.5 py-3 min-h-[74px] flex flex-col items-center justify-center text-center shadow-sm backdrop-blur sm:px-3", item.accent)}
                   >
-                    <div className="font-display text-sm sm:text-base font-black text-[var(--text)] leading-none">{item.value}</div>
-                    <div className="mt-1 font-body text-[10px] sm:text-xs font-bold uppercase tracking-wide text-[var(--text-muted)]">{item.label}</div>
+                    <div className="font-display text-[11px] min-[380px]:text-xs sm:text-base font-black text-[var(--text)] leading-tight whitespace-nowrap">{item.value}</div>
+                    <div className="mt-1 font-body text-[9px] min-[380px]:text-[10px] sm:text-xs font-bold uppercase leading-tight text-[var(--text-muted)]">{item.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -272,10 +271,8 @@ const PaintingGallery = () => {
     { title: 'The Laugh Page', before: familyPhoto, after: familySketch, note: 'Family giggles become a page they can color again and again.', tag: 'From sofa chaos to crayon-ready' },
     { title: 'Nani & Nana Edition', before: grandparentsPhoto, after: grandparentsSketch, note: 'A warm moment turns into a keepsake kids can actually play with.', tag: 'Tiny hands, big feelings' },
     { title: 'Pet Sidekick Mode', before: petPhoto, after: petSketch, note: 'The family pet gets promoted to coloring-book main character.', tag: 'Fur, paws, instant hero' },
-    { title: 'The Selfie Spell', before: selfiePhoto, after: selfieSketch, note: 'A quick phone photo becomes artwork with gift energy.', tag: 'Ordinary photo, unfairly cute' },
   ];
   const campaigns = [
-    { title: '3-Step Process', image: processPromo },
     { title: 'Birthday Memory', image: birthdayPoster },
     { title: 'Magical Adventure', image: adventurePoster },
     { title: 'Milestone Celebration', image: milestonePoster },

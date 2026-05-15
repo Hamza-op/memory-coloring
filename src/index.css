@@ -5,13 +5,13 @@
   --font-display: "Fredoka", cursive;   /* Rounded bubble display, close to logo style */
   --font-body: "Nunito", sans-serif;    /* Clean Friendly Sans — brand guide body */
 
-  --color-warm-white: #FFF9EF; /* Brand cream */
-  --color-charcoal: #011F55; /* Brand navy */
-  --color-coral: #FF928B; /* Brand coral */
-  --color-honey: #FFC12F; /* Brand yellow */
-  --color-sky: #55BCF1; /* Brand blue */
-  --color-sage: #81BE8C; /* Brand green */
-  --color-violet: #9672CC; /* Brand violet */
+  --color-warm-white: #F7FBFF; /* Soft cloud */
+  --color-charcoal: #10264A; /* Gentle navy */
+  --color-coral: #F5A1CF; /* Soft pink */
+  --color-honey: #B9E6FF; /* Powder blue */
+  --color-sky: #78CBEF; /* Friendly blue */
+  --color-sage: #A3DDBB; /* Soft mint */
+  --color-violet: #9EDDF5; /* Soft aqua */
   --color-blush: color-mix(in srgb, var(--color-coral) 24%, var(--color-warm-white));
   --color-wa-green: #25D366;
 
@@ -24,45 +24,50 @@
 
 @layer base {
   :root {
-    --bg: #FFF9EF; /* Brand cream */
-    --text: #011F55; /* Brand navy */
-    --text-muted: #675466; /* Warmer muted ink */
-    --surface: color-mix(in srgb, var(--color-warm-white) 62%, white);
-    --surface-hover: color-mix(in srgb, var(--color-warm-white) 82%, white);
-    --border: rgba(255, 146, 139, 0.28);
-    --shadow-sm: 0 1px 3px rgba(255,146,139,0.08), 0 1px 2px rgba(1,31,85,0.03);
-    --shadow-md: 0 4px 16px rgba(255,146,139,0.12), 0 2px 4px rgba(1,31,85,0.04);
-    --shadow-lg: 0 12px 40px rgba(255,146,139,0.16), 0 4px 12px rgba(1,31,85,0.05);
-    --shadow-xl: 0 20px 60px rgba(255,146,139,0.2), 0 8px 20px rgba(1,31,85,0.06);
+    --bg: #F7FBFF;
+    --text: #10264A;
+    --text-muted: #526070;
+    --surface: color-mix(in srgb, var(--color-warm-white) 42%, white);
+    --surface-hover: color-mix(in srgb, var(--color-honey) 16%, white);
+    --border: rgba(120, 142, 205, 0.24);
+    --shadow-sm: 0 1px 3px rgba(88, 118, 172, 0.08), 0 1px 2px rgba(16, 38, 74, 0.03);
+    --shadow-md: 0 4px 16px rgba(88, 118, 172, 0.12), 0 2px 4px rgba(16, 38, 74, 0.04);
+    --shadow-lg: 0 12px 40px rgba(88, 118, 172, 0.16), 0 4px 12px rgba(16, 38, 74, 0.05);
+    --shadow-xl: 0 20px 60px rgba(88, 118, 172, 0.2), 0 8px 20px rgba(16, 38, 74, 0.06);
     --radius: 32px;
     --radius-sm: 20px;
     --radius-lg: 48px;
 
-    --theme-text-coral: #A93B35;
-    --theme-text-honey: #745100;
-    --theme-text-sky: #075D91;
-    --theme-text-sage: #356F3D;
-    --theme-text-violet: #5F3B98;
-    --logo-blue: #7EA3F4;
+    --theme-text-coral: #873061;
+    --theme-text-honey: #245C7A;
+    --theme-text-sky: #0D5D86;
+    --theme-text-sage: #276849;
+    --theme-text-violet: #1F6380;
+    --logo-blue: #6D91EA;
   }
 
   .dark {
-    --bg: #1A1613; /* Warm espresso — the dark twin of light-mode cream */
-    --text: #FFF5E6;
-    --text-muted: #B0A89E;
-    --surface: #252120;
-    --surface-hover: #322C28;
-    --border: rgba(255, 200, 160, 0.14);
+    --color-honey: #CDEED9;
+    --color-sky: #A9E2C4;
+    --color-violet: #D8F3E6;
+    --logo-blue: #BDEBD2;
+
+    --bg: #17171B;
+    --text: #FFF7FB;
+    --text-muted: #C9C0C8;
+    --surface: #222329;
+    --surface-hover: #2B2C33;
+    --border: rgba(245, 161, 207, 0.16);
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.45), 0 1px 2px rgba(0,0,0,0.3);
     --shadow-md: 0 4px 16px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
     --shadow-lg: 0 12px 40px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.3);
     --shadow-xl: 0 20px 60px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.35);
 
-    --theme-text-coral: #FFB8B2;
-    --theme-text-honey: #FFD06A;
-    --theme-text-sky: #8AD4FF;
-    --theme-text-sage: #A8DABA;
-    --theme-text-violet: #C9B5E8;
+    --theme-text-coral: #F7BAD5;
+    --theme-text-honey: #CDEED9;
+    --theme-text-sky: #BDEBD2;
+    --theme-text-sage: #B7E8C9;
+    --theme-text-violet: #D8F3E6;
   }
 
   html {
@@ -102,10 +107,10 @@
     pointer-events: none;
     opacity: 0.75;
     background:
-      radial-gradient(circle at 8% 18%, rgba(255, 146, 139, 0.16) 0 34px, transparent 35px),
-      radial-gradient(circle at 88% 14%, rgba(255, 193, 47, 0.2) 0 42px, transparent 43px),
-      radial-gradient(circle at 16% 78%, rgba(129, 190, 140, 0.18) 0 46px, transparent 47px),
-      radial-gradient(circle at 92% 70%, rgba(150, 114, 204, 0.14) 0 38px, transparent 39px);
+      radial-gradient(circle at 8% 18%, rgba(245, 161, 207, 0.22) 0 34px, transparent 35px),
+      radial-gradient(circle at 88% 14%, rgba(185, 230, 255, 0.28) 0 42px, transparent 43px),
+      radial-gradient(circle at 16% 78%, rgba(163, 221, 187, 0.2) 0 46px, transparent 47px),
+      radial-gradient(circle at 92% 70%, rgba(120, 203, 239, 0.18) 0 38px, transparent 39px);
   }
 
   .playful-page::after {
@@ -116,31 +121,31 @@
     pointer-events: none;
     opacity: 0.42;
     background:
-      linear-gradient(115deg, transparent 0 45%, rgba(255, 146, 139, 0.25) 45% 46%, transparent 46% 100%) 0 0 / 180px 180px,
-      radial-gradient(circle, rgba(255, 193, 47, 0.35) 1.5px, transparent 2px) 12px 18px / 42px 42px,
-      radial-gradient(circle, rgba(129, 190, 140, 0.28) 1.5px, transparent 2px) 32px 30px / 58px 58px;
+      linear-gradient(115deg, transparent 0 45%, rgba(120, 203, 239, 0.2) 45% 46%, transparent 46% 100%) 0 0 / 180px 180px,
+      radial-gradient(circle, rgba(185, 230, 255, 0.5) 1.5px, transparent 2px) 12px 18px / 42px 42px,
+      radial-gradient(circle, rgba(163, 221, 187, 0.32) 1.5px, transparent 2px) 32px 30px / 58px 58px;
   }
 
   .hero-stage {
     position: relative;
     background:
-      radial-gradient(circle at 12px 12px, rgba(255, 146, 139, 0.22) 2px, transparent 2.5px) 0 0 / 34px 34px,
-      linear-gradient(135deg, rgba(255, 249, 239, 0.96), rgba(255, 146, 139, 0.2) 48%, rgba(255, 193, 47, 0.22));
+      radial-gradient(circle at 12px 12px, rgba(120, 203, 239, 0.18) 2px, transparent 2.5px) 0 0 / 34px 34px,
+      linear-gradient(135deg, rgba(247, 251, 255, 0.97), rgba(245, 161, 207, 0.24) 44%, rgba(185, 230, 255, 0.3));
   }
 
   .dark .hero-stage {
     background:
-      radial-gradient(circle at 12px 12px, rgba(255, 200, 160, 0.06) 2px, transparent 2.5px) 0 0 / 34px 34px,
-      linear-gradient(135deg, rgba(26, 22, 19, 0.97), rgba(150, 114, 204, 0.14) 48%, rgba(255, 146, 139, 0.10));
+      radial-gradient(circle at 12px 12px, rgba(205, 238, 217, 0.06) 2px, transparent 2.5px) 0 0 / 34px 34px,
+      linear-gradient(135deg, rgba(23, 23, 27, 0.98), rgba(245, 161, 207, 0.1) 46%, rgba(205, 238, 217, 0.1));
   }
 
   .dark .playful-page::before {
     opacity: 0.45;
     background:
-      radial-gradient(circle at 8% 18%, rgba(255, 146, 139, 0.22) 0 50px, transparent 51px),
-      radial-gradient(circle at 88% 14%, rgba(255, 193, 47, 0.18) 0 60px, transparent 61px),
-      radial-gradient(circle at 16% 78%, rgba(150, 114, 204, 0.2) 0 55px, transparent 56px),
-      radial-gradient(circle at 92% 70%, rgba(255, 146, 139, 0.14) 0 45px, transparent 46px);
+      radial-gradient(circle at 8% 18%, rgba(245, 161, 207, 0.2) 0 50px, transparent 51px),
+      radial-gradient(circle at 88% 14%, rgba(205, 238, 217, 0.12) 0 60px, transparent 61px),
+      radial-gradient(circle at 16% 78%, rgba(183, 232, 201, 0.16) 0 55px, transparent 56px),
+      radial-gradient(circle at 92% 70%, rgba(163, 221, 187, 0.12) 0 45px, transparent 46px);
   }
 
   .dark .playful-page::after {
@@ -180,20 +185,20 @@
   .brand-ribbon {
     background:
       radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.75), transparent 24%),
-      radial-gradient(circle at 85% 18%, rgba(255, 193, 47, 0.5), transparent 28%),
-      linear-gradient(135deg, color-mix(in srgb, var(--color-coral) 72%, white), color-mix(in srgb, var(--color-honey) 62%, white));
+      radial-gradient(circle at 85% 18%, rgba(185, 230, 255, 0.7), transparent 28%),
+      linear-gradient(135deg, color-mix(in srgb, var(--color-coral) 62%, white), color-mix(in srgb, var(--color-sky) 32%, white));
     color: var(--color-charcoal);
   }
 
   .hero-wordmark {
     display: inline;
     color: var(--color-charcoal);
-    text-shadow: 0.075em 0.075em 0 rgba(255, 193, 47, 0.38);
+    text-shadow: 0.075em 0.075em 0 rgba(185, 230, 255, 0.72);
   }
 
   .dark .hero-wordmark {
     color: var(--text);
-    text-shadow: 0.075em 0.075em 0 rgba(255, 193, 47, 0.22);
+    text-shadow: 0.075em 0.075em 0 rgba(205, 238, 217, 0.2);
   }
 
   .rainbow-word {
@@ -258,7 +263,7 @@
 
   /* ─── Buttons ─── */
   .btn-primary {
-    background: linear-gradient(135deg, var(--color-coral), var(--color-honey));
+    background: linear-gradient(135deg, var(--color-coral), var(--color-violet));
     color: var(--color-charcoal);
     padding: 0.875rem 2rem;
     border-radius: 999px;
@@ -269,12 +274,12 @@
     justify-content: center;
     gap: 0.5rem;
     min-height: 48px;
-    box-shadow: 0 4px 16px rgba(255, 146, 139, 0.35);
+    box-shadow: 0 4px 16px rgba(120, 142, 205, 0.26);
     transition: all 0.3s ease;
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(255, 146, 139, 0.45);
+    box-shadow: 0 8px 24px rgba(120, 142, 205, 0.34);
   }
 
   .btn-wa {

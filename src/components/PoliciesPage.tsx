@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, Shield, RefreshCw, FileText, Truck, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Shield, RefreshCw, FileText, Truck } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const sections = [
   {
@@ -245,7 +246,7 @@ const PoliciesPage = () => {
             rel="noreferrer"
             className="btn-wa inline-flex"
           >
-            <MessageCircle size={18} fill="currentColor" /> Chat with Us
+            <WhatsAppIcon size={18} className="text-white" /> Chat with Us
           </a>
         </motion.div>
 

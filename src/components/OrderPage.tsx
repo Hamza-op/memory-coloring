@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ShoppingBag, ArrowLeft, CheckCircle, Package, MessageCircle, Sparkles } from 'lucide-react';
+import { ShoppingBag, ArrowLeft, CheckCircle, Package, Sparkles, BookOpen, Paintbrush, Gift, User, Phone, Mail, MapPin, ShieldCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import WhatsAppIcon from './WhatsAppIcon';
 
 const OrderPage = () => {
   const navigate = useNavigate();
@@ -19,9 +20,9 @@ const OrderPage = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const packages = [
-    { id: 'mini', name: 'Mini Memory', priceNum: 1999, price: '1,999', emoji: '📖', accent: 'border-violet/40 bg-violet/5', selected: 'border-violet bg-violet/10 shadow-md', badge: null },
-    { id: 'family', name: 'Family Favorite', priceNum: 3499, price: '3,499', emoji: '🎨', accent: 'border-coral/40 bg-coral/5', selected: 'border-coral bg-coral/10 shadow-md', badge: 'Most Popular' },
-    { id: 'premium', name: 'Premium Gift', priceNum: 4999, price: '4,999', emoji: '🎁', accent: 'border-honey/40 bg-honey/5', selected: 'border-honey bg-honey/10 shadow-md', badge: null },
+    { id: 'mini', name: 'Mini Memory', priceNum: 1999, price: '1,999', pages: '12 pages', detail: 'Small keepsake starter', Icon: BookOpen, iconClass: 'bg-violet/18 text-violet-text', accent: 'border-violet/35 bg-violet/8', selected: 'border-violet bg-violet/16 shadow-md', badge: null },
+    { id: 'family', name: 'Family Favorite', priceNum: 3499, price: '3,499', pages: '24 pages', detail: 'Best for birthdays and siblings', Icon: Paintbrush, iconClass: 'bg-coral/18 text-coral-text', accent: 'border-coral/35 bg-coral/8', selected: 'border-coral bg-coral/16 shadow-md', badge: 'Most Popular' },
+    { id: 'premium', name: 'Premium Gift', priceNum: 4999, price: '4,999', pages: '36 pages', detail: 'Bigger gift-ready memory book', Icon: Gift, iconClass: 'bg-honey/25 text-honey-text', accent: 'border-honey/40 bg-honey/10', selected: 'border-honey bg-honey/18 shadow-md', badge: null },
   ];
 
   const togglePackage = (id: string) => {
@@ -41,13 +42,13 @@ const OrderPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedIds.size === 0) return;
     setIsSubmitting(true);
-    const pkgLines = selectedPackages.map(p => `  • ${p.name} — Rs. ${p.price}`).join('\n');
+    const pkgLines = selectedPackages.map(p => `  - ${p.name} - Rs. ${p.price}`).join('\n');
     const message =
-      `*New Order - memorycoloring* 🎨\n\n` +
+      `*New Order - memorycoloring*\n\n` +
       `*Package(s):*\n${pkgLines}\n` +
       `*Total:* Rs. ${totalFormatted}\n` +
       `*50% Advance:* Rs. ${advanceFormatted}\n\n` +
@@ -56,7 +57,7 @@ const OrderPage = () => {
       `*Email:* ${formData.email || 'Not provided'}\n` +
       `*Address:* ${formData.address}\n\n` +
       `_I understand a 50% advance payment is required to process my order._\n` +
-      `_Please confirm my order!_`;
+      `_Please confirm my order._`;
     window.open(`https://wa.me/923462083310?text=${encodeURIComponent(message)}`, '_blank');
     setIsSubmitting(false);
     setIsSuccess(true);
@@ -64,12 +65,14 @@ const OrderPage = () => {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="absolute left-[-100px] top-20 h-72 w-72 rounded-full bg-coral/18 blur-3xl" />
+        <div className="absolute bottom-12 right-[-100px] h-72 w-72 rounded-full bg-honey/24 blur-3xl" />
         <motion.div
           initial={{ scale: 0.8, opacity: 0, y: 30 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ type: 'spring', bounce: 0.4 }}
-          className="soft-card max-w-md w-full text-center p-10 border-2 border-sage/30"
+          className="soft-card max-w-md w-full text-center p-8 sm:p-10 border-2 border-sage/30 relative z-10"
         >
           <motion.div
             initial={{ scale: 0 }}
@@ -79,10 +82,9 @@ const OrderPage = () => {
           >
             <CheckCircle size={48} strokeWidth={1.5} />
           </motion.div>
-          <h2 className="text-3xl text-[var(--text)] font-display font-bold mb-3">Order Received! 🎉</h2>
+          <h2 className="text-3xl text-[var(--text)] font-display font-bold mb-3">Order details opened</h2>
           <p className="text-[var(--text-muted)] font-body mb-8 leading-relaxed">
-            Thank you! We've opened WhatsApp with your order details.<br />
-            Please Connect <b className="text-[var(--text)]">"with us"</b> on WhatsApp and share your photos with us!
+            WhatsApp now has your package, advance amount, and delivery details. Send the message there, then share the photos you want inside the coloring book.
           </p>
           <button onClick={() => navigate('/')} className="btn-primary w-full justify-center">Return to Home</button>
         </motion.div>
@@ -90,16 +92,17 @@ const OrderPage = () => {
     );
   }
 
-  const inputClass = "w-full bg-[var(--bg)] border-2 border-[var(--border)] rounded-2xl px-4 py-3 font-body text-[var(--text)] placeholder:text-[var(--text-muted)]/50 focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/15 transition-all";
-  const labelClass = "block text-sm font-bold text-[var(--text-muted)] mb-2 font-body";
+  const inputClass = "w-full bg-[var(--surface)] border-2 border-[var(--border)] rounded-2xl px-4 py-3.5 font-body text-[var(--text)] placeholder:text-[var(--text-muted)]/45 focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20 transition-all";
+  const labelClass = "flex items-center gap-2 text-sm font-bold text-[var(--text)] mb-2 font-body";
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] py-6 sm:py-8 px-3 sm:px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg)] py-6 sm:py-10 px-3 sm:px-4 relative overflow-hidden">
       {/* Background blobs */}
-      <div className="absolute top-20 right-[5%] w-72 h-72 bg-violet/8 blob animate-float-slow pointer-events-none -z-10" />
-      <div className="absolute bottom-20 left-[5%] w-56 h-56 bg-coral/8 blob-2 pointer-events-none -z-10" />
+      <div className="absolute top-16 right-[-90px] w-80 h-80 bg-coral/18 blob animate-float-slow pointer-events-none -z-10 blur-2xl" />
+      <div className="absolute bottom-24 left-[-90px] w-72 h-72 bg-honey/22 blob-2 pointer-events-none -z-10 blur-2xl" />
+      <div className="absolute top-1/2 right-[12%] w-52 h-52 bg-violet/12 blob pointer-events-none -z-10 blur-3xl" />
 
-      <div className="max-w-2xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-[var(--text-muted)] hover:text-coral-text transition-colors mb-6 font-body font-bold text-sm group"
@@ -112,7 +115,7 @@ const OrderPage = () => {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <div className="w-16 h-16 bg-coral/10 text-coral-text rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
+          <div className="w-16 h-16 bg-coral/14 text-coral-text rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm ring-1 ring-coral/20">
             <ShoppingBag size={28} />
           </div>
           <h1 className="text-3xl lg:text-4xl text-[var(--text)] font-display font-bold mb-2">
@@ -123,123 +126,161 @@ const OrderPage = () => {
           </p>
         </motion.div>
 
-        <motion.div
+        <motion.form
+          onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="soft-card p-4 sm:p-8 space-y-6"
+          className="soft-card overflow-hidden"
         >
-          {/* Package Selection */}
-          <div>
-            <label className="flex items-center gap-2 font-display font-bold text-[var(--text)] text-lg mb-1">
-              <Package size={18} className="text-violet-text" /> Select Package(s)
-            </label>
-            <p className="text-xs text-[var(--text-muted)] font-body mb-4">You can select multiple — tap to toggle.</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {packages.map((pkg, i) => {
-                const isSelected = selectedIds.has(pkg.id);
-                return (
-                  <motion.div
-                    key={pkg.id}
-                    onClick={() => togglePackage(pkg.id)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className={cn(
-                      'relative p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200',
-                      isSelected ? pkg.selected : `${pkg.accent} border-transparent hover:border-[var(--border)]`
-                    )}
-                  >
-                    {pkg.badge && (
-                      <span className="absolute -top-2.5 left-3 bg-coral text-charcoal text-[9px] px-2.5 py-1 rounded-full font-black uppercase tracking-wider shadow-sm border border-coral-text/20">
-                        {pkg.badge}
-                      </span>
-                    )}
-                    <div className="text-xl mb-1">{pkg.emoji}</div>
-                    <div className="font-display font-bold text-[var(--text)] text-sm leading-tight">{pkg.name}</div>
-                    <div className="text-[var(--text-muted)] font-body text-xs mt-0.5">
-                      Rs. <span className="font-bold text-[var(--text)]">{pkg.price}</span>
-                    </div>
-                    {isSelected && (
-                      <div className="absolute top-2 right-2 w-4 h-4 bg-coral rounded-full flex items-center justify-center">
-                        <span className="text-charcoal text-[8px] font-black">✓</span>
+          <div className="grid lg:grid-cols-[1.35fr_0.9fr]">
+            <div className="p-4 sm:p-7 lg:p-8 space-y-7">
+              {/* Package Selection */}
+              <section>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <h2 className="flex items-center gap-2 font-display font-bold text-[var(--text)] text-xl">
+                      <Package size={20} className="text-violet-text" /> Choose your book
+                    </h2>
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)] font-body mt-1">Tap a package to add or remove it from this order.</p>
+                  </div>
+                  <span className="hidden sm:inline-flex rounded-full bg-coral/12 px-3 py-1 text-[11px] font-black uppercase text-coral-text ring-1 ring-coral/20">Step 1</span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {packages.map((pkg, i) => {
+                    const isSelected = selectedIds.has(pkg.id);
+                    return (
+                      <motion.button
+                        type="button"
+                        key={pkg.id}
+                        onClick={() => togglePackage(pkg.id)}
+                        whileHover={{ y: -3 }}
+                        whileTap={{ scale: 0.98 }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.05 }}
+                        className={cn(
+                          'relative min-h-[172px] rounded-2xl border-2 p-4 text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-coral/25',
+                          isSelected ? pkg.selected : `${pkg.accent} hover:border-[var(--border)]`
+                        )}
+                      >
+                        {pkg.badge && (
+                          <span className="absolute -top-2.5 left-4 rounded-full bg-coral px-2.5 py-1 text-[9px] font-black uppercase tracking-wide text-charcoal shadow-sm ring-1 ring-coral-text/20">
+                            {pkg.badge}
+                          </span>
+                        )}
+                        <div className="mb-3 flex items-start justify-between gap-3">
+                          <div className={cn('flex h-11 w-11 items-center justify-center rounded-2xl shadow-sm', pkg.iconClass)}>
+                            <pkg.Icon size={22} />
+                          </div>
+                          <div className={cn('flex h-6 w-6 items-center justify-center rounded-full border-2 transition-colors', isSelected ? 'border-coral bg-coral text-charcoal' : 'border-[var(--border)] bg-[var(--surface)] text-transparent')}>
+                            <CheckCircle size={14} fill="currentColor" />
+                          </div>
+                        </div>
+                        <h3 className="font-display text-base font-bold leading-tight text-[var(--text)]">{pkg.name}</h3>
+                        <p className="mt-1 text-xs font-bold uppercase tracking-wide text-[var(--text-muted)]">{pkg.pages}</p>
+                        <p className="mt-2 min-h-[32px] text-xs leading-relaxed text-[var(--text-muted)]">{pkg.detail}</p>
+                        <p className="mt-3 font-display text-xl font-bold text-[var(--text)]">Rs. {pkg.price}</p>
+                      </motion.button>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* Delivery Details */}
+              <section className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h2 className="font-display font-bold text-[var(--text)] text-xl flex items-center gap-2">
+                      <Sparkles size={18} className="text-honey-text" /> Delivery details
+                    </h2>
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)] font-body mt-1">We use this to confirm your order on WhatsApp.</p>
+                  </div>
+                  <span className="hidden sm:inline-flex rounded-full bg-honey/20 px-3 py-1 text-[11px] font-black uppercase text-honey-text ring-1 ring-honey/30">Step 2</span>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClass}><User size={15} className="text-coral-text" /> Full Name *</label>
+                    <input type="text" name="fullName" required value={formData.fullName} onChange={handleChange} className={inputClass} placeholder="Ali Khan" />
+                  </div>
+                  <div>
+                    <label className={labelClass}><Phone size={15} className="text-sage-text" /> WhatsApp Number *</label>
+                    <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className={inputClass} placeholder="+923XXXXXXXXX" />
+                  </div>
+                </div>
+                <div>
+                  <label className={labelClass}><Mail size={15} className="text-violet-text" /> Email Address <span className="font-normal text-[var(--text-muted)]">(optional)</span></label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClass} placeholder="name@example.com" />
+                </div>
+                <div>
+                  <label className={labelClass}><MapPin size={15} className="text-honey-text" /> Delivery Address *</label>
+                  <textarea name="address" required rows={4} value={formData.address} onChange={handleChange} className={cn(inputClass, 'resize-none')} placeholder="House 123, Street 4, City" />
+                </div>
+              </section>
+            </div>
+
+            <aside className="border-t border-[var(--border)] bg-honey/10 p-4 sm:p-7 lg:border-l lg:border-t-0 lg:p-8">
+              <div className="lg:sticky lg:top-28 space-y-5">
+                <div>
+                  <p className="section-label">Order Summary</p>
+                  <h2 className="mt-1 font-display text-2xl font-bold text-[var(--text)]">Almost ready</h2>
+                </div>
+
+                <div className="space-y-2">
+                  {selectedPackages.length > 0 ? selectedPackages.map(pkg => (
+                    <div key={pkg.id} className="flex items-center justify-between gap-3 rounded-2xl bg-[var(--surface)] px-3 py-3 ring-1 ring-[var(--border)]">
+                      <div>
+                        <p className="font-display text-sm font-bold text-[var(--text)]">{pkg.name}</p>
+                        <p className="text-xs text-[var(--text-muted)]">{pkg.pages}</p>
                       </div>
-                    )}
-                  </motion.div>
-                );
-              })}
-            </div>
+                      <p className="shrink-0 font-display text-sm font-bold text-[var(--text)]">Rs. {pkg.price}</p>
+                    </div>
+                  )) : (
+                    <div className="rounded-2xl bg-[var(--surface)] p-4 text-sm font-bold text-coral-text ring-1 ring-coral/25">Select at least one package.</div>
+                  )}
+                </div>
+
+                <div className="rounded-3xl bg-[var(--surface)] p-4 ring-1 ring-[var(--border)]">
+                  <div className="flex items-center justify-between text-sm text-[var(--text-muted)]">
+                    <span>Total</span>
+                    <span>{selectedIds.size} package{selectedIds.size > 1 ? 's' : ''}</span>
+                  </div>
+                  <div className="mt-1 flex items-end justify-between gap-4">
+                    <p className="font-display text-3xl font-bold text-[var(--text)]">Rs. {totalFormatted}</p>
+                  </div>
+                  <div className="mt-4 rounded-2xl bg-coral/12 p-3 ring-1 ring-coral/20">
+                    <p className="text-xs font-bold uppercase text-coral-text">Advance to start</p>
+                    <p className="font-display text-xl font-bold text-[var(--text)]">Rs. {advanceFormatted}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 rounded-3xl bg-[var(--surface)] p-4 ring-1 ring-honey/30">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-honey/25 text-honey-text">
+                    <ShieldCheck size={18} />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-sm font-bold text-[var(--text)]">Payment note</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-[var(--text-muted)]">
+                      A <span className="font-bold text-coral-text">50% advance payment</span> via bank transfer is required to start your order. Remaining balance is paid on delivery.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting || selectedIds.size === 0}
+                  className="btn-primary w-full justify-center text-base py-4 disabled:pointer-events-none disabled:opacity-60"
+                >
+                  <WhatsAppIcon size={20} className="text-white" />
+                  {isSubmitting ? 'Opening WhatsApp...' : 'Confirm via WhatsApp'}
+                </button>
+                <p className="text-center text-xs text-[var(--text-muted)] font-body leading-relaxed">
+                  You can review everything with us on WhatsApp before final confirmation.
+                </p>
+              </div>
+            </aside>
           </div>
-
-          {/* Order Total */}
-          {selectedIds.size > 0 && (
-            <div className="bg-[var(--bg)] border-2 border-[var(--border)] rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <div>
-                <p className="text-xs text-[var(--text-muted)] font-body">{selectedIds.size} package{selectedIds.size > 1 ? 's' : ''} selected</p>
-                <p className="font-display font-bold text-[var(--text)] text-lg">Rs. {totalFormatted}</p>
-              </div>
-              <div className="sm:text-right">
-                <p className="text-xs text-[var(--text-muted)] font-body">Advance (50%)</p>
-                <p className="font-display font-bold text-coral-text text-lg">Rs. {advanceFormatted}</p>
-              </div>
-            </div>
-          )}
-
-          {/* Divider */}
-          <div className="border-t-2 border-dashed border-[var(--border)]" />
-
-          {/* Delivery Details */}
-          <div className="space-y-4">
-            <h3 className="font-display font-bold text-[var(--text)] text-lg flex items-center gap-2">
-              <Sparkles size={16} className="text-honey-text" /> Delivery Details
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClass}>Full Name *</label>
-                <input type="text" name="fullName" required value={formData.fullName} onChange={handleChange} className={inputClass} placeholder="Ali" />
-              </div>
-              <div>
-                <label className={labelClass}>WhatsApp Number *</label>
-                <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} className={inputClass} placeholder="+923XXXXXXXXX" />
-              </div>
-            </div>
-            <div>
-              <label className={labelClass}>Email Address <span className="font-normal opacity-60">(optional)</span></label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClass} placeholder="jane@example.com" />
-            </div>
-            <div>
-              <label className={labelClass}>Delivery Address *</label>
-              <textarea name="address" required rows={3} value={formData.address} onChange={handleChange} className={cn(inputClass, 'resize-none')} placeholder="House 123, Street 4, City" />
-            </div>
-          </div>
-
-          {/* Payment Notice */}
-          <div className="soft-card border-2 border-honey/40 bg-honey/5 p-4 flex items-start gap-3">
-            <div className="w-8 h-8 rounded-xl bg-honey flex items-center justify-center shrink-0 shadow-sm">
-              <span className="text-charcoal text-sm font-black">!</span>
-            </div>
-            <div>
-              <h4 className="text-sm font-display font-bold text-[var(--text)] mb-0.5">💳 Payment Notice</h4>
-              <p className="text-xs text-[var(--text-muted)] leading-relaxed font-body">
-                At least <span className="font-bold text-coral-text">50% advance payment</span> via Bank Transfer is required to start your order. Remaining balance on delivery.
-              </p>
-            </div>
-          </div>
-
-          {/* Submit */}
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-            className="btn-primary w-full justify-center text-base py-4 mt-2"
-          >
-            <MessageCircle size={20} fill="currentColor" />
-            {isSubmitting ? 'Opening WhatsApp...' : 'Confirm Order via WhatsApp'}
-          </button>
-          <p className="text-center text-xs text-[var(--text-muted)] font-body leading-relaxed">
-            By ordering, you agree to a <b>50% advance payment</b> via Bank Transfer to confirm and begin processing.
-          </p>
-        </motion.div>
+        </motion.form>
       </div>
     </div>
   );
