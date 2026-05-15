@@ -29,9 +29,9 @@ const RainbowWord = ({ children }: { children: string }) => (
 const Hero = () => {
   const navigate = useNavigate();
   const proof = [
-    { value: '12-36', label: 'custom pages' },
-    { value: 'PDF + Print', label: 'delivery options' },
-    { value: 'Preview', label: 'before final' },
+    { value: '12-36', label: 'custom pages', accent: 'border-sky/40 dark:border-sky/60' },
+    { value: 'PDF + Print', label: 'delivery options', accent: 'border-coral/40 dark:border-coral/60' },
+    { value: 'Preview', label: 'before final', accent: 'border-honey/50 dark:border-honey/70' },
   ];
 
   return (
@@ -71,7 +71,7 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.35 + i * 0.08, duration: 0.45 }}
-                    className="rounded-2xl border border-[var(--border)] bg-white/75 px-3 py-3 text-center shadow-sm backdrop-blur"
+                    className={cn("rounded-2xl border-2 bg-[var(--surface)] px-3 py-3 text-center shadow-sm backdrop-blur", item.accent)}
                   >
                     <div className="font-display text-sm sm:text-base font-black text-[var(--text)] leading-none">{item.value}</div>
                     <div className="mt-1 font-body text-[10px] sm:text-xs font-bold uppercase tracking-wide text-[var(--text-muted)]">{item.label}</div>
@@ -82,7 +82,7 @@ const Hero = () => {
           </div>
 
           {/* Right Content - Editorial Overlapping Grid */}
-          <div className="lg:col-span-7 relative h-[430px] sm:h-[500px] lg:h-[650px] w-full mt-12 sm:mt-6 lg:mt-0">
+          <div className="lg:col-span-7 relative h-[460px] sm:h-[540px] md:h-[600px] lg:h-[650px] w-full mt-10 sm:mt-8 lg:mt-0">
             {/* Decorative background blur */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-coral/20 rounded-full blur-3xl -z-10" />
 
@@ -92,9 +92,9 @@ const Hero = () => {
               animate={{ opacity: 1, x: 0, y: 0, rotate: -6 }}
               transition={{ duration: 1, type: "spring", bounce: 0.3 }}
               whileHover={{ scale: 1.05, rotate: -2, zIndex: 40 }}
-              className="absolute top-[9%] left-[1%] sm:top-[3%] sm:left-[5%] lg:left-[10%] w-[62%] sm:w-[60%] lg:w-[55%] soft-card p-2.5 sm:p-3 pb-10 sm:pb-12 bg-white shadow-2xl z-20 origin-bottom-right"
+              className="absolute top-[2%] left-[2%] sm:top-[3%] sm:left-[5%] md:top-[3%] md:left-[8%] lg:left-[10%] w-[58%] sm:w-[58%] md:w-[56%] lg:w-[55%] soft-card p-2.5 sm:p-3 pb-10 sm:pb-12 shadow-2xl z-20 origin-bottom-right"
             >
-              <div className="aspect-[4/5] overflow-hidden rounded-[calc(var(--radius)-12px)] bg-gray-100">
+              <div className="aspect-[4/5] overflow-hidden rounded-[calc(var(--radius)-12px)] bg-[var(--bg)]">
                 <img src={familyPhoto} alt="Family photo before coloring conversion" fetchPriority="high" className="w-full h-full object-cover" />
               </div>
               <div className="absolute bottom-4 left-0 w-full text-center">
@@ -107,7 +107,7 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="absolute top-[46%] left-[45%] sm:top-[43%] sm:left-[47%] lg:left-[55%] z-50 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-honey text-charcoal rounded-full flex items-center justify-center shadow-xl border-4 border-[var(--bg)]"
+              className="absolute top-[44%] left-[44%] sm:top-[43%] sm:left-[47%] md:top-[44%] md:left-[50%] lg:left-[55%] z-50 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-honey text-charcoal rounded-full flex items-center justify-center shadow-xl border-4 border-[var(--bg)]"
             >
               <Wand2 size={24} className="animate-pulse" />
             </motion.div>
@@ -118,9 +118,9 @@ const Hero = () => {
               animate={{ opacity: 1, x: 0, y: 0, rotate: 8 }}
               transition={{ duration: 1, delay: 0.2, type: "spring", bounce: 0.3 }}
               whileHover={{ scale: 1.05, rotate: 4, zIndex: 40 }}
-              className="absolute bottom-[0%] right-[0%] sm:bottom-[4%] sm:right-[5%] lg:right-[5%] w-[66%] sm:w-[65%] lg:w-[60%] soft-card p-2.5 sm:p-3 pb-10 sm:pb-12 bg-white shadow-xl z-30 origin-top-left"
+              className="absolute bottom-[2%] right-[2%] sm:bottom-[4%] sm:right-[5%] md:right-[6%] lg:right-[5%] w-[60%] sm:w-[60%] md:w-[58%] lg:w-[60%] soft-card p-2.5 sm:p-3 pb-10 sm:pb-12 shadow-xl z-30 origin-top-left"
             >
-              <div className="aspect-[4/5] overflow-hidden rounded-[calc(var(--radius)-12px)] bg-white border border-[var(--border)]">
+              <div className="aspect-[4/5] overflow-hidden rounded-[calc(var(--radius)-12px)] bg-[var(--surface)] border border-[var(--border)]">
                 <img src={familySketch} alt="Family photo transformed into a coloring page" fetchPriority="high" className="w-full h-full object-cover" />
               </div>
               <div className="absolute bottom-4 left-0 w-full text-center">
@@ -140,19 +140,19 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20, rotate: -8 }}
               animate={{ opacity: 1, y: 0, rotate: -5 }}
               transition={{ delay: 0.7, type: 'spring', bounce: 0.35 }}
-              className="absolute left-[2%] bottom-[19%] z-40 hidden sm:flex items-center gap-2 rounded-2xl bg-honey px-4 py-3 text-charcoal shadow-xl border-2 border-white"
+              className="absolute left-[2%] bottom-[18%] md:bottom-[20%] z-40 hidden sm:flex items-center gap-2 rounded-2xl bg-honey px-3 py-2 md:px-4 md:py-3 text-charcoal shadow-xl border-2 border-white"
             >
               <Gift size={18} />
-              <span className="font-display text-sm font-black">Gift-ready book</span>
+              <span className="font-display text-xs md:text-sm font-black">Gift-ready book</span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: -20, rotate: 8 }}
               animate={{ opacity: 1, y: 0, rotate: 5 }}
               transition={{ delay: 0.8, type: 'spring', bounce: 0.35 }}
-              className="absolute right-[1%] top-[6%] z-40 hidden sm:flex items-center gap-2 rounded-2xl bg-sage px-4 py-3 text-charcoal shadow-xl border-2 border-white"
+              className="absolute right-[1%] top-[4%] md:top-[6%] z-40 hidden sm:flex items-center gap-2 rounded-2xl bg-sage px-3 py-2 md:px-4 md:py-3 text-charcoal shadow-xl border-2 border-white"
             >
               <Camera size={18} />
-              <span className="font-display text-sm font-black">Real photo in</span>
+              <span className="font-display text-xs md:text-sm font-black">Real photo in</span>
             </motion.div>
           </div>
         </div>
@@ -177,7 +177,7 @@ const ProductMomentum = () => {
             <h2 className="logo-like-title text-3xl sm:text-4xl lg:text-5xl">
               A <RainbowWord>coloring</RainbowWord> book that starts with their real life.
             </h2>
-            <p className="mt-4 max-w-xl font-body text-sm sm:text-base leading-relaxed text-[var(--text-muted)]">
+            <p className="mt-4 max-w-xl font-body text-sm sm:text-base leading-relaxed text-charcoal/65">
               The hook is simple: kids recognize the people, pets, and moments on the page. That makes the book feel personal before they even pick a color.
             </p>
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
@@ -188,16 +188,16 @@ const ProductMomentum = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.08 }}
                   viewport={{ once: true }}
-                  className="rounded-3xl bg-white/55 p-4 ring-1 ring-coral/20 backdrop-blur"
+                  className="rounded-3xl bg-white/40 dark:bg-white/8 p-4 ring-1 ring-coral/20 backdrop-blur"
                 >
                   <step.icon className="mb-3 text-coral-text" size={22} />
                   <h3 className="font-display text-lg font-black">{step.title}</h3>
-                  <p className="mt-1 font-body text-xs leading-relaxed text-[var(--text-muted)]">{step.copy}</p>
+                  <p className="mt-1 font-body text-xs leading-relaxed text-charcoal/65">{step.copy}</p>
                 </motion.div>
               ))}
             </div>
           </div>
-          <div className="relative min-h-[280px] overflow-hidden bg-warm-white p-4 sm:p-6">
+          <div className="relative min-h-[280px] overflow-hidden bg-[var(--bg)] p-4 sm:p-6">
             <motion.img
               src={processPromo}
               alt="Memory Coloring three-step process"
@@ -243,7 +243,7 @@ const WhyUs = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-4 px-0 sm:px-4 lg:px-0">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 lg:gap-4 px-0 sm:px-4 lg:px-0">
           {features.map((f, i) => (
             <motion.div
               key={i}
@@ -305,13 +305,13 @@ const PaintingGallery = () => {
               whileHover={{ y: -8, rotate: 0 }}
               transition={{ duration: 0.7, delay: i * 0.08, type: "spring", bounce: 0.35 }}
               viewport={{ once: true }}
-              className="soft-card overflow-hidden bg-white p-2.5 sm:p-3 lg:p-4"
+              className="soft-card overflow-hidden p-2.5 sm:p-3 lg:p-4"
             >
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <div className="aspect-[5/4] overflow-hidden rounded-[calc(var(--radius)-14px)] bg-[var(--bg)]">
                   <img src={item.before} alt={`${item.title} original photo`} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover" />
                 </div>
-                <div className="aspect-[5/4] overflow-hidden rounded-[calc(var(--radius)-14px)] bg-white border border-[var(--border)]">
+                <div className="aspect-[5/4] overflow-hidden rounded-[calc(var(--radius)-14px)] bg-[var(--surface)] border border-[var(--border)]">
                   <img src={item.after} alt={`${item.title} coloring page`} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover" />
                 </div>
               </div>
@@ -335,9 +335,9 @@ const PaintingGallery = () => {
               whileHover={{ y: -6, scale: 1.015 }}
               transition={{ duration: 0.55, delay: i * 0.06 }}
               viewport={{ once: true }}
-              className="soft-card overflow-hidden bg-white p-2"
+              className="soft-card overflow-hidden p-2"
             >
-              <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full rounded-[calc(var(--radius)-12px)] object-contain bg-white" />
+              <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full rounded-[calc(var(--radius)-12px)] object-contain bg-[var(--surface)]" />
               <figcaption className="px-4 py-3 font-display font-bold text-[var(--text)]">{item.title}</figcaption>
             </motion.figure>
           ))}
@@ -368,7 +368,7 @@ const Packages = () => {
           <p className="text-base text-[var(--text-muted)] font-body max-w-xl mx-auto">Choose the perfect memory coloring book adventure for your child.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 lg:gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 md:gap-5 lg:gap-6 max-w-5xl mx-auto">
           {packs.map((pack, i) => (
             <motion.div
               key={i}

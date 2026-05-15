@@ -53,7 +53,7 @@ const icons = [
   { Icon: DashedHeart, color: "text-coral-text" },
   { Icon: DashedSwirl, color: "text-sage-text opacity-60" },
   { Icon: Dots, color: "text-violet-text opacity-70" },
-  { Icon: CuteBook, color: "text-charcoal" },
+  { Icon: CuteBook, color: "text-charcoal dark:text-[var(--text-muted)]" },
 ];
 
 interface DoodleElement {

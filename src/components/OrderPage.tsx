@@ -82,7 +82,7 @@ const OrderPage = () => {
           <h2 className="text-3xl text-[var(--text)] font-display font-bold mb-3">Order Received! 🎉</h2>
           <p className="text-[var(--text-muted)] font-body mb-8 leading-relaxed">
             Thank you! We've opened WhatsApp with your order details.<br />
-            Please hit <b className="text-[var(--text)]">"Send"</b> to confirm and share your photos with us!
+            Please Connect <b className="text-[var(--text)]">"with us"</b> on WhatsApp and share your photos with us!
           </p>
           <button onClick={() => navigate('/')} className="btn-primary w-full justify-center">Return to Home</button>
         </motion.div>

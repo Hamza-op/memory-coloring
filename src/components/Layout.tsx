@@ -113,8 +113,8 @@ const Footer = () => (
             We turn your favorite photos into personalized coloring books that create smiles and lasting memories.
           </p>
           <div className="flex gap-3">
-            <a href="#" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Facebook size={16} /></a>
-            <a href="#" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Instagram size={16} /></a>
+            <a href="https://www.facebook.com/share/1EanqnTYcw/" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Facebook size={16} /></a>
+            <a href="https://www.instagram.com/memorycoloring?igsh=MXRlc29qd2ZlZ2tpYQ==" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Instagram size={16} /></a>
           </div>
         </div>
         <div>
