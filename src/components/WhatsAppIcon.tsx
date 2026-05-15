@@ -8,7 +8,8 @@ type WhatsAppIconProps = {
 const WhatsAppIcon = ({ size = 20, className = '' }: WhatsAppIconProps) => (
   <svg
     aria-hidden="true"
-    className={className}
+    className={`whatsapp-icon ${className}`.trim()}
+    style={{ color: 'var(--color-wa-green)' }}
     width={size}
     height={size}
     viewBox="0 0 24 24"
