@@ -11,9 +11,10 @@ import grandparentsPhoto from '../../assets/memory-coloring-20260513-223140.webp
 import grandparentsSketch from '../../assets/memory-coloring-20260513-223143.webp';
 import petPhoto from '../../assets/memory-coloring-20260513-223145.webp';
 import petSketch from '../../assets/memory-coloring-20260513-223148.webp';
+import momDaughterPhoto from '../../assets/mom-daughter-selfie-photo.png';
+import momDaughterSketch from '../../assets/mom-daughter-selfie-sketch.png';
 import processPromo from '../../assets/memory-coloring-20260513-223545.webp';
 import birthdayPoster from '../../assets/memory-coloring-20260513-224058.webp';
-import adventurePoster from '../../assets/memory-coloring-20260513-224258.webp';
 import milestonePoster from '../../assets/memory-coloring-20260513-224638.webp';
 import schoolPoster from '../../assets/memory-coloring-20260513-225412.webp';
 
@@ -60,7 +61,7 @@ const Hero = () => {
                   <ShoppingBag size={20} /> Order Online
                 </button>
                 <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa w-full sm:w-auto justify-center">
-                  <WhatsAppIcon size={20} className="text-white" /> WhatsApp
+                  <WhatsAppIcon size={20} /> WhatsApp
                 </a>
               </div>
               <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-3 max-w-lg mx-auto lg:mx-0">
@@ -231,7 +232,7 @@ const WhyUs = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-8 px-4 overflow-hidden relative">
+    <section id="parent-trust" className="py-8 px-4 overflow-hidden relative">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-10 px-4">
           <motion.div initial={{ y: -10, rotate: -5 }} whileInView={{ y: 0, rotate: 0 }} transition={{ type: "spring" }} viewport={{ once: true }} className="badge bg-violet/10 text-violet-text mb-4 border border-violet/20 shadow-sm">
@@ -271,10 +272,10 @@ const PaintingGallery = () => {
     { title: 'The Laugh Page', before: familyPhoto, after: familySketch, note: 'Family giggles become a page they can color again and again.', tag: 'From sofa chaos to crayon-ready' },
     { title: 'Nani & Nana Edition', before: grandparentsPhoto, after: grandparentsSketch, note: 'A warm moment turns into a keepsake kids can actually play with.', tag: 'Tiny hands, big feelings' },
     { title: 'Pet Sidekick Mode', before: petPhoto, after: petSketch, note: 'The family pet gets promoted to coloring-book main character.', tag: 'Fur, paws, instant hero' },
+    { title: 'Selfie Smile Page', before: momDaughterPhoto, after: momDaughterSketch, note: 'A favorite selfie becomes a keepsake page filled with familiar smiles.', tag: 'Real faces, sweet memories' },
   ];
   const campaigns = [
     { title: 'Birthday Memory', image: birthdayPoster },
-    { title: 'Magical Adventure', image: adventurePoster },
     { title: 'Milestone Celebration', image: milestonePoster },
     { title: 'First Day of School', image: schoolPoster },
   ];

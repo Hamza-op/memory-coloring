@@ -84,7 +84,7 @@ const ThemeToggle = () => {
 const Navbar = () => {
   const links = [
     { name: 'Home', href: '/' },
-    { name: 'How It Works', href: '#how-it-works' },
+    { name: 'Parent Trust', href: '#parent-trust' },
     { name: 'Packages', href: '#packages' },
     { name: 'Gallery', href: '#gallery' },
     { name: 'About', href: '#about' },
@@ -107,7 +107,7 @@ const Navbar = () => {
               ))}
               <ThemeToggle />
               <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa py-2.5 px-5 text-sm">
-                <WhatsAppIcon size={16} className="text-white" /> WhatsApp Us
+                <WhatsAppIcon size={16} /> WhatsApp Us
               </a>
             </div>
             <div className="lg:hidden flex items-center gap-3">
@@ -138,7 +138,7 @@ const Footer = () => (
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Quick Links</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
             <li><Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-coral transition-colors">Home</Link></li>
-            <li><button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">How It Works</button></li>
+            <li><button onClick={() => document.getElementById('parent-trust')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Parent Trust</button></li>
             <li><button onClick={() => document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Packages</button></li>
             <li><button onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Gallery</button></li>
           </ul>
