@@ -22,7 +22,9 @@ const ThemeToggle = () => {
     const saved = window.localStorage.getItem('memory-coloring-theme');
     if (saved === 'dark') return true;
     if (saved === 'light') return false;
-    return document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Default to light (white) theme
+    return false;
+    // return document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
   };
 
   const applyTheme = (nextIsDark: boolean) => {
