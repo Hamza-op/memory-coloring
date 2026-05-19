@@ -36,7 +36,6 @@ const OrderPage = () => {
   const selectedPackages = packages.filter(p => selectedIds.has(p.id));
   const total = selectedPackages.reduce((sum, p) => sum + p.priceNum, 0);
   const totalFormatted = total.toLocaleString();
-  const advanceFormatted = Math.ceil(total * 0.5).toLocaleString();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,13 +50,12 @@ const OrderPage = () => {
       `*New Order - memorycoloring*\n\n` +
       `*Package(s):*\n${pkgLines}\n` +
       `*Total:* Rs. ${totalFormatted}\n` +
-      `*50% Advance:* Rs. ${advanceFormatted}\n\n` +
+      `\n` +
       `*Name:* ${formData.fullName}\n` +
       `*Phone:* ${formData.phone}\n` +
       `*Email:* ${formData.email || 'Not provided'}\n` +
       `*Address:* ${formData.address}\n\n` +
-      `_I understand a 50% advance payment is required to process my order._\n` +
-      `_Please confirm my order._`;
+      `_Please review my order and share the next steps for photo submission and payment._`;
     window.open(`https://wa.me/923462083310?text=${encodeURIComponent(message)}`, '_blank');
     setIsSubmitting(false);
     setIsSuccess(true);
@@ -84,7 +82,7 @@ const OrderPage = () => {
           </motion.div>
           <h2 className="text-3xl text-[var(--text)] font-display font-bold mb-3">Order details opened</h2>
           <p className="text-[var(--text-muted)] font-body mb-8 leading-relaxed">
-            WhatsApp now has your package, advance amount, and delivery details. Send the message there, then share the photos you want inside the coloring book.
+            WhatsApp now has your package and delivery details. Send the message there, then share the photos you want inside the coloring book.
           </p>
           <button onClick={() => navigate('/')} className="btn-primary w-full justify-center">Return to Home</button>
         </motion.div>
@@ -119,10 +117,10 @@ const OrderPage = () => {
             <ShoppingBag size={28} />
           </div>
           <h1 className="text-3xl lg:text-4xl text-[var(--text)] font-display font-bold mb-2">
-            Complete Your <span className="text-coral-text italic">Order</span>
+            Start Your <span className="text-coral-text italic">Order</span>
           </h1>
           <p className="text-[var(--text-muted)] font-body text-sm max-w-sm mx-auto">
-            Fill out the details below to secure your personalised memory coloring book.
+            Submit your details and we'll continue on WhatsApp for photos and payment.
           </p>
         </motion.div>
 
@@ -248,10 +246,6 @@ const OrderPage = () => {
                   <div className="mt-1 flex items-end justify-between gap-4">
                     <p className="font-display text-3xl font-bold text-[var(--text)]">Rs. {totalFormatted}</p>
                   </div>
-                  <div className="mt-4 rounded-2xl bg-coral/12 p-3 ring-1 ring-coral/20">
-                    <p className="text-xs font-bold uppercase text-coral-text">Advance to start</p>
-                    <p className="font-display text-xl font-bold text-[var(--text)]">Rs. {advanceFormatted}</p>
-                  </div>
                 </div>
 
                 <div className="flex items-start gap-3 rounded-3xl bg-[var(--surface)] p-4 ring-1 ring-honey/30">
@@ -259,9 +253,9 @@ const OrderPage = () => {
                     <ShieldCheck size={18} />
                   </div>
                   <div>
-                    <h3 className="font-display text-sm font-bold text-[var(--text)]">Payment note</h3>
+                    <h3 className="font-display text-sm font-bold text-[var(--text)]">Order note</h3>
                     <p className="mt-1 text-xs leading-relaxed text-[var(--text-muted)]">
-                      A <span className="font-bold text-coral-text">50% advance payment</span> via bank transfer is required to start your order. Remaining balance is paid on delivery.
+                      We will review your order with you on WhatsApp, confirm the selected package, and share the next steps for photos and payment.
                     </p>
                   </div>
                 </div>

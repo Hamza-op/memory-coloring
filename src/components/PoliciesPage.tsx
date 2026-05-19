@@ -42,16 +42,16 @@ const sections = [
     emoji: '💸',
     content: [
       {
-        heading: 'Advance Payment',
-        body: 'A 50% advance payment is required before we begin work on your order. This covers the cost of the artist\'s time and illustration work.',
+        heading: 'Order Review',
+        body: 'We review each order with you before production begins, including package selection, submitted photos, delivery details, and the payment steps shared on WhatsApp.',
       },
       {
         heading: 'Before Work Begins',
-        body: 'If you cancel your order before we have started the artwork, you are eligible for a full refund of your advance payment. Please notify us within 24 hours of placing the order.',
+        body: 'If you cancel your order before we have started the artwork, you may request a full refund of any payment already made. Please notify us within 24 hours of placing the order.',
       },
       {
         heading: 'After Work Has Begun',
-        body: 'Once our artist has started illustrating your coloring book, the advance payment becomes non-refundable. This is because custom artwork requires significant time and skill from our team.',
+        body: 'Once our artist has started illustrating your coloring book, refunds may be limited because custom artwork requires significant time and skill from our team.',
       },
       {
         heading: 'Quality Issues',
@@ -63,7 +63,7 @@ const sections = [
       },
       {
         heading: 'Refund Timeline',
-        body: 'Approved refunds are processed within 5-7 business days via the same payment method used for the advance.',
+        body: 'Approved refunds are processed within 5-7 business days via the same payment method used for your order.',
       },
     ],
   },
@@ -80,7 +80,7 @@ const sections = [
       },
       {
         heading: 'Turnaround Time',
-        body: 'Standard orders are completed within 5-10 business days from receipt of all photos and advance payment. Rush orders may be available — please inquire via WhatsApp.',
+        body: 'Standard orders are completed within 5-10 business days from receipt of all photos and order confirmation. Rush orders may be available — please inquire via WhatsApp.',
       },
       {
         heading: 'Photo Requirements',

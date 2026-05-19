@@ -129,7 +129,7 @@ const Footer = () => (
         <div className="md:col-span-1">
           <div className="mb-5"><Logo /></div>
           <p className="text-[var(--text-muted)] text-sm font-body leading-relaxed mb-4">
-            We turn your favorite photos into personalized coloring books that create smiles and lasting memories.
+            Turn your favorite memories into creative moments.
           </p>
           <div className="flex gap-3">
             <a href="https://www.facebook.com/share/1EanqnTYcw/" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Facebook size={16} /></a>
@@ -165,7 +165,7 @@ const Footer = () => (
       </div>
       <div className="border-t border-[var(--border)] pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-[var(--text-muted)] font-body">
         <p>© {new Date().getFullYear()} MemoryColoring. All rights reserved.</p>
-        <p className="flex items-center gap-1">Made with <Heart className="text-coral fill-coral" size={12} /> for beautiful memories</p>
+        <p className="flex items-center gap-1">Made with <Heart className="text-coral fill-coral" size={12} /> for creative moments</p>
       </div>
     </div>
   </footer>

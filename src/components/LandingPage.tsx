@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Check, Star, Sparkles, Heart, Pencil, Shield, Diamond, Smile, ShoppingBag, Palette, Wand2, Camera, Gift, Truck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ActivityToast from './ActivityToast';
-import WhatsAppIcon from './WhatsAppIcon';
 import familyPhoto from '../../assets/memory-coloring-20260513-223056.webp';
 import familySketch from '../../assets/memory-coloring-20260513-223135.webp';
 import grandparentsPhoto from '../../assets/memory-coloring-20260513-223140.webp';
@@ -51,18 +50,21 @@ const Hero = () => {
                 <Sparkles size={14} /> Personalized coloring books from your photos
               </div>
               <h1 className="logo-like-title text-[2.75rem] sm:text-5xl lg:text-[4.5rem] text-[var(--text)] mb-5">
-                Turn family photos into a <span className="hero-wordmark"><RainbowWord>coloring</RainbowWord> adventure</span>.
+                Turn Your Family Memories Into a <span className="hero-wordmark"><RainbowWord>Coloring</RainbowWord> Book</span>
               </h1>
               <p className="text-base lg:text-lg text-[var(--text-muted)] mb-6 leading-relaxed font-body max-w-lg mx-auto lg:mx-0">
-                Send your favorite moments. We redraw them as kid-friendly coloring pages, then deliver a custom book your child can actually use, keep, and proudly ruin with crayons.
+                Upload your favorite photos and we'll transform them into a personalized coloring book your child can enjoy, color, and keep forever.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start w-full sm:w-auto">
                 <button onClick={() => navigate('/checkout')} className="btn-primary w-full sm:w-auto justify-center">
-                  <ShoppingBag size={20} /> Order Online
+                  <ShoppingBag size={20} /> Start Your Order
                 </button>
-                <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa w-full sm:w-auto justify-center">
-                  <WhatsAppIcon size={20} /> WhatsApp
-                </a>
+                <button
+                  onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="btn-wa w-full sm:w-auto justify-center"
+                >
+                  <Palette size={20} /> See Sample Book
+                </button>
               </div>
               <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-3 max-w-lg mx-auto lg:mx-0">
                 {proof.map((item, i) => (
@@ -163,9 +165,9 @@ const Hero = () => {
 
 const ProductMomentum = () => {
   const steps = [
-    { icon: Camera, title: 'Send photos', copy: 'Pick birthdays, pets, school days, or everyday chaos.' },
-    { icon: Wand2, title: 'We redraw them', copy: 'Faces stay familiar. Lines stay clean enough for kids.' },
-    { icon: Truck, title: 'You get the book', copy: 'Printed + PDF packages with preview before final.' },
+    { icon: Camera, title: 'Upload Your Favorite Photos', copy: 'Choose the family moments you want turned into coloring pages.' },
+    { icon: Wand2, title: 'Approve Your Personalized Preview', copy: 'We prepare your custom preview so you can review it before final production.' },
+    { icon: Truck, title: 'Receive Your Memory Coloring Book', copy: 'Your finished memory book is delivered ready to enjoy, color, and keep.' },
   ];
 
   return (
@@ -175,10 +177,10 @@ const ProductMomentum = () => {
           <div className="p-6 sm:p-8 lg:p-10">
             <div className="badge bg-warm-white text-charcoal mb-5 border border-coral/30"><Sparkles size={14} /> Not a template</div>
             <h2 className="logo-like-title text-3xl sm:text-4xl lg:text-5xl">
-              A <RainbowWord>coloring</RainbowWord> book that starts with their real life.
+              How <RainbowWord>Memory</RainbowWord> Coloring Works
             </h2>
             <p className="mt-4 max-w-xl font-body text-sm sm:text-base leading-relaxed text-charcoal/65">
-              The hook is simple: kids recognize the people, pets, and moments on the page. That makes the book feel personal before they even pick a color.
+              Simple, personal, and made just for your family.
             </p>
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
               {steps.map((step, i) => (
@@ -224,11 +226,11 @@ const MagicPath = ({ color = "text-honey", className = "" }) => (
 
 const WhyUs = () => {
   const features = [
-    { name: "Pure Joy", desc: "Interactive fun for kids", icon: Star, color: "text-honey-text bg-honey/10", border: "border-honey/20 hover:border-honey/40" },
-    { name: "Warmth", desc: "Emotional family bonding", icon: Heart, color: "text-coral-text bg-coral/10", border: "border-coral/20 hover:border-coral/40" },
-    { name: "Imagination", desc: "Spark their creativity", icon: Pencil, color: "text-sage-text bg-sage/10", border: "border-sage/20 hover:border-sage/40" },
-    { name: "Privacy", desc: "100% Safe and private", icon: Shield, color: "text-sky-text bg-sky/10", border: "border-sky/20 hover:border-sky/40" },
-    { name: "Artists", desc: "Hand-drawn premium art", icon: Diamond, color: "text-violet-text bg-violet/10", border: "border-violet/20 hover:border-violet/40" }
+    { name: "Creative Fun", desc: "A creative activity kids can enjoy away from screens.", icon: Star, color: "text-honey-text bg-honey/10", border: "border-honey/20 hover:border-honey/40" },
+    { name: "Meaningful Moments", desc: "Create meaningful moments children can color and remember.", icon: Heart, color: "text-coral-text bg-coral/10", border: "border-coral/20 hover:border-coral/40" },
+    { name: "Real Memories", desc: "Every book is designed from your real family memories.", icon: Pencil, color: "text-sage-text bg-sage/10", border: "border-sage/20 hover:border-sage/40" },
+    { name: "Privacy", desc: "Your photos are securely used only to create your order.", icon: Shield, color: "text-sky-text bg-sky/10", border: "border-sky/20 hover:border-sky/40" },
+    { name: "Artist Crafted", desc: "Clean, hand-drawn pages shaped from the photos you share.", icon: Diamond, color: "text-violet-text bg-violet/10", border: "border-violet/20 hover:border-violet/40" }
   ];
 
   return (
@@ -239,7 +241,7 @@ const WhyUs = () => {
             <Smile size={14} /> The Magic Formula
           </motion.div>
           <h2 className="logo-like-title text-3xl lg:text-4xl text-[var(--text)] text-center">
-            Why Parents <span className="text-violet-text inline-block transform -rotate-2">Trust Us</span>
+            Why Families <span className="text-violet-text inline-block transform -rotate-2">Choose Memory Coloring</span>
           </h2>
         </div>
 
@@ -348,9 +350,9 @@ const PaintingGallery = () => {
 const Packages = () => {
   const navigate = useNavigate();
   const packs = [
-    { name: "Mini Memory", pages: "12 Pages", price: "1,999", tag: "Printed + PDF", items: ["Personalized Cover", "Preview Before Final", "12-15 Photos Best", "Nationwide Delivery"], color: "bg-violet text-charcoal" },
-    { name: "Family Favorite", pages: "24 Pages", price: "3,499", tag: "Printed + PDF", popular: true, items: ["Best for Growing Kids", "Beautiful Softcover", "Custom Cover Design", "Free PDF Included", "Priority Support"], color: "bg-coral text-charcoal" },
-    { name: "Premium Gift", pages: "36 Pages", price: "4,999", tag: "Printed + PDF", items: ["30-45 Photos Best", "Hardcover Finish", "Exclusive Gift Box", "All-In-One Package", "Memories That Last"], color: "bg-honey text-charcoal" }
+    { name: "Mini Memory", pages: "12 Pages", price: "1,999", tag: "Printed + PDF", items: ["Perfect for smaller moments.", "Preview Before Final", "12-15 Photos Best", "Nationwide Delivery"], color: "bg-violet text-charcoal" },
+    { name: "Family Favorite", pages: "24 Pages", price: "3,499", tag: "Printed + PDF", popular: true, items: ["Our most loved choice for family memories.", "Beautiful Softcover", "Custom Cover Design", "Free PDF Included", "Priority Support"], color: "bg-coral text-charcoal" },
+    { name: "Premium Gift", pages: "36 Pages", price: "4,999", tag: "Printed + PDF", items: ["A keepsake designed for special moments.", "Hardcover Finish", "Exclusive Gift Box", "All-In-One Package", "Memories That Last"], color: "bg-honey text-charcoal" }
   ];
 
   return (
@@ -361,9 +363,9 @@ const Packages = () => {
             initial={{ scale: 0.9 }} whileInView={{ scale: 1 }} transition={{ type: "spring" }} viewport={{ once: true }}
             className="text-3xl lg:text-5xl text-[var(--text)] mb-4 font-display font-bold"
           >
-            Pick Your <span className="inline-block transform rotate-2"><RainbowWord>Magic</RainbowWord> Box</span>
+            Choose Your <span className="inline-block transform rotate-2"><RainbowWord>Memory</RainbowWord> Book</span>
           </motion.h2>
-          <p className="text-base text-[var(--text-muted)] font-body max-w-xl mx-auto">Choose the perfect memory coloring book adventure for your child.</p>
+          <p className="text-base text-[var(--text-muted)] font-body max-w-xl mx-auto">Pick the option that fits your family best.</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 md:gap-5 lg:gap-6 max-w-5xl mx-auto">
@@ -406,16 +408,13 @@ const Packages = () => {
                 </div>
                 <div className="flex flex-col gap-2 mt-auto">
                   <button onClick={() => navigate('/checkout')} className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-charcoal hover:bg-coral/90 shadow-lg border border-coral-text/20 hover:scale-[1.02]" : "bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--border)] hover:border-charcoal/20 hover:bg-[var(--surface-hover)] hover:scale-[1.02]")}>
-                    <ShoppingBag size={16} /> Order Online
+                    <ShoppingBag size={16} /> Start Your Order
                   </button>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-        <p className="text-center text-sm text-[var(--text-muted)] mt-12 font-body max-w-2xl mx-auto italic">
-          * Note: At least 50% advance payment is required via Bank Transfer to confirm your order and begin the magical transformation.
-        </p>
       </div>
     </section>
   );
