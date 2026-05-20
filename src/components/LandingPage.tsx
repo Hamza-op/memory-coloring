@@ -98,7 +98,14 @@ const Hero = () => {
               className="absolute top-[2%] left-[2%] sm:top-[3%] sm:left-[5%] md:top-[3%] md:left-[8%] lg:left-[10%] w-[58%] sm:w-[58%] md:w-[56%] lg:w-[55%] soft-card p-2.5 sm:p-3 pb-10 sm:pb-12 shadow-2xl z-20 origin-bottom-right"
             >
               <div className="aspect-[4/5] overflow-hidden rounded-[calc(var(--radius)-12px)] bg-[var(--bg)]">
-                <img src={familyPhoto} alt="Family photo before coloring conversion" fetchPriority="high" className="w-full h-full object-cover" />
+                <img 
+                  src={familyPhoto} 
+                  alt="Family photo before coloring conversion" 
+                  width={400} 
+                  height={500} 
+                  fetchPriority="high" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
               <div className="absolute bottom-4 left-0 w-full text-center">
                 <span className="font-display font-bold text-xs sm:text-sm text-[var(--text-muted)] tracking-widest uppercase">Your Photo</span>
@@ -124,7 +131,14 @@ const Hero = () => {
               className="absolute bottom-[2%] right-[2%] sm:bottom-[4%] sm:right-[5%] md:right-[6%] lg:right-[5%] w-[60%] sm:w-[60%] md:w-[58%] lg:w-[60%] soft-card p-2.5 sm:p-3 pb-10 sm:pb-12 shadow-xl z-30 origin-top-left"
             >
               <div className="aspect-[4/5] overflow-hidden rounded-[calc(var(--radius)-12px)] bg-[var(--surface)] border border-[var(--border)]">
-                <img src={familySketch} alt="Family photo transformed into a coloring page" fetchPriority="high" className="w-full h-full object-cover" />
+                <img 
+                  src={familySketch} 
+                  alt="Family photo transformed into a coloring page" 
+                  width={400} 
+                  height={500} 
+                  fetchPriority="high" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
               <div className="absolute bottom-4 left-0 w-full text-center">
                 <span className="font-display font-bold text-xs sm:text-sm text-coral-text tracking-widest uppercase">Our Magic</span>
