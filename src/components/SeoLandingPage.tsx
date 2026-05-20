@@ -277,8 +277,8 @@ export default function SeoLandingPage() {
             <img 
               src={page.image} 
               alt={page.imageAlt} 
-              width={600} 
-              height={450} 
+              width={page.image === birthdayPoster ? 1448 : 1402} 
+              height={page.image === birthdayPoster ? 1086 : 1122} 
               fetchPriority="high"
               className="aspect-[4/3] w-full rounded-[calc(var(--radius)-12px)] object-cover" 
             />

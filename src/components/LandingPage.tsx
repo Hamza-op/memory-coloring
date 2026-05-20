@@ -101,8 +101,8 @@ const Hero = () => {
                 <img 
                   src={familyPhoto} 
                   alt="Family photo before coloring conversion" 
-                  width={400} 
-                  height={500} 
+                  width={1402} 
+                  height={1122} 
                   fetchPriority="high" 
                   className="w-full h-full object-cover" 
                 />
@@ -134,8 +134,8 @@ const Hero = () => {
                 <img 
                   src={familySketch} 
                   alt="Family photo transformed into a coloring page" 
-                  width={400} 
-                  height={500} 
+                  width={1402} 
+                  height={1122} 
                   fetchPriority="high" 
                   className="w-full h-full object-cover" 
                 />
@@ -354,8 +354,8 @@ const PaintingGallery = () => {
               <img 
                 src={item.image} 
                 alt={item.title} 
-                width={400} 
-                height={500} 
+                width={item.image === birthdayPoster ? 1448 : 1402} 
+                height={item.image === birthdayPoster ? 1086 : 1122} 
                 loading="lazy" 
                 decoding="async" 
                 className="w-full rounded-[calc(var(--radius)-12px)] object-contain bg-[var(--surface)]" 

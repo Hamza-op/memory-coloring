@@ -48,6 +48,8 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, className }: BeforeAfterSl
       <img 
         src={afterImage} 
         alt="After" 
+        width={1402}
+        height={1122}
         className="absolute top-0 left-0 w-full h-full object-cover" 
         loading="lazy" 
         decoding="async" 
@@ -61,6 +63,8 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, className }: BeforeAfterSl
         <img 
           src={beforeImage} 
           alt="Before" 
+          width={1402}
+          height={1122}
           className="max-w-none h-full object-cover"
           style={{ width: containerWidth || '100%' }}
           loading="lazy" 
