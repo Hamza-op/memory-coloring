@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Check, Star, Sparkles, Heart, Pencil, Shield, Diamond, Smile, ShoppingBag, Palette, Wand2, Camera, Gift, Truck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ActivityToast from './ActivityToast';
@@ -30,7 +30,6 @@ const RainbowWord = ({ children }: { children: string }) => (
 );
 
 const Hero = () => {
-  const navigate = useNavigate();
   const proof = [
     { value: '12-36', label: 'custom pages', accent: 'border-sky/40 dark:border-sky/60' },
     { value: 'PDF + Print', label: 'delivery options', accent: 'border-coral/40 dark:border-coral/60' },
@@ -60,9 +59,9 @@ const Hero = () => {
                 Upload your favorite photos and we'll transform them into a personalized coloring book your child can enjoy, color, and keep forever.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start w-full sm:w-auto">
-                <button onClick={() => navigate('/checkout')} className="btn-primary w-full sm:w-auto justify-center">
+                <Link to="/checkout" className="btn-primary w-full sm:w-auto justify-center">
                   <ShoppingBag size={20} /> Choose Your Book
-                </button>
+                </Link>
                 <button
                   onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
                   className="btn-wa w-full sm:w-auto justify-center"
@@ -373,7 +372,6 @@ const PaintingGallery = () => {
 };
 
 const Packages = () => {
-  const navigate = useNavigate();
   const packs = [
     { name: "Mini Memory", pages: "12 Pages", price: "1,999", tag: "Printed + PDF", items: ["Perfect for smaller moments.", "Preview Before Final", "12-15 Photos Best", "Nationwide Delivery"], color: "bg-violet text-charcoal" },
     { name: "Family Favorite", pages: "24 Pages", price: "3,499", tag: "Printed + PDF", popular: true, items: ["Our most loved choice for family memories.", "Beautiful Softcover", "Custom Cover Design", "Free PDF Included", "Priority Support"], color: "bg-coral text-charcoal" },
@@ -432,9 +430,9 @@ const Packages = () => {
                   ))}
                 </div>
                 <div className="flex flex-col gap-2 mt-auto">
-                  <button onClick={() => navigate('/checkout')} className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-charcoal hover:bg-coral/90 shadow-lg border border-coral-text/20 hover:scale-[1.02]" : "bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--border)] hover:border-charcoal/20 hover:bg-[var(--surface-hover)] hover:scale-[1.02]")}>
+                  <Link to="/checkout" className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-charcoal hover:bg-coral/90 shadow-lg border border-coral-text/20 hover:scale-[1.02]" : "bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--border)] hover:border-charcoal/20 hover:bg-[var(--surface-hover)] hover:scale-[1.02]")}>
                     <ShoppingBag size={16} /> Choose Your Book
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>
