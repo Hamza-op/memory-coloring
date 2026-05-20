@@ -125,7 +125,7 @@ const Navbar = () => {
 const Footer = () => (
   <footer id="about" className="bg-[var(--surface)] border-t border-[var(--border)] pt-10 pb-6 transition-colors">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mb-12">
         <div className="md:col-span-1">
           <div className="mb-5"><Logo /></div>
           <p className="text-[var(--text-muted)] text-sm font-body leading-relaxed mb-4">
@@ -143,6 +143,16 @@ const Footer = () => (
             <li><button onClick={() => document.getElementById('parent-trust')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Parent Trust</button></li>
             <li><button onClick={() => document.getElementById('packages')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Packages</button></li>
             <li><button onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-coral transition-colors">Gallery</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-display font-bold text-[var(--text)] mb-4">Coloring Book Guides</h4>
+          <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
+            <li><Link to="/custom-coloring-book-from-photos" className="hover:text-coral transition-colors">Custom Book from Photos</Link></li>
+            <li><Link to="/personalized-coloring-book-for-kids" className="hover:text-coral transition-colors">Personalized Book for Kids</Link></li>
+            <li><Link to="/photo-to-coloring-page" className="hover:text-coral transition-colors">Photo to Coloring Page</Link></li>
+            <li><Link to="/custom-coloring-book-pakistan" className="hover:text-coral transition-colors">Custom Book Pakistan</Link></li>
+            <li><Link to="/birthday-coloring-book-gift" className="hover:text-coral transition-colors">Birthday Coloring Gift</Link></li>
           </ul>
         </div>
         <div>

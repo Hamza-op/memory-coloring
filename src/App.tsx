@@ -12,6 +12,7 @@ import CreatePage from './components/CreatePage';
 import OrderPage from './components/OrderPage';
 import PoliciesPage from './components/PoliciesPage';
 import SEO from './components/SEO';
+import SeoLandingPage, { seoPages } from './components/SeoLandingPage';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -96,6 +97,22 @@ const AnimatedRoutes = () => {
             </motion.div>
           }
         />
+        {seoPages.map((page) => (
+          <Route
+            key={page.slug}
+            path={page.slug}
+            element={
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <SeoLandingPage page={page} />
+              </motion.div>
+            }
+          />
+        ))}
       </Routes>
     </AnimatePresence>
   );

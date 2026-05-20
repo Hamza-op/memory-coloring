@@ -4,13 +4,14 @@ import { useLocation } from 'react-router-dom';
 interface SEOProps {
   title: string;
   description: string;
+  schema?: object | object[];
 }
 
-export default function SEO({ title, description }: SEOProps) {
-  const { pathname, search } = useLocation();
+export default function SEO({ title, description, schema }: SEOProps) {
+  const { pathname } = useLocation();
   
   // Construct the absolute canonical URL
-  const canonicalUrl = `https://memorycoloring.online${pathname}${search}`;
+  const canonicalUrl = `https://memorycoloring.online${pathname}`;
 
   useEffect(() => {
     // 1. Update Title
@@ -73,7 +74,19 @@ export default function SEO({ title, description }: SEOProps) {
     if (twitterUrl) {
       twitterUrl.setAttribute('content', canonicalUrl);
     }
-  }, [title, description, canonicalUrl]);
+
+    // 10. Update route-specific structured data
+    const existingRouteSchema = document.querySelector('script[data-route-schema="true"]');
+    existingRouteSchema?.remove();
+
+    if (schema) {
+      const schemaScript = document.createElement('script');
+      schemaScript.type = 'application/ld+json';
+      schemaScript.dataset.routeSchema = 'true';
+      schemaScript.textContent = JSON.stringify(schema);
+      document.head.appendChild(schemaScript);
+    }
+  }, [title, description, canonicalUrl, schema]);
 
   return null; // This component handles side-effects only and does not render visual UI.
 }

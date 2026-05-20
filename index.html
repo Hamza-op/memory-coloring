@@ -9,7 +9,6 @@
   <title>Custom Coloring Books from Photos | MemoryColoring</title>
   <meta name="description"
     content="Turn your favorite family photos into personalized coloring books. Premium artist-crafted, hand-drawn pages for kids and families. Fast nationwide delivery!" />
-  <meta name="keywords" content="custom coloring book, personalized coloring book, photo to coloring page, memory coloring, kids custom gift, family keepsake" />
   <meta name="author" content="MemoryColoring" />
   <meta name="theme-color" content="#FFF9EF" />
   <link rel="canonical" href="https://memorycoloring.online" />
@@ -19,14 +18,14 @@
   <meta property="og:url" content="https://memorycoloring.online" />
   <meta property="og:title" content="Custom Coloring Books from Photos | MemoryColoring" />
   <meta property="og:description" content="Turn your favorite family photos into personalized coloring books. Beautiful, hand-drawn layouts for kids & families. Order online!" />
-  <meta property="og:image" content="https://memorycoloring.online/assets/logo-memory-coloring.webp" />
+  <meta property="og:image" content="https://memorycoloring.online/demo/hero_new_after.png" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://memorycoloring.online" />
   <meta name="twitter:title" content="Custom Coloring Books from Photos | MemoryColoring" />
   <meta name="twitter:description" content="Turn your favorite family photos into personalized coloring books. Beautiful, hand-drawn layouts for kids & families. Order online!" />
-  <meta name="twitter:image" content="https://memorycoloring.online/assets/logo-memory-coloring.webp" />
+  <meta name="twitter:image" content="https://memorycoloring.online/demo/hero_new_after.png" />
 
   <!-- Font Preloading for Performance -->
   <link rel="preload" href="/fonts/LilitaOne-Regular.ttf" as="font" type="font/ttf" crossorigin />
@@ -91,21 +90,43 @@
           "@type": "Product",
           "@id": "https://memorycoloring.online/#product",
           "name": "Personalized Custom Memory Coloring Book",
-          "image": "https://memorycoloring.online/assets/logo-memory-coloring.webp",
+          "image": "https://memorycoloring.online/demo/hero_new_after.png",
           "description": "Transform your real family photos into beautifully hand-drawn, personalized coloring books. Choice of printed softcover/hardcover or downloadable high-quality PDF files.",
           "brand": {
             "@id": "https://memorycoloring.online/#organization"
           },
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "PKR",
-            "lowPrice": "1999",
-            "highPrice": "4999",
-            "offerCount": "3",
-            "url": "https://memorycoloring.online/#packages",
-            "priceValidUntil": "2027-12-31",
-            "availability": "https://schema.org/InStock"
-          }
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Mini Memory - 12 Pages",
+              "priceCurrency": "PKR",
+              "price": "1999",
+              "url": "https://memorycoloring.online/checkout",
+              "priceValidUntil": "2027-12-31",
+              "availability": "https://schema.org/InStock",
+              "itemCondition": "https://schema.org/NewCondition"
+            },
+            {
+              "@type": "Offer",
+              "name": "Family Favorite - 24 Pages",
+              "priceCurrency": "PKR",
+              "price": "3499",
+              "url": "https://memorycoloring.online/checkout",
+              "priceValidUntil": "2027-12-31",
+              "availability": "https://schema.org/InStock",
+              "itemCondition": "https://schema.org/NewCondition"
+            },
+            {
+              "@type": "Offer",
+              "name": "Premium Gift - 36 Pages",
+              "priceCurrency": "PKR",
+              "price": "4999",
+              "url": "https://memorycoloring.online/checkout",
+              "priceValidUntil": "2027-12-31",
+              "availability": "https://schema.org/InStock",
+              "itemCondition": "https://schema.org/NewCondition"
+            }
+          ]
         }
       ]
     }
