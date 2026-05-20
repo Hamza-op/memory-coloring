@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, Camera, Gift, HelpCircle, MapPin, Paintbrush, ShieldCheck, Sparkles } from 'lucide-react';
 import SEO from './SEO';
@@ -234,7 +234,14 @@ export function getSeoPage(slug: string) {
   return seoPages.find((page) => page.slug === slug);
 }
 
-export default function SeoLandingPage({ page }: { page: SeoPage }) {
+export default function SeoLandingPage() {
+  const { pathname } = useLocation();
+  const page = getSeoPage(pathname);
+
+  if (!page) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className="min-h-screen playful-page">
       <SEO title={page.metaTitle} description={page.metaDescription} schema={buildSchema(page)} />

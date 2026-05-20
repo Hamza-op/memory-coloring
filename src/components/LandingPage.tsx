@@ -11,8 +11,8 @@ import grandparentsPhoto from '../../assets/memory-coloring-20260513-223140.webp
 import grandparentsSketch from '../../assets/memory-coloring-20260513-223143.webp';
 import petPhoto from '../../assets/memory-coloring-20260513-223145.webp';
 import petSketch from '../../assets/memory-coloring-20260513-223148.webp';
-import momDaughterPhoto from '../../assets/mom-daughter-selfie-photo.png';
-import momDaughterSketch from '../../assets/mom-daughter-selfie-sketch.png';
+import momDaughterPhoto from '../../assets/mom-daughter-selfie-photo.webp';
+import momDaughterSketch from '../../assets/mom-daughter-selfie-sketch.webp';
 import processPromo from '../../assets/memory-coloring-20260513-223545.webp';
 import birthdayPoster from '../../assets/memory-coloring-20260513-224058.webp';
 import milestonePoster from '../../assets/memory-coloring-20260513-224638.webp';

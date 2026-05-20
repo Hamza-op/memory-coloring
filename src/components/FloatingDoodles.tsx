@@ -116,34 +116,36 @@ const FloatingDoodles = () => {
   const smoothY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Detect mobile once
+    // Detect mobile once. Decorative doodles are skipped on mobile to protect LCP/TBT.
     const mobile = window.matchMedia('(max-width: 768px)').matches;
     setIsMobile(mobile);
+    if (mobile) {
+      setElements([]);
+      return;
+    }
 
-    // Fewer doodles on mobile (10 vs 22) for performance
-    const count = mobile ? 10 : 22;
+    const count = 22;
     const newElements = Array.from({ length: count }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 200, // spread over 200% height (scrollable page)
       iconIndex: Math.floor(Math.random() * icons.length),
-      size: mobile ? 18 + Math.random() * 20 : 25 + Math.random() * 35,
+      size: 25 + Math.random() * 35,
       rotate: Math.random() * 360,
       parallax: 10 + Math.random() * 30,
       duration: 5 + Math.random() * 5,
     }));
     setElements(newElements);
 
-    // Only add mouse tracking on desktop
-    if (!mobile) {
-      const handleMouseMove = (e: MouseEvent) => {
-        mouseX.set(e.clientX);
-        mouseY.set(e.clientY);
-      };
-      window.addEventListener('mousemove', handleMouseMove, { passive: true });
-      return () => window.removeEventListener('mousemove', handleMouseMove);
-    }
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  if (isMobile) return null;
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-[0.35] dark:opacity-[0.2] -z-10">
