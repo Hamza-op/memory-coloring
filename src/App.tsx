@@ -4,13 +4,14 @@
  */
 
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import CreatePage from './components/CreatePage';
 import OrderPage from './components/OrderPage';
 import PoliciesPage from './components/PoliciesPage';
+import SEO from './components/SEO';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -36,6 +37,10 @@ const AnimatedRoutes = () => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
+              <SEO 
+                title="Custom Coloring Books from Photos | MemoryColoring" 
+                description="Turn your favorite family photos into personalized coloring books. Premium artist-crafted, hand-drawn pages for kids and families. Fast nationwide delivery!" 
+              />
               <LandingPage />
             </motion.div>
           } 
@@ -49,6 +54,10 @@ const AnimatedRoutes = () => {
               exit={{ opacity: 0, scale: 1.02 }}
               transition={{ duration: 0.4 }}
             >
+              <SEO 
+                title="Create Your Personalized Coloring Book | MemoryColoring" 
+                description="Upload your favorite family photo and preview a custom hand-drawn coloring page in seconds. Give it a try for free!" 
+              />
               <CreatePage />
             </motion.div>
           } 
@@ -62,6 +71,10 @@ const AnimatedRoutes = () => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
+              <SEO 
+                title="Order Your Custom Memory Book | MemoryColoring" 
+                description="Choose a package, upload your photos, and place your order. Free PDF copies and premium hardcovers available." 
+              />
               <OrderPage />
             </motion.div>
           } 
@@ -75,6 +88,10 @@ const AnimatedRoutes = () => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
+              <SEO 
+                title="Privacy, Refunds & Delivery Terms | MemoryColoring" 
+                description="Read the terms, refund policies, privacy guidelines, and nationwide shipping details for MemoryColoring." 
+              />
               <PoliciesPage />
             </motion.div>
           }
