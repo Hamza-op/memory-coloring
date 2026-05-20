@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ShoppingBag, ArrowLeft, CheckCircle, Package, Sparkles, BookOpen, Paintbrush, Gift, User, Phone, Mail, MapPin, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, ArrowLeft, CheckCircle, Package, Sparkles, BookOpen, Paintbrush, Gift, User, Phone, Mail, MapPin, ShieldCheck, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import WhatsAppIcon from './WhatsAppIcon';
 
@@ -94,7 +94,7 @@ const OrderPage = () => {
   const labelClass = "flex items-center gap-2 text-sm font-bold text-[var(--text)] mb-2 font-body";
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] py-6 sm:py-10 px-3 sm:px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg)] pt-4 pb-28 sm:py-10 px-3 sm:px-4 relative overflow-hidden">
       {/* Background blobs */}
       <div className="absolute top-16 right-[-90px] w-80 h-80 bg-coral/18 blob animate-float-slow pointer-events-none -z-10 blur-2xl" />
       <div className="absolute bottom-24 left-[-90px] w-72 h-72 bg-honey/22 blob-2 pointer-events-none -z-10 blur-2xl" />
@@ -103,7 +103,7 @@ const OrderPage = () => {
       <div className="max-w-5xl mx-auto relative z-10">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-[var(--text-muted)] hover:text-coral-text transition-colors mb-6 font-body font-bold text-sm group"
+          className="flex items-center gap-2 text-[var(--text-muted)] hover:text-coral-text transition-colors mb-3 sm:mb-6 font-body font-bold text-sm group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back
         </button>
@@ -111,15 +111,15 @@ const OrderPage = () => {
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-5 sm:mb-8"
         >
-          <div className="w-16 h-16 bg-coral/14 text-coral-text rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm ring-1 ring-coral/20">
-            <ShoppingBag size={28} />
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-coral/14 text-coral-text rounded-2xl flex items-center justify-center mx-auto mb-2 sm:mb-4 shadow-sm ring-1 ring-coral/20">
+            <ShoppingBag size={22} className="sm:w-7 sm:h-7" />
           </div>
-          <h1 className="text-3xl lg:text-4xl text-[var(--text)] font-display font-bold mb-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl text-[var(--text)] font-display font-bold mb-1 sm:mb-2">
             Start Your <span className="text-coral-text italic">Order</span>
           </h1>
-          <p className="text-[var(--text-muted)] font-body text-sm max-w-sm mx-auto">
+          <p className="text-[var(--text-muted)] font-body text-xs sm:text-sm max-w-sm mx-auto leading-relaxed">
             Submit your details and we'll continue on WhatsApp for photos and payment.
           </p>
         </motion.div>
@@ -130,7 +130,7 @@ const OrderPage = () => {
           className="soft-card overflow-hidden"
         >
           <div className="grid lg:grid-cols-[1.35fr_0.9fr]">
-            <div className="p-4 sm:p-7 lg:p-8 space-y-7">
+            <div className="p-3.5 sm:p-7 lg:p-8 space-y-5 sm:space-y-7">
               {/* Package Selection */}
               <section>
                 <div className="flex items-start justify-between gap-4 mb-4">
@@ -182,6 +182,13 @@ const OrderPage = () => {
                     );
                   })}
                 </div>
+
+                <div className="mt-4 flex items-center gap-2.5 rounded-2xl bg-sage/10 p-3.5 ring-1 ring-sage/25 text-sage-text">
+                  <Lock size={16} className="shrink-0" />
+                  <p className="text-xs sm:text-sm font-bold font-body leading-none">
+                    Photos will be submitted securely after WhatsApp confirmation.
+                  </p>
+                </div>
               </section>
 
               {/* Delivery Details */}
@@ -221,7 +228,7 @@ const OrderPage = () => {
               <div className="lg:sticky lg:top-28 space-y-5">
                 <div>
                   <p className="section-label">Order Summary</p>
-                  <h2 className="mt-1 font-display text-2xl font-bold text-[var(--text)]">Almost ready</h2>
+                  <h2 className="mt-1 font-display text-2xl font-bold text-[var(--text)]">One last Step on WhatsApp</h2>
                 </div>
 
                 <div className="space-y-2">
@@ -253,9 +260,9 @@ const OrderPage = () => {
                     <ShieldCheck size={18} />
                   </div>
                   <div>
-                    <h3 className="font-display text-sm font-bold text-[var(--text)]">Order note</h3>
+                    <h3 className="font-display text-sm font-bold text-[var(--text)]">What happens next</h3>
                     <p className="mt-1 text-xs leading-relaxed text-[var(--text-muted)]">
-                      We will review your order with you on WhatsApp, confirm the selected package, and share the next steps for photos and payment.
+                      We’ll connect with you on WhatsApp to review your order, collect your photos, and guide you through the next steps before final confirmation.
                     </p>
                   </div>
                 </div>
@@ -266,10 +273,10 @@ const OrderPage = () => {
                   className="btn-primary w-full justify-center text-base py-4 disabled:pointer-events-none disabled:opacity-60"
                 >
                   <WhatsAppIcon size={20} className="text-white" />
-                  {isSubmitting ? 'Opening WhatsApp...' : 'Confirm via WhatsApp'}
+                  {isSubmitting ? 'Opening WhatsApp...' : 'Continue on WhatsApp'}
                 </button>
                 <p className="text-center text-xs text-[var(--text-muted)] font-body leading-relaxed">
-                  You can review everything with us on WhatsApp before final confirmation.
+                  No payment required yet — review everything with us on WhatsApp before confirming your order.
                 </p>
               </div>
             </aside>

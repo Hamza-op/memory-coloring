@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { Upload, Paintbrush, Download, RefreshCw, Sparkles, Image as ImageIcon, Wand2, Heart, Pencil, Camera, ShoppingBag, Star } from 'lucide-react';
@@ -14,7 +14,15 @@ const CreatePage = () => {
   const [error, setError] = useState<string | null>(null);
   const [msgIdx, setMsgIdx] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const isMountedRef = useRef(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -27,7 +35,11 @@ const CreatePage = () => {
   const processImage = async () => {
     if (!file) return;
     setIsProcessing(true); setError(null); setMsgIdx(0);
-    const interval = setInterval(() => setMsgIdx(p => (p + 1) % MAGIC_MSGS.length), 2200);
+    const interval = setInterval(() => {
+      if (isMountedRef.current) {
+        setMsgIdx(p => (p + 1) % MAGIC_MSGS.length);
+      }
+    }, 2200);
 
     try {
       const url = URL.createObjectURL(file);
@@ -112,12 +124,18 @@ const CreatePage = () => {
       // Artificial delay to show magic messages
       await new Promise(resolve => setTimeout(resolve, 3000));
 
-      setResultImage(canvas.toDataURL('image/png'));
+      if (isMountedRef.current) {
+        setResultImage(canvas.toDataURL('image/png'));
+      }
     } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
+      if (isMountedRef.current) {
+        setError(err.message || 'Something went wrong. Please try again.');
+      }
     } finally {
       clearInterval(interval);
-      setIsProcessing(false);
+      if (isMountedRef.current) {
+        setIsProcessing(false);
+      }
     }
   };
 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Check, Star, Sparkles, Heart, Pencil, Shield, Diamond, Smile, ShoppingBag, Palette, Wand2, Camera, Gift, Truck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ActivityToast from './ActivityToast';
+import BeforeAfterSlider from './BeforeAfterSlider';
 import familyPhoto from '../../assets/memory-coloring-20260513-223056.webp';
 import familySketch from '../../assets/memory-coloring-20260513-223135.webp';
 import grandparentsPhoto from '../../assets/memory-coloring-20260513-223140.webp';
@@ -57,7 +58,7 @@ const Hero = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start w-full sm:w-auto">
                 <button onClick={() => navigate('/checkout')} className="btn-primary w-full sm:w-auto justify-center">
-                  <ShoppingBag size={20} /> Start Your Order
+                  <ShoppingBag size={20} /> Choose Your Book
                 </button>
                 <button
                   onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
@@ -307,13 +308,12 @@ const PaintingGallery = () => {
               viewport={{ once: true }}
               className="soft-card overflow-hidden p-2.5 sm:p-3 lg:p-4"
             >
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                <div className="aspect-[5/4] overflow-hidden rounded-[calc(var(--radius)-14px)] bg-[var(--bg)]">
-                  <img src={item.before} alt={`${item.title} original photo`} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover" />
-                </div>
-                <div className="aspect-[5/4] overflow-hidden rounded-[calc(var(--radius)-14px)] bg-[var(--surface)] border border-[var(--border)]">
-                  <img src={item.after} alt={`${item.title} coloring page`} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover" />
-                </div>
+              <div className="aspect-[5/4] overflow-hidden rounded-[calc(var(--radius)-14px)]">
+                <BeforeAfterSlider 
+                  beforeImage={item.before} 
+                  afterImage={item.after} 
+                  className="w-full h-full" 
+                />
               </div>
               <div className="p-3 sm:p-4">
                 <div className="mb-2 inline-flex rotate-[-1deg] rounded-full bg-honey px-3 py-1 font-display text-[11px] font-black uppercase tracking-wide text-charcoal shadow-sm">
@@ -408,7 +408,7 @@ const Packages = () => {
                 </div>
                 <div className="flex flex-col gap-2 mt-auto">
                   <button onClick={() => navigate('/checkout')} className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-charcoal hover:bg-coral/90 shadow-lg border border-coral-text/20 hover:scale-[1.02]" : "bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--border)] hover:border-charcoal/20 hover:bg-[var(--surface-hover)] hover:scale-[1.02]")}>
-                    <ShoppingBag size={16} /> Start Your Order
+                    <ShoppingBag size={16} /> Choose Your Book
                   </button>
                 </div>
               </div>

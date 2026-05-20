@@ -40,7 +40,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, className }: BeforeAfterSl
   return (
     <div 
       ref={containerRef}
-      className={cn("relative overflow-hidden select-none touch-none bg-brand-cream", className)}
+      className={cn("relative overflow-hidden select-none touch-none bg-[var(--bg)] rounded-3xl", className)}
       onMouseMove={onMouseMove}
       onTouchMove={onTouchMove}
     >
@@ -55,7 +55,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, className }: BeforeAfterSl
       
       {/* Before Image (Original Photo) */}
       <div 
-        className="absolute top-0 left-0 h-full overflow-hidden z-10"
+        className="absolute top-0 left-0 h-full overflow-hidden z-10 border-r-2 border-honey"
         style={{ width: `${sliderPosition}%` }}
       >
         <img 
@@ -66,23 +66,23 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, className }: BeforeAfterSl
           loading="lazy" 
           decoding="async" 
         />
-        <div className="absolute top-4 left-4 bg-brand-cream text-brand-navy text-[10px] font-black px-4 py-2 uppercase tracking-[0.2em] border-2 border-brand-navy shadow-[4px_4px_0px_var(--text-primary)]">
+        <div className="absolute top-3 left-3 bg-[var(--surface)] text-[var(--text)] text-[9px] sm:text-[10px] font-black px-3 py-1.5 uppercase tracking-[0.2em] rounded-full shadow-sm border border-[var(--border)]">
           THE PHOTO
         </div>
       </div>
 
-      {/* Slider Handle */}
+      {/* Slider Handle Button */}
       <div 
-        className="absolute top-0 bottom-0 w-2 bg-brand-cream cursor-ew-resize z-30 shadow-[4px_0_0_var(--text-primary)] border-x-2 border-brand-navy"
+        className="absolute top-0 bottom-0 cursor-ew-resize z-30"
         style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-brand-sunshine flex items-center justify-center border-4 border-brand-navy shadow-[4px_4px_0px_var(--text-primary)] z-40">
-          <ChevronsLeftRight size={20} className="text-brand-navy animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-honey text-charcoal flex items-center justify-center rounded-full border-2 border-white shadow-lg z-40 transition-transform duration-200 hover:scale-110 active:scale-95">
+          <ChevronsLeftRight size={18} className="animate-pulse" />
         </div>
       </div>
 
-      <div className="absolute top-4 right-4 bg-brand-sunshine text-brand-navy text-[10px] font-black px-4 py-2 uppercase tracking-[0.2em] shadow-[4px_4px_0px_var(--text-primary)] border-2 border-brand-navy flex items-center gap-2 z-20">
-        MAGICAL ART <Sparkles size={12} className="animate-pulse" />
+      <div className="absolute top-3 right-3 bg-honey text-charcoal text-[9px] sm:text-[10px] font-black px-3 py-1.5 uppercase tracking-[0.2em] rounded-full shadow-sm flex items-center gap-1 z-20">
+        MAGICAL ART <Sparkles size={11} className="animate-pulse" />
       </div>
     </div>
   );

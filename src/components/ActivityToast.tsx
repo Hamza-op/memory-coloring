@@ -20,26 +20,33 @@ const ActivityToast = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
+    let active = true;
+    let timerId: ReturnType<typeof setTimeout>;
 
-    const scheduleNext = () => {
+    const showToast = () => {
+      if (!active) return;
       // Pick a random notification
       setCurrentIndex(Math.floor(Math.random() * NOTIFICATIONS.length));
       setIsVisible(true);
       
       // Hide after 4 seconds
-      setTimeout(() => {
+      timerId = setTimeout(() => {
+        if (!active) return;
         setIsVisible(false);
         // Schedule next pop up randomly between 6s to 18s from now
         const nextDelay = 6000 + Math.random() * 12000;
-        timeoutId = setTimeout(scheduleNext, nextDelay);
+        timerId = setTimeout(showToast, nextDelay);
       }, 4000);
     };
 
     // Initial pop-up delay between 2s to 5s
-    timeoutId = setTimeout(scheduleNext, 2000 + Math.random() * 3000);
+    const initialDelay = 2000 + Math.random() * 3000;
+    timerId = setTimeout(showToast, initialDelay);
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      active = false;
+      clearTimeout(timerId);
+    };
   }, []);
 
   const notification = NOTIFICATIONS[currentIndex];
