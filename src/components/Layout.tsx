@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Heart, Facebook, Instagram, Home, ShoppingBag, Moon, Sun } from 'lucide-react';
-import { motion } from 'motion/react';
 import logo from '../../assets/logo-memory-coloring.webp';
 import WhatsAppIcon from './WhatsAppIcon';
 
+const FloatingDoodles = React.lazy(() => import('./FloatingDoodles'));
+
 const Logo = () => (
   <div className="flex items-center">
-    <motion.img
+    <img
       src={logo}
       alt="Memory Coloring"
       className="h-12 w-auto sm:h-14 object-contain"
-      animate={{ y: [0, -1, 0] }}
-      transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
     />
   </div>
 );
@@ -68,17 +67,15 @@ const ThemeToggle = () => {
       <span className="absolute left-2 top-2.5 h-1 w-1 rounded-full bg-white/70 opacity-0 transition-opacity dark:opacity-100" />
       <span className="absolute right-2.5 top-2 h-1.5 w-1.5 rounded-full bg-coral/70 opacity-100 transition-opacity dark:opacity-0" />
       <span className="absolute bottom-2 right-4 h-1 w-1 rounded-full bg-white/60 opacity-0 transition-opacity dark:opacity-100" />
-      <motion.div
-        layout
-        transition={{ type: 'spring', stiffness: 520, damping: 32 }}
-        className={`absolute top-0.5 flex h-7 w-7 items-center justify-center rounded-full shadow-md ring-1 ring-white/70 ${isDark ? 'right-0.5 bg-honey text-charcoal' : 'left-0.5 bg-white text-honey-text'
+      <div
+        className={`absolute top-0.5 flex h-7 w-7 items-center justify-center rounded-full shadow-md ring-1 ring-white/70 transition-all duration-300 ${isDark ? 'right-0.5 bg-honey text-charcoal' : 'left-0.5 bg-white text-honey-text'
           }`}
       >
         {isDark
           ? <Moon size={14} fill="currentColor" />
           : <Sun size={14} fill="currentColor" />
         }
-      </motion.div>
+      </div>
     </button>
   );
 };
@@ -132,8 +129,8 @@ const Footer = () => (
             Turn your favorite memories into creative moments.
           </p>
           <div className="flex gap-3">
-            <a href="https://www.facebook.com/share/1EanqnTYcw/" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Facebook size={16} /></a>
-            <a href="https://www.instagram.com/memorycoloring?igsh=MXRlc29qd2ZlZ2tpYQ==" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Instagram size={16} /></a>
+            <a href="https://www.facebook.com/share/1EanqnTYcw/" target="_blank" rel="noreferrer" aria-label="MemoryColoring on Facebook" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Facebook size={16} /></a>
+            <a href="https://www.instagram.com/memorycoloring?igsh=MXRlc29qd2ZlZ2tpYQ==" target="_blank" rel="noreferrer" aria-label="MemoryColoring on Instagram" className="w-9 h-9 rounded-full bg-[var(--bg)] border border-[var(--border)] flex items-center justify-center text-[var(--text-muted)] hover:text-coral hover:border-coral/30 transition-colors"><Instagram size={16} /></a>
           </div>
         </div>
         <div>
@@ -203,11 +200,11 @@ const MobileBottomNav = () => {
   );
 };
 
-import FloatingDoodles from './FloatingDoodles';
-
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="min-h-screen flex flex-col pb-[68px] lg:pb-0 bg-[var(--bg)] transition-colors relative z-0">
-    <FloatingDoodles />
+    <React.Suspense fallback={null}>
+      <FloatingDoodles />
+    </React.Suspense>
     <header className="sticky top-0 z-50 flex flex-col"><Navbar /></header>
     <main className="flex-grow">{children}</main>
     <Footer />

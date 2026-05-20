@@ -36,7 +36,7 @@
   --color-sage: #8ED39C; 
   --color-violet: #A47AD8; 
   --color-blush: color-mix(in srgb, var(--color-coral) 18%, white);
-  --color-wa-green: #25D366;
+  --color-wa-green: #0B7A3A;
 
   --color-coral-text: var(--theme-text-coral);
   --color-honey-text: var(--theme-text-honey);

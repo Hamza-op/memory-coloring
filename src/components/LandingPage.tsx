@@ -19,11 +19,14 @@ import milestonePoster from '../../assets/memory-coloring-20260513-224638.webp';
 import schoolPoster from '../../assets/memory-coloring-20260513-225412.webp';
 
 const RainbowWord = ({ children }: { children: string }) => (
-  <span className="rainbow-word" aria-label={children}>
-    {children.split('').map((letter, index) => (
-      <span key={`${letter}-${index}`} aria-hidden="true">{letter}</span>
-    ))}
-  </span>
+  <>
+    <span className="sr-only">{children}</span>
+    <span className="rainbow-word" aria-hidden="true">
+      {children.split('').map((letter, index) => (
+        <span key={`${letter}-${index}`}>{letter}</span>
+      ))}
+    </span>
+  </>
 );
 
 const Hero = () => {

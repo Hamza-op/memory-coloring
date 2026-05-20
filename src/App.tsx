@@ -5,7 +5,6 @@
 
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
 import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import SEO from './components/SEO';
@@ -33,98 +32,71 @@ const ScrollToTop = () => {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
+
   return (
-    <AnimatePresence mode="wait">
-      <Suspense fallback={<RouteFallback />}>
-        <Routes location={location}>
-          <Route
-            path="/"
-            element={
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <SEO
-                  title="Custom Coloring Books from Photos | MemoryColoring"
-                  description="Turn your favorite family photos into personalized coloring books. Premium artist-crafted, hand-drawn pages for kids and families. Fast nationwide delivery!"
-                />
-                <LandingPage />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/create"
-            element={
-              <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: 0.4 }}
-              >
-                <SEO
-                  title="Create Your Personalized Coloring Book | MemoryColoring"
-                  description="Upload your favorite family photo and preview a custom hand-drawn coloring page in seconds. Give it a try for free!"
-                />
-                <CreatePage />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/checkout"
-            element={
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <SEO
-                  title="Order Your Custom Memory Book | MemoryColoring"
-                  description="Choose a package, upload your photos, and place your order. Free PDF copies and premium hardcovers available."
-                />
-                <OrderPage />
-              </motion.div>
-            }
-          />
-          <Route
-            path="/policies"
-            element={
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
-                <SEO
-                  title="Privacy, Refunds & Delivery Terms | MemoryColoring"
-                  description="Read the terms, refund policies, privacy guidelines, and nationwide shipping details for MemoryColoring."
-                />
-                <PoliciesPage />
-              </motion.div>
-            }
-          />
-          {seoRoutes.map((slug) => (
+    <Suspense fallback={<RouteFallback />}>
+      <Routes location={location}>
+        <Route
+          path="/"
+          element={
+            <>
+              <SEO
+                title="Custom Coloring Books from Photos | MemoryColoring"
+                description="Turn your favorite family photos into personalized coloring books. Premium artist-crafted, hand-drawn pages for kids and families. Fast nationwide delivery!"
+              />
+              <LandingPage />
+            </>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <>
+              <SEO
+                title="Create Your Personalized Coloring Book | MemoryColoring"
+                description="Upload your favorite family photo and preview a custom hand-drawn coloring page in seconds. Give it a try for free!"
+              />
+              <CreatePage />
+            </>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <>
+              <SEO
+                title="Order Your Custom Memory Book | MemoryColoring"
+                description="Choose a package, upload your photos, and place your order. Free PDF copies and premium hardcovers available."
+              />
+              <OrderPage />
+            </>
+          }
+        />
+        <Route
+          path="/policies"
+          element={
+            <>
+              <SEO
+                title="Privacy, Refunds & Delivery Terms | MemoryColoring"
+                description="Read the terms, refund policies, privacy guidelines, and nationwide shipping details for MemoryColoring."
+              />
+              <PoliciesPage />
+            </>
+          }
+        />
+        {seoRoutes.map((slug) => (
           <Route
             key={slug}
             path={slug}
             element={
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.3 }}
-              >
+              <>
                 <SeoLandingPage />
-              </motion.div>
+              </>
             }
           />
-          ))}
-        </Routes>
-      </Suspense>
-    </AnimatePresence>
+        ))}
+      </Routes>
+    </Suspense>
   );
 };
 
