@@ -351,7 +351,15 @@ const PaintingGallery = () => {
               viewport={{ once: true }}
               className="soft-card overflow-hidden p-2"
             >
-              <img src={item.image} alt={item.title} loading="lazy" decoding="async" className="w-full rounded-[calc(var(--radius)-12px)] object-contain bg-[var(--surface)]" />
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                width={400} 
+                height={500} 
+                loading="lazy" 
+                decoding="async" 
+                className="w-full rounded-[calc(var(--radius)-12px)] object-contain bg-[var(--surface)]" 
+              />
               <figcaption className="px-4 py-3 font-display font-bold text-[var(--text)]">{item.title}</figcaption>
             </motion.figure>
           ))}

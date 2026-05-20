@@ -274,7 +274,14 @@ export default function SeoLandingPage() {
             transition={{ duration: 0.55, type: 'spring', bounce: 0.25 }}
             className="soft-card overflow-hidden p-3"
           >
-            <img src={page.image} alt={page.imageAlt} className="aspect-[4/3] w-full rounded-[calc(var(--radius)-12px)] object-cover" />
+            <img 
+              src={page.image} 
+              alt={page.imageAlt} 
+              width={600} 
+              height={450} 
+              fetchPriority="high"
+              className="aspect-[4/3] w-full rounded-[calc(var(--radius)-12px)] object-cover" 
+            />
             <figcaption className="px-3 py-4 font-display text-lg font-bold text-[var(--text)]">
               Real memories, redrawn for coloring.
             </figcaption>
