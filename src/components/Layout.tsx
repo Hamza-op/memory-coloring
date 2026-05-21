@@ -107,10 +107,10 @@ const Navbar = () => {
                 )
               ))}
               <ThemeToggle />
-              <WhatsAppLink source="desktop_nav" iconSize={16} className="btn-wa py-2.5 px-5 text-sm">WhatsApp Us</WhatsAppLink>
+              <WhatsAppLink iconSize={16} className="btn-wa py-2.5 px-5 text-sm">WhatsApp Us</WhatsAppLink>
             </div>
             <div className="lg:hidden flex items-center gap-2">
-              <WhatsAppLink source="mobile_header" iconSize={15} className="btn-wa px-3 py-2 text-xs">
+              <WhatsAppLink iconSize={15} className="btn-wa px-3 py-2 text-xs">
                 WhatsApp Us
               </WhatsAppLink>
               <ThemeToggle />
@@ -195,7 +195,7 @@ const MobileBottomNav = () => {
           <span className="text-[10px] mt-1 font-body font-bold">{item.label}</span>
         </Link>
       ))}
-      <WhatsAppLink source="mobile_bottom_nav" iconSize={22} className="flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] text-wa-green hover:text-sage transition-colors">
+      <WhatsAppLink iconSize={22} className="flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] text-wa-green hover:text-sage transition-colors">
         <span className="text-[10px] mt-1 font-body font-bold">Chat</span>
       </WhatsAppLink>
     </div>

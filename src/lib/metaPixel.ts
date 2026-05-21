@@ -9,13 +9,6 @@ export function trackMetaEvent(eventName: string, parameters?: Record<string, un
   window.fbq?.('track', eventName, parameters);
 }
 
-export function trackPageView(path: string) {
-  trackMetaEvent('PageView', {
-    page_path: path,
-    page_title: document.title
-  });
-}
-
 type MetaOrderItem = {
   id: string;
   name: string;
@@ -38,25 +31,9 @@ function buildOrderEventParameters(total: number, packages: MetaOrderItem[]) {
   };
 }
 
-export function trackWhatsAppLead(source: string) {
-  trackMetaEvent('Contact', {
-    content_name: 'WhatsApp click',
-    content_category: 'WhatsApp',
-    source,
-    page_path: window.location.pathname
-  });
-}
-
-export function trackWhatsAppCheckoutStarted(total: number, packages: MetaOrderItem[]) {
-  trackMetaEvent('InitiateCheckout', {
-    content_name: 'WhatsApp order submit',
-    ...buildOrderEventParameters(total, packages)
-  });
-}
-
-export function trackWhatsAppOrderOpened(total: number, packages: MetaOrderItem[]) {
+export function trackWhatsAppOrderLead(total: number, packages: MetaOrderItem[]) {
   trackMetaEvent('Lead', {
-    content_name: 'Order details opened',
+    content_name: 'WhatsApp order button',
     ...buildOrderEventParameters(total, packages)
   });
 }

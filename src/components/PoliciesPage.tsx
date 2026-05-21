@@ -241,7 +241,7 @@ const PoliciesPage = () => {
           <p className="text-[var(--text-muted)] font-body text-sm mb-6 max-w-sm mx-auto">
             We're always happy to clarify anything. Reach out on WhatsApp and we'll respond within a few hours.
           </p>
-          <WhatsAppLink source="policies_page_cta" message={WHATSAPP_MESSAGES.policies} iconClassName="text-white" className="btn-wa inline-flex">Chat with Us</WhatsAppLink>
+          <WhatsAppLink message={WHATSAPP_MESSAGES.policies} iconClassName="text-white" className="btn-wa inline-flex">Chat with Us</WhatsAppLink>
         </motion.div>
 
         <p className="text-center text-xs text-[var(--text-muted)] font-body mt-8">

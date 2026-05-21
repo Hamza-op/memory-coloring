@@ -359,7 +359,7 @@ export default function SeoLandingPage() {
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <Link to="/checkout" className="btn-primary">Choose a Package</Link>
-            <WhatsAppLink source={`seo_page_${page.slug.replace('/', '')}`} message={WHATSAPP_MESSAGES.seo} className="btn-wa">Ask on WhatsApp</WhatsAppLink>
+            <WhatsAppLink message={WHATSAPP_MESSAGES.seo} className="btn-wa">Ask on WhatsApp</WhatsAppLink>
           </div>
         </div>
       </section>

@@ -255,7 +255,7 @@ const CreatePage = () => {
                   <p className="font-display font-bold text-lg text-[var(--text)]">Want a full book like this?</p>
                   <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                     <button onClick={() => navigate('/checkout', { state: { image: resultImage } })} className="btn-primary w-full sm:w-auto text-sm py-2.5 px-5"><ShoppingBag size={16} /> Order</button>
-                    <WhatsAppLink source="create_page_upsell" iconSize={16} iconClassName="text-white" className="btn-wa w-full sm:w-auto text-sm py-2.5 px-5">Chat</WhatsAppLink>
+                    <WhatsAppLink iconSize={16} iconClassName="text-white" className="btn-wa w-full sm:w-auto text-sm py-2.5 px-5">Chat</WhatsAppLink>
                   </div>
                 </div>
               </div>
