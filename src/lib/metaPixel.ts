@@ -22,18 +22,8 @@ type MetaOrderItem = {
   priceNum: number;
 };
 
-export function trackWhatsAppLead(source: string) {
-  trackMetaEvent('Contact', {
-    content_name: 'WhatsApp click',
-    content_category: 'WhatsApp',
-    source,
-    page_path: window.location.pathname
-  });
-}
-
-export function trackWhatsAppOrderSubmit(total: number, packages: MetaOrderItem[]) {
-  trackMetaEvent('Lead', {
-    content_name: 'WhatsApp order submit',
+function buildOrderEventParameters(total: number, packages: MetaOrderItem[]) {
+  return {
     content_category: 'Order',
     currency: 'PKR',
     value: total,
@@ -43,7 +33,31 @@ export function trackWhatsAppOrderSubmit(total: number, packages: MetaOrderItem[
       name: pkg.name,
       quantity: 1,
       item_price: pkg.priceNum
-    }))
+    })),
+    page_path: window.location.pathname
+  };
+}
+
+export function trackWhatsAppLead(source: string) {
+  trackMetaEvent('Contact', {
+    content_name: 'WhatsApp click',
+    content_category: 'WhatsApp',
+    source,
+    page_path: window.location.pathname
+  });
+}
+
+export function trackWhatsAppCheckoutStarted(total: number, packages: MetaOrderItem[]) {
+  trackMetaEvent('InitiateCheckout', {
+    content_name: 'WhatsApp order submit',
+    ...buildOrderEventParameters(total, packages)
+  });
+}
+
+export function trackWhatsAppOrderOpened(total: number, packages: MetaOrderItem[]) {
+  trackMetaEvent('Lead', {
+    content_name: 'Order details opened',
+    ...buildOrderEventParameters(total, packages)
   });
 }
 

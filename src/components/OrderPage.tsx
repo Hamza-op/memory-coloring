@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, ArrowLeft, CheckCircle, Package, Sparkles, BookOpen, Paintbrush, Gift, User, Phone, Mail, MapPin, ShieldCheck, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { trackWhatsAppOrderSubmit } from '@/lib/metaPixel';
+import { trackWhatsAppOrderOpened, trackWhatsAppOrderSubmit } from '@/lib/metaPixel';
 import { buildWhatsAppUrl } from '@/lib/whatsapp';
 import WhatsAppIcon from './WhatsAppIcon';
 
@@ -18,6 +18,10 @@ const OrderPage = () => {
     email: '',
     address: ''
   });
+  const [submittedOrder, setSubmittedOrder] = useState<{
+    total: number;
+    packages: typeof packages;
+  } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -38,6 +42,11 @@ const OrderPage = () => {
   const selectedPackages = packages.filter(p => selectedIds.has(p.id));
   const total = selectedPackages.reduce((sum, p) => sum + p.priceNum, 0);
   const totalFormatted = total.toLocaleString();
+
+  React.useEffect(() => {
+    if (!isSuccess || !submittedOrder) return;
+    trackWhatsAppOrderOpened(submittedOrder.total, submittedOrder.packages);
+  }, [isSuccess, submittedOrder]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -60,6 +69,7 @@ const OrderPage = () => {
       `*Address:* ${formData.address}\n\n` +
       `_Please review my order and share the next steps for photo submission and payment._`;
     window.open(buildWhatsAppUrl(message), '_blank');
+    setSubmittedOrder({ total, packages: selectedPackages });
     setIsSubmitting(false);
     setIsSuccess(true);
   };
