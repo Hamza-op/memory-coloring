@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, ArrowLeft, CheckCircle, Package, Sparkles, BookOpen, Paintbrush, Gift, User, Phone, Mail, MapPin, ShieldCheck, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { trackWhatsAppOrderOpened, trackWhatsAppOrderSubmit } from '@/lib/metaPixel';
+import { trackWhatsAppCheckoutStarted, trackWhatsAppOrderOpened } from '@/lib/metaPixel';
 import { buildWhatsAppUrl } from '@/lib/whatsapp';
 import WhatsAppIcon from './WhatsAppIcon';
 
@@ -18,10 +18,6 @@ const OrderPage = () => {
     email: '',
     address: ''
   });
-  const [submittedOrder, setSubmittedOrder] = useState<{
-    total: number;
-    packages: typeof packages;
-  } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -43,11 +39,6 @@ const OrderPage = () => {
   const total = selectedPackages.reduce((sum, p) => sum + p.priceNum, 0);
   const totalFormatted = total.toLocaleString();
 
-  React.useEffect(() => {
-    if (!isSuccess || !submittedOrder) return;
-    trackWhatsAppOrderOpened(submittedOrder.total, submittedOrder.packages);
-  }, [isSuccess, submittedOrder]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -56,7 +47,7 @@ const OrderPage = () => {
     e.preventDefault();
     if (selectedIds.size === 0) return;
     setIsSubmitting(true);
-    trackWhatsAppOrderSubmit(total, selectedPackages);
+    trackWhatsAppCheckoutStarted(total, selectedPackages);
     const pkgLines = selectedPackages.map(p => `  - ${p.name} - Rs. ${p.price}`).join('\n');
     const message =
       `*New Order - memorycoloring*\n\n` +
@@ -69,7 +60,7 @@ const OrderPage = () => {
       `*Address:* ${formData.address}\n\n` +
       `_Please review my order and share the next steps for photo submission and payment._`;
     window.open(buildWhatsAppUrl(message), '_blank');
-    setSubmittedOrder({ total, packages: selectedPackages });
+    trackWhatsAppOrderOpened(total, selectedPackages);
     setIsSubmitting(false);
     setIsSuccess(true);
   };
