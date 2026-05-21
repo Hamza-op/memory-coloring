@@ -11,6 +11,8 @@ const Logo = () => (
     <img
       src={logo}
       alt="Memory Coloring"
+      width={433}
+      height={315}
       className="h-12 w-auto sm:h-14 object-contain"
     />
   </div>

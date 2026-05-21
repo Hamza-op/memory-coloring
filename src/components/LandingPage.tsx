@@ -220,6 +220,10 @@ const ProductMomentum = () => {
             <motion.img
               src={processPromo}
               alt="Memory Coloring three-step process"
+              width={1402}
+              height={1122}
+              loading="lazy"
+              decoding="async"
               className="h-full min-h-[260px] w-full rounded-[1.5rem] object-contain"
               initial={{ scale: 0.96, rotate: 2 }}
               whileInView={{ scale: 1, rotate: 0 }}
