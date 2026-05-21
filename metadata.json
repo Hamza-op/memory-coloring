@@ -1,8 +1,0 @@
-{
-  "name": "memorycoloring",
-  "description": "Turn your favorite family snapshots into a hand-drawn coloring adventure. Personalized coloring books for kids and families.",
-  "requestFramePermissions": [
-    "camera"
-  ],
-  "majorCapabilities": []
-}

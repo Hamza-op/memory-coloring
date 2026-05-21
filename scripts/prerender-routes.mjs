@@ -12,6 +12,7 @@ const seoPagesData = [
   {
     slug: '/custom-coloring-book-from-photos',
     title: 'Custom Coloring Book from Photos | MemoryColoring',
+    h1: 'Custom Coloring Book from Photos',
     description: 'Turn family photos into a custom coloring book with artist-crafted pages, preview approval, PDF options, and nationwide Pakistan delivery.',
     faqs: [
       { question: 'Can any photo become a coloring page?', answer: 'Most clear photos can work. Bright, sharp images with visible faces and simple backgrounds usually produce the best coloring pages.' },
@@ -22,6 +23,7 @@ const seoPagesData = [
   {
     slug: '/personalized-coloring-book-for-kids',
     title: 'Personalized Coloring Book for Kids | MemoryColoring',
+    h1: 'Personalized Coloring Book for Kids',
     description: 'Create a personalized coloring book for kids using real family photos, familiar faces, pets, birthdays, and everyday memories.',
     faqs: [
       { question: 'What age is this best for?', answer: 'Most children from around 3 years and up can enjoy it, though younger children may prefer simpler photos with fewer people.' },
@@ -32,6 +34,7 @@ const seoPagesData = [
   {
     slug: '/photo-to-coloring-page',
     title: 'Photo to Coloring Page Service | MemoryColoring',
+    h1: 'Photo to Coloring Page Service',
     description: 'Convert a photo to a coloring page preview, then order a complete personalized coloring book with clean hand-drawn-style artwork.',
     faqs: [
       { question: 'Can I try one photo first?', answer: 'Yes. The Create page lets you preview the basic photo-to-coloring-page idea before starting an order.' },
@@ -42,6 +45,7 @@ const seoPagesData = [
   {
     slug: '/custom-coloring-book-pakistan',
     title: 'Custom Coloring Book Pakistan | MemoryColoring',
+    h1: 'Custom Coloring Book in Pakistan',
     description: 'Order custom coloring books in Pakistan from family photos. WhatsApp ordering, preview approval, PDF options, and nationwide delivery.',
     faqs: [
       { question: 'Do you deliver outside Multan?', answer: 'Yes. We deliver nationwide across Pakistan through courier services.' },
@@ -52,6 +56,7 @@ const seoPagesData = [
   {
     slug: '/birthday-coloring-book-gift',
     title: 'Birthday Coloring Book Gift from Photos | MemoryColoring',
+    h1: 'Birthday Coloring Book Gift from Photos',
     description: 'Create a birthday coloring book gift from party photos, family memories, pets, and milestones. Personalized, creative, and gift-ready.',
     faqs: [
       { question: 'Can I order before the birthday and use older photos?', answer: 'Yes. Many birthday books use photos from the past year, not only photos from the party itself.' },
@@ -66,16 +71,19 @@ const staticPagesData = [
   {
     slug: '/create',
     title: 'Create Your Personalized Coloring Book | MemoryColoring',
+    h1: 'Create Your Personalized Coloring Book',
     description: 'Upload your favorite family photo and preview a custom hand-drawn coloring page in seconds. Give it a try for free!',
   },
   {
     slug: '/checkout',
     title: 'Order Your Custom Memory Book | MemoryColoring',
+    h1: 'Order Your Custom Memory Book',
     description: 'Choose a package, upload your photos, and place your order. Free PDF copies and premium hardcovers available.',
   },
   {
     slug: '/policies',
     title: 'Privacy, Refunds & Delivery Terms | MemoryColoring',
+    h1: 'Privacy, Refunds and Delivery Terms',
     description: 'Read the terms, refund policies, privacy guidelines, and nationwide shipping details for MemoryColoring.',
   }
 ];
@@ -191,6 +199,14 @@ for (const route of routes) {
   html = html.replace(
     /<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/,
     `<script type="application/ld+json">${JSON.stringify(schemaData, null, 2)}</script>`
+  );
+
+  html = html.replace(
+    /<main data-seo-fallback>[\s\S]*?<\/main>/,
+    `<main data-seo-fallback>
+      <h1>${route.h1}</h1>
+      <p>${route.description}</p>
+    </main>`
   );
 
   writeFileSync(join(targetDir, 'index.html'), html, 'utf-8');

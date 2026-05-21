@@ -153,7 +153,13 @@
     src="https://www.facebook.com/tr?id=1101175009519919&ev=PageView&noscript=1"
     alt=""
   /></noscript>
-  <div id="root"></div>
+  <div id="root">
+    <!-- SEO fallback content for crawlers that do not execute JavaScript. React replaces this at runtime. -->
+    <main data-seo-fallback>
+      <h1>Custom Coloring Books from Photos</h1>
+      <p>Turn your favorite family photos into personalized coloring books for kids and families.</p>
+    </main>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
