@@ -1,5 +1,5 @@
 import React from 'react';
-import { trackWhatsAppChat } from '@/lib/metaPixel';
+import { trackWhatsAppLead } from '@/lib/metaPixel';
 import { buildWhatsAppUrl, WHATSAPP_MESSAGES } from '@/lib/whatsapp';
 import WhatsAppIcon from './WhatsAppIcon';
 
@@ -24,7 +24,7 @@ const WhatsAppLink = ({
     href={buildWhatsAppUrl(message)}
     target="_blank"
     rel="noreferrer"
-    onClick={() => trackWhatsAppChat(source)}
+    onClick={() => trackWhatsAppLead(source)}
     className={className}
   >
     <WhatsAppIcon size={iconSize} className={iconClassName} />

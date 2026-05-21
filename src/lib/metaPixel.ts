@@ -5,7 +5,15 @@ declare global {
 }
 
 export function trackMetaEvent(eventName: string, parameters?: Record<string, unknown>) {
+  if (typeof window === 'undefined') return;
   window.fbq?.('track', eventName, parameters);
+}
+
+export function trackPageView(path: string) {
+  trackMetaEvent('PageView', {
+    page_path: path,
+    page_title: document.title
+  });
 }
 
 type MetaOrderItem = {
@@ -14,11 +22,12 @@ type MetaOrderItem = {
   priceNum: number;
 };
 
-export function trackWhatsAppChat(source: string) {
+export function trackWhatsAppLead(source: string) {
   trackMetaEvent('Contact', {
-    content_name: 'WhatsApp chat click',
+    content_name: 'WhatsApp click',
     content_category: 'WhatsApp',
-    source
+    source,
+    page_path: window.location.pathname
   });
 }
 

@@ -109,7 +109,10 @@ const Navbar = () => {
               <ThemeToggle />
               <WhatsAppLink source="desktop_nav" iconSize={16} className="btn-wa py-2.5 px-5 text-sm">WhatsApp Us</WhatsAppLink>
             </div>
-            <div className="lg:hidden flex items-center gap-3">
+            <div className="lg:hidden flex items-center gap-2">
+              <WhatsAppLink source="mobile_header" iconSize={15} className="btn-wa px-3 py-2 text-xs">
+                WhatsApp Us
+              </WhatsAppLink>
               <ThemeToggle />
             </div>
           </div>

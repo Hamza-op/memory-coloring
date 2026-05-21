@@ -9,6 +9,7 @@ import Layout from './components/Layout';
 import LandingPage from './components/LandingPage';
 import SEO from './components/SEO';
 import { seoRoutes } from './data/seoRoutes';
+import { trackPageView } from './lib/metaPixel';
 
 const CreatePage = React.lazy(() => import('./components/CreatePage'));
 const OrderPage = React.lazy(() => import('./components/OrderPage'));
@@ -27,6 +28,22 @@ const ScrollToTop = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+  return null;
+};
+
+const MetaPageViewTracker = () => {
+  const { pathname, search } = useLocation();
+  const didTrackInitialPage = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!didTrackInitialPage.current) {
+      didTrackInitialPage.current = true;
+      return;
+    }
+
+    trackPageView(`${pathname}${search}`);
+  }, [pathname, search]);
+
   return null;
 };
 
@@ -104,6 +121,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
+      <MetaPageViewTracker />
       <Layout>
         <AnimatedRoutes />
       </Layout>
