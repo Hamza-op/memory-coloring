@@ -3,6 +3,8 @@ import { motion } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, ArrowLeft, CheckCircle, Package, Sparkles, BookOpen, Paintbrush, Gift, User, Phone, Mail, MapPin, ShieldCheck, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { trackWhatsAppOrderSubmit } from '@/lib/metaPixel';
+import { buildWhatsAppUrl } from '@/lib/whatsapp';
 import WhatsAppIcon from './WhatsAppIcon';
 
 const OrderPage = () => {
@@ -45,6 +47,7 @@ const OrderPage = () => {
     e.preventDefault();
     if (selectedIds.size === 0) return;
     setIsSubmitting(true);
+    trackWhatsAppOrderSubmit(total, selectedPackages);
     const pkgLines = selectedPackages.map(p => `  - ${p.name} - Rs. ${p.price}`).join('\n');
     const message =
       `*New Order - memorycoloring*\n\n` +
@@ -56,7 +59,7 @@ const OrderPage = () => {
       `*Email:* ${formData.email || 'Not provided'}\n` +
       `*Address:* ${formData.address}\n\n` +
       `_Please review my order and share the next steps for photo submission and payment._`;
-    window.open(`https://wa.me/923462083310?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(buildWhatsAppUrl(message), '_blank');
     setIsSubmitting(false);
     setIsSuccess(true);
   };

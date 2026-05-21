@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Heart, Facebook, Instagram, Home, ShoppingBag, Moon, Sun } from 'lucide-react';
 import logo from '../../assets/logo-memory-coloring.webp';
-import WhatsAppIcon from './WhatsAppIcon';
+import WhatsAppLink from './WhatsAppLink';
 
 const FloatingDoodles = React.lazy(() => import('./FloatingDoodles'));
 
@@ -105,9 +105,7 @@ const Navbar = () => {
                 )
               ))}
               <ThemeToggle />
-              <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa py-2.5 px-5 text-sm">
-                <WhatsAppIcon size={16} /> WhatsApp Us
-              </a>
+              <WhatsAppLink source="desktop_nav" iconSize={16} className="btn-wa py-2.5 px-5 text-sm">WhatsApp Us</WhatsAppLink>
             </div>
             <div className="lg:hidden flex items-center gap-3">
               <ThemeToggle />
@@ -192,10 +190,9 @@ const MobileBottomNav = () => {
           <span className="text-[10px] mt-1 font-body font-bold">{item.label}</span>
         </Link>
       ))}
-      <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] text-wa-green hover:text-sage transition-colors">
-        <WhatsAppIcon size={22} />
+      <WhatsAppLink source="mobile_bottom_nav" iconSize={22} className="flex flex-col items-center justify-center p-2 min-w-[60px] min-h-[44px] text-wa-green hover:text-sage transition-colors">
         <span className="text-[10px] mt-1 font-body font-bold">Chat</span>
-      </a>
+      </WhatsAppLink>
     </div>
   );
 };

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Shield, RefreshCw, FileText, Truck } from 'lucide-react';
-import WhatsAppIcon from './WhatsAppIcon';
+import { WHATSAPP_MESSAGES } from '@/lib/whatsapp';
+import WhatsAppLink from './WhatsAppLink';
 
 const sections = [
   {
@@ -240,14 +241,7 @@ const PoliciesPage = () => {
           <p className="text-[var(--text-muted)] font-body text-sm mb-6 max-w-sm mx-auto">
             We're always happy to clarify anything. Reach out on WhatsApp and we'll respond within a few hours.
           </p>
-          <a
-            href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20have%20a%20question%20about%20your%20policies."
-            target="_blank"
-            rel="noreferrer"
-            className="btn-wa inline-flex"
-          >
-            <WhatsAppIcon size={18} className="text-white" /> Chat with Us
-          </a>
+          <WhatsAppLink source="policies_page_cta" message={WHATSAPP_MESSAGES.policies} iconClassName="text-white" className="btn-wa inline-flex">Chat with Us</WhatsAppLink>
         </motion.div>
 
         <p className="text-center text-xs text-[var(--text-muted)] font-body mt-8">

@@ -1,8 +1,9 @@
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, Camera, Gift, HelpCircle, MapPin, Paintbrush, ShieldCheck, Sparkles } from 'lucide-react';
+import { WHATSAPP_MESSAGES } from '@/lib/whatsapp';
 import SEO from './SEO';
-import WhatsAppIcon from './WhatsAppIcon';
+import WhatsAppLink from './WhatsAppLink';
 import familyPhoto from '../../assets/memory-coloring-20260513-223056.webp';
 import familySketch from '../../assets/memory-coloring-20260513-223135.webp';
 import birthdayPoster from '../../assets/memory-coloring-20260513-224058.webp';
@@ -358,14 +359,7 @@ export default function SeoLandingPage() {
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <Link to="/checkout" className="btn-primary">Choose a Package</Link>
-            <a
-              href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20want%20to%20ask%20about%20a%20custom%20coloring%20book."
-              target="_blank"
-              rel="noreferrer"
-              className="btn-wa"
-            >
-              <WhatsAppIcon size={18} /> Ask on WhatsApp
-            </a>
+            <WhatsAppLink source={`seo_page_${page.slug.replace('/', '')}`} message={WHATSAPP_MESSAGES.seo} className="btn-wa">Ask on WhatsApp</WhatsAppLink>
           </div>
         </div>
       </section>

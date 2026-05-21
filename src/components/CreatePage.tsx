@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, Paintbrush, Download, RefreshCw, Sparkles, Image as ImageIcon, Wand2, Heart, Pencil, Camera, ShoppingBag, Star } from 'lucide-react';
-import WhatsAppIcon from './WhatsAppIcon';
+import { Upload, Paintbrush, Download, RefreshCw, Sparkles, Image as ImageIcon, Wand2, Heart, Camera, ShoppingBag, Star } from 'lucide-react';
+import WhatsAppLink from './WhatsAppLink';
 
 const MAGIC_MSGS = ["Sketching the outlines…", "Adding tiny details…", "Sprinkling fairy dust…", "Almost there…"];
 
@@ -255,7 +255,7 @@ const CreatePage = () => {
                   <p className="font-display font-bold text-lg text-[var(--text)]">Want a full book like this?</p>
                   <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                     <button onClick={() => navigate('/checkout', { state: { image: resultImage } })} className="btn-primary w-full sm:w-auto text-sm py-2.5 px-5"><ShoppingBag size={16} /> Order</button>
-                    <a href="https://wa.me/923462083310?text=Hi%20memorycoloring!%20I%20would%20like%20to%20know%20more%20about%20your%20custom%20coloring%20books." target="_blank" rel="noreferrer" className="btn-wa w-full sm:w-auto text-sm py-2.5 px-5"><WhatsAppIcon size={16} className="text-white" /> Chat</a>
+                    <WhatsAppLink source="create_page_upsell" iconSize={16} iconClassName="text-white" className="btn-wa w-full sm:w-auto text-sm py-2.5 px-5">Chat</WhatsAppLink>
                   </div>
                 </div>
               </div>
