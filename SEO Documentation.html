@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SEO and Meta Pixel Implementation</title>
+  <meta name="description" content="Plain-language documentation explaining how SEO and Meta Pixel are implemented on the website.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://memorycoloring.online/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SEO and Meta Pixel Implementation">
+  <meta property="og:description" content="Plain-language documentation explaining website SEO and Meta Pixel implementation.">
+  <meta property="og:url" content="https://memorycoloring.online/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SEO and Meta Pixel Implementation">
+  <meta name="twitter:description" content="Plain-language documentation explaining website SEO and Meta Pixel implementation.">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "SEO and Meta Pixel Implementation",
+      "description": "Plain-language documentation explaining how SEO and Meta Pixel are implemented on the website."
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f6f7f8;
+      --surface: #ffffff;
+      --soft: #eef3f7;
+      --text: #17202a;
+      --muted: #5b6874;
+      --border: #d8e0e7;
+      --accent: #235f8d;
+      --accent-soft: #e8f2fa;
+      --code-bg: #202a33;
+      --code-text: #f5f7f8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      overflow: auto;
+    }
+
+    main {
+      max-width: 980px;
+      padding: 44px 40px 72px;
+    }
+
+    .label {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      margin-top: 52px;
+      padding-top: 26px;
+      border-top: 1px solid var(--border);
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+
+    h3 {
+      margin-top: 22px;
+      font-size: 1.08rem;
+    }
+
+    p {
+      max-width: 760px;
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .intro {
+      margin-top: 18px;
+      font-size: 1.12rem;
+    }
+
+    nav {
+      display: grid;
+      gap: 4px;
+      margin-top: 22px;
+    }
+
+    nav a {
+      padding: 9px 10px;
+      border-radius: 6px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background: var(--accent-soft);
+      color: var(--accent);
+      outline: none;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .summary-item,
+    .card,
+    .step,
+    details {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .summary-item {
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+
+    .card {
+      margin-top: 18px;
+      padding: 22px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .number {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .simple-table {
+      width: 100%;
+      margin-top: 14px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    .simple-table th,
+    .simple-table td {
+      padding: 13px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .simple-table th {
+      background: var(--soft);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .simple-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    li + li {
+      margin-top: 7px;
+    }
+
+    code {
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      background: var(--soft);
+      color: var(--text);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--text);
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    details {
+      margin-top: 12px;
+      padding: 16px;
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 52px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+      }
+
+      aside {
+        position: static;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      main {
+        padding: 30px 18px 52px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .simple-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside aria-label="Page navigation">
+      <p class="label">Implementation guide</p>
+      <h2 style="margin:0;padding:0;border:0;font-size:1.35rem;">SEO and Meta Pixel</h2>
+      <p>What was implemented, what each part does, and why it matters.</p>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#seo">SEO implementation</a>
+        <a href="#pixel">Meta Pixel implementation</a>
+        <a href="#testing">Testing checklist</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </aside>
+
+    <main>
+      <header>
+        <p class="label">Website implementation</p>
+        <h1>SEO and Meta Pixel implementation</h1>
+        <p class="intro">
+          The website uses SEO to help Google understand and index important pages, and Meta Pixel to
+          measure visitor actions that matter for advertising.
+        </p>
+        <div class="summary-grid" aria-label="Quick summary">
+          <div class="summary-item">
+            <strong>SEO</strong>
+            This is how we tell Google what each page is about and which pages should appear in search.
+          </div>
+          <div class="summary-item">
+            <strong>Meta Pixel</strong>
+            This is how we measure whether visitors are only browsing or actually moving toward an order.
+          </div>
+        </div>
+      </header>
+
+      <section id="overview">
+        <h2>Overview</h2>
+        <div class="card">
+          <p>
+            SEO and Meta Pixel support different parts of the marketing funnel. SEO helps people find the
+            website through Google. Meta Pixel helps measure what visitors do after they arrive from ads or
+            retargeting campaigns.
+          </p>
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>Implementation</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Search result appearance</td>
+                <td>Page title and meta description</td>
+                <td>Helps Google show the right page with the right summary.</td>
+              </tr>
+              <tr>
+                <td>Preferred page address</td>
+                <td>Canonical URL</td>
+                <td>Prevents Google from getting confused by different versions of the same page.</td>
+              </tr>
+              <tr>
+                <td>Page discovery</td>
+                <td>Sitemap and robots file</td>
+                <td>Helps Google find the important pages we want indexed.</td>
+              </tr>
+              <tr>
+                <td>Page meaning</td>
+                <td>Structured data</td>
+                <td>Gives Google extra context about the page in a more organized format.</td>
+              </tr>
+              <tr>
+                <td>Ad measurement</td>
+                <td>Meta Pixel events</td>
+                <td>Shows whether people are just visiting or taking a real step toward ordering.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="seo">
+        <h2>SEO implementation</h2>
+        <p>
+          The SEO setup is built around consistency. For every important page, the page title,
+          description, canonical URL, sitemap entry, and structured data should all describe the same page.
+        </p>
+
+        <div class="steps">
+          <article class="step">
+            <div class="number">1</div>
+            <div>
+              <h3>Page titles</h3>
+              <p>
+                Each page has a unique title that explains the page topic. Example: a page about turning
+                photos into coloring pages uses a title focused on that exact service.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">2</div>
+            <div>
+              <h3>Meta descriptions</h3>
+              <p>
+                Each page has a short description that summarizes the offer or purpose of the page. This
+                helps people understand what they will find before they click.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">3</div>
+            <div>
+              <h3>Canonical URLs</h3>
+              <p>
+                Canonical URLs identify the preferred version of each page. The website uses final,
+                crawlable page addresses so Google does not receive mixed signals from redirects,
+                sitemap entries, and page metadata.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">4</div>
+            <div>
+              <h3>Sitemap</h3>
+              <p>
+                The sitemap lists important pages such as the homepage, create page, checkout page,
+                policy page, and SEO landing pages. This gives Google a clean page list to crawl.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">5</div>
+            <div>
+              <h3>Robots file</h3>
+              <p>
+                The robots file allows crawlers to access the site and points them to the sitemap. It is
+                a simple crawl instruction file, not a ranking booster.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">6</div>
+            <div>
+              <h3>Structured data</h3>
+              <p>
+                Structured data describes page meaning in a format search engines can read. The website
+                uses page and FAQ-style data where it matches what the visitor can actually see on the page.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="card note">
+          <h3>SEO rule used on this website</h3>
+          <p>
+            The same final URL should appear in the page canonical tag, sitemap, social metadata, and
+            structured data. In simple terms: every SEO signal should point to the same page, not to slightly
+            different versions of it.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Examples from this website</h3>
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>What we implemented</th>
+                <th>Example from the website</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Homepage title and description</td>
+                <td>
+                  Title: <code>Custom Coloring Books from Photos | MemoryColoring</code><br>
+                  Description: <code>Turn your favorite family photos into personalized coloring books. Premium artist-crafted, hand-drawn pages for kids and families. Fast nationwide delivery!</code>
+                </td>
+              </tr>
+              <tr>
+                <td>Canonical URL format</td>
+                <td><code>https://memorycoloring.online/</code> on the homepage and trailing-slash URLs such as <code>/create/</code> and <code>/custom-coloring-book-from-photos/</code> on internal pages.</td>
+              </tr>
+              <tr>
+                <td>Keyword-based landing pages</td>
+                <td>
+                  <code>custom coloring book from photos</code><br>
+                  <code>personalized coloring book for kids</code><br>
+                  <code>photo to coloring page</code><br>
+                  <code>custom coloring book Pakistan</code><br>
+                  <code>birthday coloring book gift</code>
+                </td>
+              </tr>
+              <tr>
+                <td>Where those keywords are used</td>
+                <td>They are used in page names, page addresses, search descriptions, page headings, and the structured data behind each landing page.</td>
+              </tr>
+              <tr>
+                <td>Sitemap pages</td>
+                <td>
+                  The sitemap includes <code>/</code>, <code>/create/</code>, <code>/checkout/</code>, <code>/policies/</code>, and the five SEO landing pages.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>How we use keywords on this website</h3>
+          <p>
+            The site does not rely on one broad keyword repeated everywhere. Instead, each landing page is
+            built around one clear search phrase and then supported by matching page copy.
+          </p>
+          <div class="pill-list" aria-label="Keyword examples">
+            <span class="pill">custom coloring book from photos</span>
+            <span class="pill">personalized coloring book for kids</span>
+            <span class="pill">photo to coloring page</span>
+            <span class="pill">custom coloring book Pakistan</span>
+            <span class="pill">birthday coloring book gift</span>
+          </div>
+          <p>
+            Example: the page <code>/custom-coloring-book-from-photos/</code> uses the same idea in the page
+            address, page title, page heading, and page description. That is deliberate. It keeps the page focused.
+          </p>
+        </div>
+      </section>
+
+      <section id="pixel">
+        <h2>Meta Pixel implementation</h2>
+        <p>
+          Meta Pixel is implemented to measure visitor activity connected to advertising. It helps answer
+          questions like: did visitors view the site, and did they move far enough to start an order?
+        </p>
+
+        <div class="steps">
+          <article class="step">
+            <div class="number">1</div>
+            <div>
+              <h3>Pixel initialization</h3>
+              <p>
+                The website is connected to the correct Meta advertising account so visitor actions can be recorded there.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">2</div>
+            <div>
+              <h3>PageView tracking</h3>
+              <p>
+                A page view is recorded when someone opens the website. This is the basic measurement used
+                to understand traffic and build audiences.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">3</div>
+            <div>
+              <h3>Lead tracking</h3>
+              <p>
+                A lead is recorded when someone reaches the WhatsApp order step from the checkout page.
+                This is the main business action the current setup measures.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">4</div>
+            <div>
+              <h3>Where the Lead event is used</h3>
+              <p>
+                It is triggered from the checkout page when the visitor sends order details through the
+                WhatsApp order flow. It also keeps useful order details such as selected package count and order value.
+              </p>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="number">5</div>
+            <div>
+              <h3>Event context</h3>
+              <p>
+                The event keeps page context, so later reporting can show which part of the website produced the action.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="card">
+          <h3>Event examples</h3>
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Meaning</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PageView</td>
+                <td>A visitor opened a page.</td>
+                <td>Used to measure traffic and build retargeting audiences.</td>
+              </tr>
+              <tr>
+                <td>Lead</td>
+                <td>A visitor submitted an order and moved into the WhatsApp ordering step.</td>
+                <td>Used to measure stronger buying intent than a simple page visit.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Examples from this website</h3>
+          <table class="simple-table">
+            <thead>
+              <tr>
+                <th>What we measure</th>
+                <th>Where it happens on the website</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Page views</td>
+                <td>Across the website as the base Meta Pixel event.</td>
+              </tr>
+              <tr>
+                <td>WhatsApp order leads</td>
+                <td>On the checkout page when the visitor moves from the form into the WhatsApp order step.</td>
+              </tr>
+              <tr>
+                <td>Order details attached to the lead</td>
+                <td>Package names, prices, number of selected packages, total order value, and the page where the action happened.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Where Meta Pixel is used on this website</h3>
+          <ul>
+            <li>On the website as a whole for page visit measurement.</li>
+            <li>On the checkout journey for lead measurement.</li>
+            <li>Inside the WhatsApp order step, where the customer moves closer to placing a real order.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="testing">
+        <h2>Testing checklist</h2>
+        <div class="card">
+          <ul>
+            <li>Confirm every important page has a unique title and description.</li>
+            <li>Confirm canonical URLs match the final page URLs.</li>
+            <li>Confirm sitemap URLs use the same final page URLs.</li>
+            <li>Confirm structured data describes visible page content.</li>
+            <li>Confirm page views are being recorded in Meta.</li>
+            <li>Confirm the lead event is recorded only when the WhatsApp order action is triggered.</li>
+            <li>Confirm Meta reports show the expected page and order context.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h2>FAQ</h2>
+
+        <details>
+          <summary>Why do canonical URLs matter?</summary>
+          <p>
+            They tell Google which page address should be treated as the official version.
+          </p>
+        </details>
+
+        <details>
+          <summary>Does a sitemap guarantee indexing?</summary>
+          <p>
+            No. A sitemap helps Google find pages, but Google still decides whether a page should be indexed.
+          </p>
+        </details>
+
+        <details>
+          <summary>Why use structured data?</summary>
+          <p>
+            It gives Google a clearer picture of what the page is about.
+          </p>
+        </details>
+
+        <details>
+          <summary>What is the main purpose of Meta Pixel?</summary>
+          <p>
+            Meta Pixel helps measure ad performance by recording selected visitor actions, such as page
+            views and leads.
+          </p>
+        </details>
+
+        <details>
+          <summary>What should be reviewed regularly?</summary>
+          <p>
+            Review Search Console for indexing and Meta Events Manager for tracking accuracy.
+          </p>
+        </details>
+      </section>
+
+      <p class="footer">
+        SEO explains the site to Google. Meta Pixel measures page views and WhatsApp order leads for advertising.
+      </p>
+    </main>
+  </div>
+
+</body>
+</html>
