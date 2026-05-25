@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://memorycoloring.online/sitemap.xml
