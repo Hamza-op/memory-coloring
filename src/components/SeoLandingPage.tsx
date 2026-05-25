@@ -201,7 +201,7 @@ export const seoPages: SeoPage[] = [
 const icons = [Camera, Paintbrush, Gift, ShieldCheck];
 
 const buildSchema = (page: SeoPage) => {
-  const url = `https://memorycoloring.online${page.slug}`;
+  const url = `https://memorycoloring.online${page.slug}/`;
   return [
     {
       '@context': 'https://schema.org',
@@ -260,10 +260,10 @@ export default function SeoLandingPage() {
               {page.intro}
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link to="/checkout" className="btn-primary">
+              <Link to="/checkout/" className="btn-primary">
                 Start Your Order <ArrowRight size={18} />
               </Link>
-              <Link to="/create" className="btn-wa">
+              <Link to="/create/" className="btn-wa">
                 Try a Photo Preview
               </Link>
             </div>
@@ -358,7 +358,7 @@ export default function SeoLandingPage() {
             Choose a package, send your order details, and continue on WhatsApp for photo submission, preview approval, and delivery confirmation.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link to="/checkout" className="btn-primary">Choose a Package</Link>
+            <Link to="/checkout/" className="btn-primary">Choose a Package</Link>
             <WhatsAppLink message={WHATSAPP_MESSAGES.seo} className="btn-wa">Ask on WhatsApp</WhatsAppLink>
           </div>
         </div>

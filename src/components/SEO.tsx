@@ -9,9 +9,10 @@ interface SEOProps {
 
 export default function SEO({ title, description, schema }: SEOProps) {
   const { pathname } = useLocation();
-  
+
   // Construct the absolute canonical URL
-  const canonicalUrl = `https://memorycoloring.online${pathname}`;
+  const canonicalPath = pathname === '/' ? '/' : `${pathname.replace(/\/$/, '')}/`;
+  const canonicalUrl = `https://memorycoloring.online${canonicalPath}`;
 
   useEffect(() => {
     // 1. Update Title

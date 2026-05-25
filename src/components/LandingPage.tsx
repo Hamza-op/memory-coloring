@@ -59,7 +59,7 @@ const Hero = () => {
                 Upload your favorite photos and we'll transform them into a personalized coloring book your child can enjoy, color, and keep forever.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start w-full sm:w-auto">
-                <Link to="/checkout" className="btn-primary w-full sm:w-auto justify-center">
+                <Link to="/checkout/" className="btn-primary w-full sm:w-auto justify-center">
                   <ShoppingBag size={20} /> Choose Your Book
                 </Link>
                 <button
@@ -434,7 +434,7 @@ const Packages = () => {
                   ))}
                 </div>
                 <div className="flex flex-col gap-2 mt-auto">
-                  <Link to="/checkout" className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-charcoal hover:bg-coral/90 shadow-lg border border-coral-text/20 hover:scale-[1.02]" : "bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--border)] hover:border-charcoal/20 hover:bg-[var(--surface-hover)] hover:scale-[1.02]")}>
+                  <Link to="/checkout/" className={cn("w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2", pack.popular ? "bg-coral text-charcoal hover:bg-coral/90 shadow-lg border border-coral-text/20 hover:scale-[1.02]" : "bg-[var(--bg)] text-[var(--text)] border-2 border-[var(--border)] hover:border-charcoal/20 hover:bg-[var(--surface-hover)] hover:scale-[1.02]")}>
                     <ShoppingBag size={16} /> Choose Your Book
                   </Link>
                 </div>

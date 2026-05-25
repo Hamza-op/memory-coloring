@@ -148,20 +148,20 @@ const Footer = () => (
         <div>
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Coloring Book Guides</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
-            <li><Link to="/custom-coloring-book-from-photos" className="hover:text-coral transition-colors">Custom Book from Photos</Link></li>
-            <li><Link to="/personalized-coloring-book-for-kids" className="hover:text-coral transition-colors">Personalized Book for Kids</Link></li>
-            <li><Link to="/photo-to-coloring-page" className="hover:text-coral transition-colors">Photo to Coloring Page</Link></li>
-            <li><Link to="/custom-coloring-book-pakistan" className="hover:text-coral transition-colors">Custom Book Pakistan</Link></li>
-            <li><Link to="/birthday-coloring-book-gift" className="hover:text-coral transition-colors">Birthday Coloring Gift</Link></li>
+            <li><Link to="/custom-coloring-book-from-photos/" className="hover:text-coral transition-colors">Custom Book from Photos</Link></li>
+            <li><Link to="/personalized-coloring-book-for-kids/" className="hover:text-coral transition-colors">Personalized Book for Kids</Link></li>
+            <li><Link to="/photo-to-coloring-page/" className="hover:text-coral transition-colors">Photo to Coloring Page</Link></li>
+            <li><Link to="/custom-coloring-book-pakistan/" className="hover:text-coral transition-colors">Custom Book Pakistan</Link></li>
+            <li><Link to="/birthday-coloring-book-gift/" className="hover:text-coral transition-colors">Birthday Coloring Gift</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-display font-bold text-[var(--text)] mb-4">Policies</h4>
           <ul className="space-y-2.5 text-sm font-body text-[var(--text-muted)]">
-            <li><Link to="/policies#privacy" className="hover:text-coral transition-colors">Privacy Policy</Link></li>
-            <li><Link to="/policies#refund" className="hover:text-coral transition-colors">Refund Policy</Link></li>
-            <li><Link to="/policies#terms" className="hover:text-coral transition-colors">Terms of Service</Link></li>
-            <li><Link to="/policies#delivery" className="hover:text-coral transition-colors">Delivery Info</Link></li>
+            <li><Link to="/policies/#privacy" className="hover:text-coral transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/policies/#refund" className="hover:text-coral transition-colors">Refund Policy</Link></li>
+            <li><Link to="/policies/#terms" className="hover:text-coral transition-colors">Terms of Service</Link></li>
+            <li><Link to="/policies/#delivery" className="hover:text-coral transition-colors">Delivery Info</Link></li>
           </ul>
         </div>
         <div>
@@ -185,7 +185,7 @@ const MobileBottomNav = () => {
   const location = useLocation();
   const items = [
     { to: '/', icon: Home, label: 'Home' },
-    { to: '/checkout', icon: ShoppingBag, label: 'Order' },
+    { to: '/checkout/', icon: ShoppingBag, label: 'Order' },
   ];
   return (
     <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-[var(--surface)]/90 backdrop-blur-xl border-t border-[var(--border)] z-[100] flex justify-around items-center min-h-[68px] px-2 pb-safe">

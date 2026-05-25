@@ -90,6 +90,14 @@ const staticPagesData = [
 
 // Combine all routes
 const routes = [...staticPagesData, ...seoPagesData];
+const siteUrl = 'https://memorycoloring.online';
+
+const toCanonicalUrl = (slug) => {
+  if (slug === '/') {
+    return `${siteUrl}/`;
+  }
+  return `${siteUrl}${slug.replace(/\/$/, '')}/`;
+};
 
 if (!existsSync(source)) {
   throw new Error('dist/index.html was not found. Run vite build before prerendering routes.');
@@ -103,7 +111,7 @@ for (const route of routes) {
   const targetDir = join(dist, route.slug.replace(/^\//, ''));
   mkdirSync(targetDir, { recursive: true });
 
-  const canonicalUrl = `https://memorycoloring.online${route.slug}`;
+  const canonicalUrl = toCanonicalUrl(route.slug);
   let html = originalHtml;
 
   // 1. Replace Title
